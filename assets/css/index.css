@@ -1,0 +1,31 @@
+nav,
+.footer-line {
+  padding-left: var(--chrome-pad-x);
+  padding-right: var(--chrome-pad-x);
+}
+
+.hero,
+.missions-section,
+.about-section,
+.photo-section {
+  padding-left: var(--section-pad-x);
+  padding-right: var(--section-pad-x);
+}
+
+.mission-grid {
+  gap: 22px;
+}
+
+.mission-card {
+  background: var(--bg-card);
+}
+
+.mission-card:hover {
+  background: var(--bg-raised);
+}
+
+.nav-cta,
+.pw-submit {
+  position: relative;
+  overflow: hidden;
+}

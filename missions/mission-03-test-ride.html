@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MISSION_03 // Test Ride Flow — Sidharth Premanand</title>
+<meta name="description" content="Making test ride booking feel effortless through research-led interaction design. Reduced friction in a high-intent customer journey at Ather Energy.">
+<meta name="author" content="Sidharth Premanand">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Making Test Ride Booking Feel Effortless">
+<meta property="og:description" content="Reduced friction in a high-intent customer journey through research-led interaction design at Ather Energy.">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Making Test Ride Booking Feel Effortless">
+<meta name="twitter:description" content="Reduced friction in a high-intent customer journey through research-led interaction design at Ather Energy.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23070707'/%3E%3Ctext x='50' y='50' font-family='monospace' font-size='48' font-weight='bold' fill='%2300E5FF' text-anchor='middle' dominant-baseline='central'%3ESP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=JetBrains+Mono:wght@300;400;500&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css?v=20261018c">
+<link rel="stylesheet" href="../assets/css/missions.css">
+<style>
+:root{--cyan:#00E5FF;--cyan-dim:rgba(0,229,255,0.10);--cyan-border:rgba(0,229,255,0.2);--white:#F0F0F0;--grey:#777;--grey-dim:#2a2a2a;--bg:#070707;--bg-card:#0d0d0d;--bg-raised:#131313;--page-gutter:clamp(20px, 4.2vw, 80px);--space-8:8px;--space-16:16px;--space-24:24px;--space-48:48px;--space-64:64px;--space-96:96px;--space-128:128px;}
+@media(max-width:768px){.nav-cta{display:none!important}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}::selection{background:var(--cyan);color:#000}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:clip}
+#cursor-dot{position:fixed;width:7px;height:7px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#cursor-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(0,229,255,0.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.5}
+.scanlines{position:fixed;inset:0;pointer-events:none;z-index:999;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.03) 3px,rgba(0,0,0,0.03) 4px)}
+/* NAV — matches Homepage exactly, with page-gutter for horizontal padding.
+   main.js adds .nav-menu-toggle for mobile and handles scroll progress bar. */
+body[data-project-page] nav,nav{position:fixed;top:0;left:0;right:0;padding:16px var(--page-gutter);display:flex;justify-content:space-between;align-items:center;background:transparent;border-bottom:1px solid transparent;z-index:500;transition:background 0.4s,backdrop-filter 0.4s,border-color 0.4s}
+nav.scrolled{background:rgba(7,7,7,0.9);backdrop-filter:blur(18px);border-color:var(--cyan-border)}
+.nav-brand{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.1em;color:var(--white);text-decoration:none;text-transform:uppercase}
+.nav-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:32px}
+.nav-link{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--grey);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s;position:relative}
+.nav-link::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform 0.22s ease}
+.nav-link:hover{color:var(--white)}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
+.nav-link.active{color:var(--cyan)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-status{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);display:flex;align-items:center;gap:6px;letter-spacing:0.1em}
+.nav-status::before{content:'';width:5px;height:5px;background:var(--cyan);border-radius:50%;animation:blink 1.6s infinite}
+.nav-cta{font-family:'JetBrains Mono',monospace;color:var(--cyan);text-transform:uppercase;text-decoration:none;border:2px solid var(--cyan);border-radius:var(--radius-lg);background:transparent;position:relative;overflow:hidden;transition:color .3s,border-color .3s}
+.nav-cta span{position:relative;z-index:1}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero{min-height:100vh;display:flex;flex-direction:column;padding-left:var(--page-gutter) !important;padding-right:var(--page-gutter) !important;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 50% at 72% 38%,rgba(255,140,0,0.05) 0%,transparent 65%),radial-gradient(ellipse 40% 60% at 22% 65%,rgba(0,229,255,0.04) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.025) 1px,transparent 1px);background-size:52px 52px}
+.hero-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:0.22em;margin-bottom:20px;animation:fadeUp 0.8s ease forwards;opacity:0}
+.hero-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(60px,9vw,120px);line-height:0.88;letter-spacing:-0.025em;text-transform:uppercase;animation:fadeUp 0.8s 0.1s ease forwards;opacity:0;position:relative}
+.hero-title .outline{-webkit-text-stroke:1.5px rgba(240,240,240,0.25);color:transparent}
+.hero-title::after{content:attr(data-text);position:absolute;inset:0;color:var(--cyan);opacity:0.1;animation:glitch 10s ease-in-out infinite}
+.hero-meta{margin-top:48px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;border:1px solid var(--cyan-border);background:var(--cyan-border);animation:fadeUp 0.8s 0.25s ease forwards;opacity:0}
+.meta-cell{background:var(--bg);padding:18px 22px}
+.meta-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--grey);letter-spacing:0.12em;margin-bottom:6px}
+.meta-value{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;color:var(--white)}.meta-value.accent{color:var(--cyan)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glitch{0%,93%,100%{clip-path:none;transform:none}94%{clip-path:polygon(0 25%,100% 25%,100% 45%,0 45%);transform:translateX(-3px)}95%{clip-path:none;transform:none}97%{clip-path:polygon(0 62%,100% 62%,100% 79%,0 79%);transform:translateX(3px)}98%{clip-path:none;transform:none}}
+.divider{
+  display: block !important; /* missions.css ships .divider{display:none!important} */
+  height: 1px;
+  margin: 0 var(--page-gutter);
+  background: linear-gradient(90deg, transparent, var(--cyan-border) 20%, var(--cyan-border) 80%, transparent);
+}
+body[data-project-page] .section,.section{max-width:none !important;margin-left:0 !important;margin-right:0 !important;padding-left:var(--page-gutter) !important;padding-right:var(--page-gutter) !important;width:100% !important;box-sizing:border-box !important;opacity:0;transform:translateY(28px);transition:opacity 0.65s,transform 0.65s}.section.visible{opacity:1;transform:none}
+.section-heading{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-0.025em;border-bottom:none !important;padding-bottom:0 !important}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:0;align-items:start}
+.body-text{font-size:16px;line-height:1.75;color:rgba(240,240,240,0.6);font-weight:300}
+.data-table{display:flex;flex-direction:column;gap:1px;border:1px solid var(--cyan-border);background:var(--cyan-border)}
+.data-row{background:var(--bg-card);padding:16px 22px;display:flex;justify-content:space-between;align-items:center}
+.data-key{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--grey);letter-spacing:0.12em}
+.data-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan)}
+.problems{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:0;background:var(--cyan-border);border:1px solid var(--cyan-border)}
+.problem-card{background:var(--bg-card);padding:36px 28px;position:relative;transition:background 0.3s}.problem-card:hover{background:var(--bg-raised)}
+.problem-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform 0.4s}.problem-card:hover::after{transform:scaleX(1)}
+.problem-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:0.15em;margin-bottom:20px}
+.problem-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;margin-bottom:12px}
+.problem-body{font-size:13px;line-height:1.7;color:rgba(240,240,240,0.5);font-weight:300}
+.findings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:0;background:var(--cyan-border);border:1px solid var(--cyan-border)}
+.finding-card{background:var(--bg-card);padding:52px 40px;display:flex;flex-direction:column;gap:12px;transition:background 0.3s}.finding-card:hover{background:var(--bg-raised)}
+.finding-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(64px,9vw,108px);line-height:1;color:var(--cyan);letter-spacing:-0.03em}
+.finding-label{font-family:'Barlow',sans-serif;font-size:14px;color:rgba(240,240,240,0.7);line-height:1.65;max-width:300px;font-weight:300}
+.process-track{margin-top:0;padding-left:28px;position:relative}
+.process-track::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:1px;background:linear-gradient(180deg,var(--cyan),var(--cyan-border) 70%,transparent)}
+.process-step{display:grid;grid-template-columns:180px 1fr;gap:44px;padding:32px 0;border-bottom:1px solid rgba(255,255,255,0.04);position:relative}
+.process-step:last-child{border-bottom:none}
+.process-step::before{content:'';position:absolute;left:-32px;top:38px;width:7px;height:7px;border:1px solid var(--cyan);border-radius:50%;background:var(--bg);transition:background 0.3s,box-shadow 0.3s}
+.process-step:hover::before{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.step-phase{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:0.15em;padding-top:4px;text-transform:uppercase}
+.step-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;margin-bottom:10px}
+.step-body{font-size:13px;line-height:1.75;color:rgba(240,240,240,0.5);font-weight:300}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:0;background:var(--cyan-border);border:1px solid var(--cyan-border)}
+.ba-panel{background:var(--bg-card);padding:40px 32px}
+.ba-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;padding:4px 10px;border:1px solid;margin-bottom:24px;text-transform:uppercase}
+.ba-tag.before{color:var(--grey);border-color:var(--grey-dim)}.ba-tag.after{color:var(--cyan);border-color:var(--cyan)}
+.ba-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;margin-bottom:20px}
+.ba-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ba-list li{font-size:13px;line-height:1.6;color:rgba(240,240,240,0.55);padding-left:18px;position:relative}
+.ba-list.before li::before{content:'—';position:absolute;left:0;color:var(--grey-dim)}.ba-list.after li::before{content:'→';position:absolute;left:0;color:var(--cyan)}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:0;background:var(--cyan-border);border:1px solid var(--cyan-border)}
+.result-card{background:var(--bg-card);padding:48px 36px;position:relative;overflow:hidden;transition:background 0.3s}.result-card:hover{background:var(--bg-raised)}
+.result-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity 0.4s}.result-card:hover::before{opacity:1}
+.result-index{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--grey);letter-spacing:0.15em;margin-bottom:20px}
+.result-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(52px,6vw,84px);line-height:1;color:var(--cyan);letter-spacing:-0.03em;margin-bottom:12px}
+.result-num span{color:var(--cyan)}
+.result-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--grey);letter-spacing:0.1em;line-height:1.65}
+.result-target{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(0,229,255,0.4);letter-spacing:0.1em}
+.decisions-track{display:flex;flex-direction:column;gap:64px;margin-top:0;background:transparent;border:0}
+.decision-row{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+.decision-copy{min-width:0}
+.decision-visual{min-width:0}
+.decision-visual-frame{position:relative;border:1px solid var(--cyan-border);border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-card)}
+.decision-visual-frame img{display:block;width:100%;height:auto}
+.decision-visual-frame--phone{width:100%;max-width:320px;margin-inline:auto;aspect-ratio:9/16;background:#0a0a0a}
+.decision-visual-frame--phone img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.decision-visual-media{position:relative;width:100%;background:var(--bg-card)}
+.decision-visual-media img{display:block;width:100%;height:auto}
+.decision-visual-caption{display:block;max-width:320px;margin:16px auto 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:var(--type-meta,0.75rem);color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase}
+.decision-panel{display:flex;flex-direction:column;align-items:center;min-width:0}
+.decision-panel>.decision-visual-caption{max-width:none;margin-top:16px}
+@media (max-width: 767px) {
+  .decision-visual-caption{max-width:260px}
+}
+/* Decision panels ≥1024px share one height: the wide composite reserves the
+   phone mockups' content height (same 320px cap + 9/16 aspect as
+   .decision-visual-frame--phone), so Decision 01's panel matches Decisions 02/03
+   without a hardcoded px value. Decisions 02/03 stay exactly as they are. */
+@media (min-width: 1024px) {
+  .decision-visual-media{display:grid;place-items:center}
+  .decision-visual-media::before{content:'';grid-area:1/1;width:100%;max-width:320px;aspect-ratio:9/16}
+  .decision-visual-media-inner{grid-area:1/1;position:relative;width:100%}
+}
+.decision-num{font-family:'JetBrains Mono',monospace;font-size:var(--type-meta,0.75rem);color:var(--cyan);letter-spacing:0.1em;margin-bottom:10px;text-transform:uppercase}
+.decision-kicker{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:var(--type-title,1.25rem);color:var(--white);letter-spacing:-0.025em;margin-bottom:6px}
+.decision-subtitle{font-family:'Barlow',sans-serif;font-weight:400;font-size:var(--type-body,0.875rem);text-transform:none;letter-spacing:0;color:rgba(255,255,255,0.55);margin-bottom:14px;line-height:1.5}
+.decision-question{font-family:'JetBrains Mono',monospace;font-size:var(--type-meta,0.75rem);color:rgba(0,229,255,0.7);letter-spacing:0.08em;line-height:1.65;margin-bottom:20px;font-style:italic}
+.decision-points{list-style:none;display:flex;flex-direction:column;gap:14px;margin:0;padding:0;max-width:42rem}
+.decision-points li{position:relative;display:flex;align-items:flex-start;gap:10px;padding-left:0;font-size:var(--type-body,0.875rem);line-height:1.625;color:rgba(255,255,255,0.7);font-weight:300}
+.decision-points li::before{display:none}
+.decision-points li strong{color:var(--white);font-weight:600}
+.anno{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:18px;height:18px;margin-top:2px;border-radius:50%;background:var(--cyan);color:#041014;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;line-height:1;letter-spacing:0}
+.anno-pin{position:absolute;z-index:2;width:22px;height:22px;margin:0;border:1px solid rgba(7,7,7,0.55);box-shadow:0 0 0 1px rgba(0,229,255,0.35),0 4px 12px rgba(0,0,0,0.45);pointer-events:none}
+.flow-figure{margin:0;width:100%}
+.flow-diagram-img{display:block;width:100%;height:auto}
+@media(max-width:767px){
+  .flow-diagram-img{min-width:640px}
+}
+.flow-lead{font-size:var(--type-body,0.875rem);line-height:1.625;color:rgba(255,255,255,0.7);font-weight:300;max-width:560px;margin-top:0;margin-bottom:48px}
+@media(min-width:768px){
+  .decision-subtitle,
+  .decision-points li,
+  .flow-lead{font-size:var(--type-body-md,1rem)}
+}
+@media(min-width:1024px){
+  .decision-row{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .decision-row--flip .decision-copy{order:2}
+  .decision-row--flip .decision-visual{order:1}
+}
+@media(max-width:1023px){
+  .two-col{grid-template-columns:1fr;gap:24px}
+  .problems{grid-template-columns:1fr}
+  .findings-grid{grid-template-columns:1fr}
+  .results-grid{grid-template-columns:1fr}
+  .decisions-track{gap:48px}
+  .decision-visual-frame--phone{max-width:260px}
+}
+/* INTERACTIVE TEST RIDE COMPARISON */
+.ride-comparison{border:1px solid var(--cyan-border);background:var(--bg-card);overflow:hidden;--rw-w:1643;--rw-h:1825;--rw-hdr-h:55;--rw-ph-w:827;--rw-ph-h:913;--rw-ph-y0:55;--rw-r-w:816;--rw-r-h:1770;--rw-hdr-top:3.3475cqw;--rw-screen-ar:1.69732;--rw-hdr-ar:29.8727;--rw-photo-ar:0.9058;--rw-right-ar:0.46102;--rw-photo-img-w:198.67%;--rw-photo-img-top:-6.0241%;--rw-right-img-w:201.35%;--rw-right-img-left:-101.35%;--rw-right-img-top:-3.1073%}
+.ride-comparison-intro{display:flex;justify-content:space-between;align-items:center;gap:32px;padding:18px 30px;border-bottom:1px solid var(--cyan-border)}
+.ride-comparison-kicker{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:0.16em;text-transform:uppercase;margin-bottom:0}
+.ride-comparison-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--grey);letter-spacing:0.14em;white-space:nowrap}
+.ride-comparison-panel{padding:30px;background:radial-gradient(circle at 50% 48%,rgba(0,229,255,0.07),transparent 42%),#090909}
+.ride-viewport-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:520px;margin:0 auto 16px}
+.ride-viewport-tab{min-height:52px;border:1px solid var(--grey-dim);background:#0b0b0b;color:#aaa;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:10px 14px;transition:color 0.22s,border-color 0.22s,background 0.22s}
+.ride-viewport-tab:hover{color:var(--white);border-color:rgba(0,229,255,0.45)}
+.ride-viewport-tab[aria-selected="true"]{color:#000;border-color:var(--cyan);background:var(--cyan)}
+.ride-viewport-tab:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.ride-comparison-toolbar{display:flex;align-items:center;justify-content:center;gap:12px;min-height:34px;margin:0 auto 18px}
+.ride-comparison-hint{display:flex;align-items:center;justify-content:center;gap:9px;margin:0;font-family:'JetBrains Mono',monospace;font-size:9px;color:#aaa;letter-spacing:0.1em;text-transform:uppercase}
+.ride-comparison-hint b{color:var(--cyan);font-weight:inherit}.ride-hint-mobile{display:none}
+.ride-device-stage{display:grid;place-items:center;min-height:660px}
+.ride-device-stage>.ride-device-shell{grid-area:1/1}
+.ride-device-shell.is-off{visibility:hidden;pointer-events:none}
+.ride-device-shell{position:relative;width:min(100%,390px);aspect-ratio:776/1592;background:#000;border-radius:12%/5.8%;filter:drop-shadow(0 28px 48px rgba(0,0,0,0.5));transition:width 0.25s ease,aspect-ratio 0.25s ease,border-radius 0.25s ease}
+.ride-browser-chrome{display:none}
+.ride-device-screen{position:absolute;z-index:1;left:4.51%;right:4.64%;top:1.95%;bottom:1.95%;overflow-y:auto;overflow-x:hidden;background:#fff;border-radius:10.8%/5.2%;scrollbar-width:none;overscroll-behavior:auto;touch-action:pan-y;color:#111}
+.ride-device-screen::-webkit-scrollbar{display:none}.ride-device-screen:focus-visible{outline:3px solid var(--cyan);outline-offset:5px}
+.ride-comparison-canvas{position:relative;width:100%;min-height:100%;overflow:hidden;background:#fff}
+.ride-comparison-canvas img{width:100%;height:auto;display:block;user-select:none;-webkit-user-drag:none}
+.ride-comparison-ui{position:absolute;z-index:2;left:4.51%;right:4.64%;top:1.95%;bottom:1.95%;border-radius:10.8%/5.2%;overflow:hidden;pointer-events:none}
+.ride-device-frame{position:absolute;z-index:3;inset:0;width:100%;height:100%;display:block;pointer-events:none;user-select:none}
+.ride-internal-progress{position:absolute;z-index:4;right:2.1%;top:15%;bottom:15%;width:3px;background:rgba(255,255,255,0.3);pointer-events:none}
+.ride-internal-progress-fill{width:100%;height:100%;background:var(--cyan);transform:scaleY(0);transform-origin:top;box-shadow:0 0 7px rgba(0,229,255,0.65);will-change:transform}
+.ride-device-shell.is-web{width:min(100%,1080px);aspect-ratio:auto;display:flex;flex-direction:column;border:1px solid rgba(240,240,240,0.18);border-radius:10px;background:#111;overflow:hidden;filter:drop-shadow(0 28px 54px rgba(0,0,0,0.5))}
+.ride-device-shell.is-web .ride-browser-chrome{position:static;flex:none;height:42px;display:flex;align-items:center;gap:12px;padding:0 15px;background:#151515;border-bottom:1px solid rgba(240,240,240,0.12)}
+.ride-browser-dots{display:flex;gap:6px}.ride-browser-dots i{display:block;width:7px;height:7px;border-radius:50%;background:#555}.ride-browser-dots i:first-child{background:rgba(0,229,255,0.72)}
+.ride-browser-address{flex:1;height:24px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(240,240,240,0.1);background:#0d0d0d;color:#777;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.08em}
+.ride-device-shell.is-web .ride-device-screen{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:100%;flex:none;aspect-ratio:var(--rw-screen-ar);border-radius:0;container-type:inline-size}
+.ride-device-shell.is-web .ride-device-frame{display:none}
+.ride-device-shell.is-web .ride-comparison-ui{left:0;right:0;top:42px;bottom:0;border-radius:0}
+.ride-device-shell.is-web .ride-internal-progress{right:10px;top:12%;bottom:12%}
+/* web fixed layout: header + photo sticky, right column scrolls (single export, regions in % of native raster) */
+.ride-web-view{display:none}
+.ride-device-shell.is-web .ride-web-view{display:block}
+.ride-device-shell.is-web .ride-comparison-canvas{display:none}
+.ride-web-header{position:sticky;top:0;z-index:3;width:100%;aspect-ratio:var(--rw-hdr-ar);overflow:hidden;background:#f9f9f9}
+.ride-web-header img,.ride-web-photo img,.ride-web-right img{position:absolute;height:auto;max-width:none;display:block;user-select:none;-webkit-user-drag:none}
+.ride-web-header img{left:0;top:0;width:100%}
+.ride-web-body{display:grid;grid-template-columns:calc(var(--rw-ph-w)/var(--rw-w)*100%) 1fr;align-items:start}
+.ride-web-photo{position:sticky;top:var(--rw-hdr-top);z-index:2;width:100%;aspect-ratio:var(--rw-photo-ar);overflow:hidden;background:#f7f7f7}
+.ride-web-photo img{left:0;top:var(--rw-photo-img-top);width:var(--rw-photo-img-w)}
+.ride-web-right{position:relative;width:100%;aspect-ratio:var(--rw-right-ar);overflow:hidden;background:#f7f7f7}
+.ride-web-right img{left:var(--rw-right-img-left);top:var(--rw-right-img-top);width:var(--rw-right-img-w)}
+@media(max-width:760px){.ride-comparison-intro{align-items:flex-start;padding:22px;flex-direction:column;gap:12px}.ride-comparison-panel{padding:24px 12px 22px}.ride-device-stage{min-height:0}.ride-device-shell{width:min(100%,360px)}.ride-device-shell.is-web{width:100%}.ride-device-shell.is-web .ride-browser-chrome{height:34px;padding:0 10px}.ride-device-shell.is-web .ride-comparison-ui{top:34px}.ride-browser-address{height:20px}.ride-viewport-tabs{gap:5px;margin-bottom:14px}.ride-viewport-tab{font-size:10px;padding:8px 5px;letter-spacing:0.02em}.ride-comparison-toolbar{flex-direction:column;margin-bottom:16px}.ride-hint-desktop{display:none}.ride-hint-mobile{display:inline}.ride-comparison-hint{font-size:9px;letter-spacing:0.03em}}
+@media(prefers-reduced-motion:reduce){.ride-device-shell,.ride-viewport-tab{transition:none}}
+body[data-project-page] .cta-section,.cta-section{padding:150px 80px;padding-left:var(--page-gutter) !important;padding-right:var(--page-gutter) !important;text-align:center;position:relative;box-sizing:border-box !important}
+.cta-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.02) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.cta-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:0.22em;margin-bottom:18px;position:relative}
+.cta-heading{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(48px,7vw,96px);text-transform:uppercase;line-height:0.9;letter-spacing:-0.02em;margin-bottom:40px;position:relative}
+.cta-heading .outline{-webkit-text-stroke:1.5px rgba(240,240,240,0.25);color:transparent}
+.case-nav{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.cta-btn{display:inline-flex;align-items:center;gap:12px;padding:14px 32px;background:transparent;border:1px solid var(--cyan);color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.15em;text-decoration:none;position:relative;overflow:hidden;transition:color 0.3s}
+.cta-btn::before{content:'';position:absolute;inset:0;background:var(--cyan);transform:translateX(-100%);transition:transform 0.35s}.cta-btn:hover::before{transform:translateX(0)}.cta-btn:hover{color:#000}.cta-btn span{position:relative;z-index:1}
+/* FOOTER — shared styles in styles.css */
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--cyan-border)}
+body[data-project-page] .document-footer,.document-footer{margin-left:var(--page-gutter) !important;margin-right:var(--page-gutter) !important;width:auto !important;max-width:none !important;box-sizing:border-box !important}
+
+
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--cyan);
+  background: transparent;
+  color: var(--cyan);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: color .3s, border-color .3s, background .3s, transform .2s ease, box-shadow .3s ease;
+  padding: 14px 32px;
+  text-decoration: none;
+}
+.btn-primary span {
+  position: relative;
+  z-index: 1;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(0,229,255,0.35), 0 4px 20px rgba(0,229,255,0.25);
+}
+
+/* Fix btn-primary hover fill clipping */
+.btn-primary::after {
+  border-radius: inherit;
+}
+</style>
+</head>
+<body data-project-page data-project="test-ride">
+<div id="cursor-dot"></div><div id="cursor-ring"></div><div class="scanlines"></div>
+<nav id="nav">
+  <a href="../index.html" class="nav-brand">Sidharth Premanand</a>
+  <div class="nav-center">
+    <a href="../index.html#missions" class="nav-link">Work</a>
+    <a href="../about.html" class="nav-link">About</a>
+    <a href="../photos.html" class="nav-link">Photos</a>
+    <a href="../index.html#contact" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-status">Available for collaboration</div>
+    <a href="../index.html#contact" class="nav-cta" data-cta-hover><span>Let's talk</span></a>
+  </div>
+</nav>
+<div class="page-flow">
+<a href="../index.html?v=20260823d#missions" class="back-link">Back home</a>
+<div class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-label">Ather Energy · Test Ride Booking</div>
+  <h1 class="hero-title" data-text="TEST RIDE BOOKING REDESIGN">
+    TEST RIDE<br>
+    BOOKING<br>
+    <span class="outline">REDESIGN</span>
+  </h1>
+  <div class="hero-meta">
+    <div class="meta-cell"><div class="meta-label">CLIENT //</div><div class="meta-value">Ather Energy</div></div>
+    <div class="meta-cell"><div class="meta-label">ROLE //</div><div class="meta-value">Digital Product Designer</div></div>
+    <div class="meta-cell"><div class="meta-label">SCOPE //</div><div class="meta-value">UX Redesign + HTR</div></div>
+    <div class="meta-cell"><div class="meta-label">PLATFORM //</div><div class="meta-value">Web + Mobile</div></div>
+    <div class="meta-cell"><div class="meta-label">STATUS //</div><div class="meta-value accent">MISSION COMPLETE</div></div>
+  </div>
+</div>
+
+<div class="divider" aria-hidden="true"></div>
+<div class="section project-intro" id="s1">
+  <div class="section-stack mb-12">
+    <div class="section-label mb-2 text-xs font-mono tracking-widest uppercase text-cyan">01 // MISSION BRIEF</div>
+    <h2 class="section-heading text-4xl md:text-5xl font-extrabold tracking-tight uppercase text-white">CONTEXT</h2>
+    <p class="section-subtitle text-sm md:text-base text-white/70 leading-relaxed mt-2">Reimagining test ride booking to eliminate customer drop-offs and bring rides home.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="reflection-body">
+      <p class="text-sm md:text-base text-white/70 leading-relaxed">This mission covers the complete redesign of Ather Energy's online test ride booking system. The core intervention was the introduction of <strong style="color:var(--white)">Home Test Rides (HTR)</strong> — a first-of-its-kind feature that brought the test ride experience directly to the customer's location, removing the friction of visiting an Experience Centre.</p>
+      <p class="text-sm md:text-base text-white/70 leading-relaxed">The existing booking flow presented a fragmented, multi-step journey that required users to locate nearby ECs, navigate an unintuitive calendar, and commit personal details before understanding availability — a sequence that drove high abandonment.</p>
+    </div>
+    <div class="data-table">
+      <div class="data-row"><span class="data-key">COMPLETED RIDES (BEFORE)</span><span class="data-val">3%</span></div>
+      <div class="data-row"><span class="data-key">TARGET COMPLETED RIDES</span><span class="data-val">6%</span></div>
+      <div class="data-row"><span class="data-key">LOCATION ABANDONMENT</span><span class="data-val">40%</span></div>
+      <div class="data-row"><span class="data-key">EARLY DROP-OFF</span><span class="data-val">25%</span></div>
+      <div class="data-row"><span class="data-key">HOME TEST RIDES</span><span class="data-val">NEW FEATURE</span></div>
+    </div>
+  </div>
+</div>
+<div class="divider" aria-hidden="true"></div>
+<div class="section" id="s2">
+  <div class="section-stack mb-12">
+    <div class="section-label mb-2 text-xs font-mono tracking-widest uppercase text-cyan">02 // PROBLEM STATEMENT</div>
+    <h2 class="section-heading text-4xl md:text-5xl font-extrabold tracking-tight uppercase text-white">WHAT WAS BROKEN</h2>
+    <p class="section-subtitle text-sm md:text-base text-white/70 leading-relaxed mt-2">Key usability hurdles preventing customers from completing their booking.</p>
+  </div>
+
+  <div class="problems">
+    <div class="problem-card"><div class="problem-num">01</div><div class="problem-title">Complex Booking Flow</div><div class="problem-body">The existing booking sequence was lengthy and cognitively demanding. Users faced multiple decision points with insufficient guidance, leading to confusion and early abandonment before they could commit to a ride.</div></div>
+    <div class="problem-card"><div class="problem-num">02</div><div class="problem-title">Ambiguous Location Data</div><div class="problem-body">Location information for Experience Centres was presented in a way that created confusion — distances were unclear, and the interface failed to surface the nearest available slot relative to the user's position.</div></div>
+    <div class="problem-card"><div class="problem-num">03</div><div class="problem-title">Mandatory EC Visits</div><div class="problem-body">Requiring in-person visits to Experience Centres was a structural barrier. The absence of a home test ride option eliminated a major segment of potential customers from completing the flow.</div></div>
+  </div>
+</div>
+
+<div class="divider" aria-hidden="true"></div>
+<div class="section" id="s3">
+  <div class="section-stack mb-12">
+    <div class="section-label mb-2 text-xs font-mono tracking-widest uppercase text-cyan">03 // RESEARCH INSIGHTS</div>
+    <h2 class="section-heading text-4xl md:text-5xl font-extrabold tracking-tight uppercase text-white">KEY FINDINGS</h2>
+    <p class="section-subtitle text-sm md:text-base text-white/70 leading-relaxed mt-2">Quantifying where and why high-intent users abandoned the flow.</p>
+  </div>
+
+  <div class="findings-grid">
+    <div class="finding-card"><div class="finding-num">25%</div><div class="finding-label">Drop-off rate during the initial stages of the booking flow — before users reached date selection</div></div>
+    <div class="finding-card"><div class="finding-num">40%</div><div class="finding-label">Of users abandoned the process due to difficulties locating a nearby Experience Centre</div></div>
+  </div>
+</div>
+
+<div class="divider" aria-hidden="true"></div>
+<div class="section" id="s4">
+  <div class="section-stack mb-12">
+    <div class="section-label mb-2 text-xs font-mono tracking-widest uppercase text-cyan">04 // STRATEGY & RATIONALE</div>
+    <h2 class="section-heading text-4xl md:text-5xl font-extrabold tracking-tight uppercase text-white">THE DECISIONS</h2>
+    <p class="section-subtitle text-sm md:text-base text-white/70 leading-relaxed mt-2">How we tackled timing, location friction, and vehicle availability.</p>
+  </div>
+
+  <div class="decisions-track">
+
+    <!-- Row 1: text left, image right -->
+    <article class="decision-row">
+      <div class="decision-copy">
+        <div class="decision-num">Decision 01</div>
+        <h3 class="decision-kicker">The Timing Problem</h3>
+        <div class="decision-subtitle">Testing Something We Couldn't See Clearly</div>
+        <div class="decision-question">Is the stepped flow actually better, or does it just feel better to us?</div>
+        <ul class="decision-points">
+          <li><span class="anno" aria-hidden="true">1</span><span><strong>Moved location selection to the top</strong> of the sequence so each step felt deliberate, not rushed.</span></li>
+          <li><span class="anno" aria-hidden="true">2</span><span>Stepped flow worked because it <strong>forced intentionality</strong> — users couldn't reach date selection without confirming location first.</span></li>
+          <li><span class="anno" aria-hidden="true">3</span><span>Ran an <strong>A/B test</strong> comparing the stepped booking flow against the single-page version — the dropout we feared <strong>didn't materialise</strong>.</span></li>
+        </ul>
+      </div>
+      <figure class="decision-visual">
+        <div class="visual-panel decision-panel">
+          <div class="decision-visual-media">
+            <div class="decision-visual-media-inner">
+              <img src="../assets/m03-screens-wide.png" alt="Redesigned stepped test ride booking screens overview" loading="lazy" decoding="async">
+              <span class="anno anno-pin" style="top:39%;left:57.81%;transform:translate(-50%,-50%)" aria-hidden="true">1</span>
+              <span class="anno anno-pin" style="top:60.89%;left:54.76%;transform:translate(-50%,-50%)" aria-hidden="true">2</span>
+              <span class="anno anno-pin" style="top:92.33%;left:78%;transform:translate(-50%,-50%)" aria-hidden="true">3</span>
+            </div>
+          </div>
+          <figcaption class="decision-visual-caption">Stepped flow // Location → Date → Time</figcaption>
+        </div>
+      </figure>
+    </article>
+
+    <!-- Row 2: image left, text right -->
+    <article class="decision-row decision-row--flip">
+      <div class="decision-copy">
+        <div class="decision-num">Decision 02</div>
+        <h3 class="decision-kicker">The Location Problem</h3>
+        <div class="decision-subtitle">Defending Two Decisions at Once</div>
+        <div class="decision-question">How do you hold your ground when stakeholders challenge your core assumptions?</div>
+        <ul class="decision-points">
+          <li><span class="anno" aria-hidden="true">1</span><span><strong>Observed 40% abandonment rate</strong> attributable to Experience Centre location difficulty.</span></li>
+          <li><span class="anno" aria-hidden="true">2</span><span>Defended <strong>Home Test Ride</strong> against cultural pushback — data showed serious buyers still got stuck finding an EC.</span></li>
+          <li><span class="anno" aria-hidden="true">3</span><span>Used the same evidence to defend the <strong>stepped flow</strong> when stakeholders preferred a single long form.</span></li>
+        </ul>
+      </div>
+      <figure class="decision-visual">
+        <div class="visual-panel decision-panel">
+          <div class="decision-visual-frame decision-visual-frame--phone">
+            <img src="../assets/images/Ather Test Ride/Mobile Earlier.png" alt="Earlier single-page booking form that contributed to location abandonment" loading="lazy" decoding="async" style="object-position:top center">
+            <span class="anno anno-pin" style="top:91.51%;left:74.65%;transform:translate(-50%,-50%)" aria-hidden="true">1</span>
+            <span class="anno anno-pin" style="top:82.56%;left:59.15%;transform:translate(-50%,-50%)" aria-hidden="true">2</span>
+            <span class="anno anno-pin" style="top:75.1%;left:49.3%;transform:translate(-50%,-50%)" aria-hidden="true">3</span>
+          </div>
+          <figcaption class="decision-visual-caption">Earlier flow // Location friction</figcaption>
+        </div>
+      </figure>
+    </article>
+
+    <!-- Row 3: text left, image right -->
+    <article class="decision-row">
+      <div class="decision-copy">
+        <div class="decision-num">Decision 03</div>
+        <h3 class="decision-kicker">The Inventory Problem</h3>
+        <div class="decision-subtitle">Designing Around a Physical Constraint</div>
+        <div class="decision-question">How do you build a booking system when you have 2–4 test ride vehicles per location?</div>
+        <ul class="decision-points">
+          <li><span class="anno" aria-hidden="true">1</span><span>Designed a <strong>chip-based date selector</strong> around real inventory limits — overbooking was an operational risk.</span></li>
+          <li><span class="anno" aria-hidden="true">2</span><span>Chips <strong>load availability in real time</strong> based on the selected location, so users only see dates with a vehicle.</span></li>
+          <li><span class="anno" aria-hidden="true">3</span><span>Surfaces the <strong>nearest available option</strong> instead of a calendar that invites distant future planning.</span></li>
+        </ul>
+      </div>
+      <figure class="decision-visual">
+        <div class="visual-panel decision-panel">
+          <div class="decision-visual-frame decision-visual-frame--phone">
+            <img src="../assets/images/Ather Test Ride/Mobile Redesign.png" alt="Chip-based date and time selection in the redesigned booking flow" loading="lazy" decoding="async" style="object-position:center 38%">
+            <span class="anno anno-pin" style="top:34%;left:16%" aria-hidden="true">1</span>
+            <span class="anno anno-pin" style="top:48%;right:14%" aria-hidden="true">2</span>
+            <span class="anno anno-pin" style="top:62%;left:20%" aria-hidden="true">3</span>
+          </div>
+          <figcaption class="decision-visual-caption">Date chips // Real-time availability</figcaption>
+        </div>
+      </figure>
+    </article>
+
+  </div>
+</div>
+<div class="divider" aria-hidden="true"></div>
+<div class="section" id="userflow">
+  <div class="section-stack mb-12">
+    <div class="section-label mb-2 text-xs font-mono tracking-widest uppercase text-cyan">05 // ARCHITECTURE</div>
+    <h2 class="section-heading text-4xl md:text-5xl font-extrabold tracking-tight uppercase text-white">THE FLOW</h2>
+    <p class="section-subtitle text-sm md:text-base text-white/70 leading-relaxed mt-2">Restructuring the booking journey around Home Test Rides.</p>
+  </div>
+
+  <p class="flow-lead">We restructured the entire booking journey — introducing the Home Test Ride branch as the primary path while preserving the Experience Centre route for users who preferred it.</p>
+  
+  <div class="findings-grid" style="grid-template-columns: 1fr;">
+    <div class="finding-card" style="padding: 0; background: #0a0a0a; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <figure class="flow-figure" style="margin: 0; width: 100%;">
+        <img src="../assets/images/User flows/m03-userflow.jpg.png" alt="Test Ride Flow — Booking journey user flow" loading="lazy" width="1600" height="900" class="flow-diagram-img">
+      </figure>
+    </div>
+  </div>
+</div>
+
+<div class="divider" aria-hidden="true"></div>
+<div class="section" id="screens">
+  <div class="section-stack mb-12">
+    <div class="section-label mb-2 text-xs font-mono tracking-widest uppercase text-cyan">06 // INTERFACE DESIGN</div>
+    <h2 class="section-heading text-4xl md:text-5xl font-extrabold tracking-tight uppercase text-white">THE WORK</h2>
+    <p class="section-subtitle text-sm md:text-base text-white/70 leading-relaxed mt-2">Interactive comparison of earlier and redesigned booking screens.</p>
+  </div>
+
+  <div class="ride-comparison" data-ride-comparison>
+    <div class="ride-comparison-intro">
+      <div>
+        <div class="ride-comparison-kicker">Interactive Review // Earlier ↔ Redesign</div>
+      </div>
+      <div class="ride-comparison-count" aria-live="polite">01 / 02</div>
+    </div>
+
+    <div class="ride-comparison-panel">
+      <div class="ride-viewport-tabs" role="tablist" aria-label="Choose a Test Ride viewport">
+        <button class="ride-viewport-tab" id="ride-tab-mobile" type="button" role="tab" aria-selected="true" aria-controls="ride-screen-mobile" data-ride-viewport="0">Mobile</button>
+        <button class="ride-viewport-tab" id="ride-tab-web" type="button" role="tab" aria-selected="false" aria-controls="ride-screen-web" data-ride-viewport="1">Web</button>
+      </div>
+
+      <div class="ride-comparison-toolbar">
+        <div class="ride-comparison-hint" id="ride-comparison-help">
+          <span class="ride-hint-desktop"><b aria-hidden="true">↕</b> Scroll inside</span>
+          <span class="ride-hint-mobile"><b aria-hidden="true">↕</b> Scroll inside</span>
+        </div>
+      </div>
+
+      <div class="ride-device-stage">
+        <div class="ride-device-shell is-mobile" data-ride-view="0">
+          <div class="ride-device-screen" id="ride-screen-mobile" role="tabpanel" tabindex="0" aria-labelledby="ride-tab-mobile" aria-describedby="ride-comparison-help">
+            <div class="ride-comparison-canvas">
+              <img class="ride-after-image" src="../assets/images/Ather Test Ride/Mobile Redesign.png" alt="Redesigned mobile Test Ride booking page" loading="lazy" decoding="async">
+            </div>
+          </div>
+
+          <div class="ride-comparison-ui">
+            <div class="ride-internal-progress" aria-hidden="true"><div class="ride-internal-progress-fill"></div></div>
+          </div>
+
+          <img class="ride-device-frame" src="../assets/images/Ather Shop/iPhone 15 Pro - White Flatten.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </div>
+
+        <div class="ride-device-shell is-web" data-ride-view="1">
+          <div class="ride-browser-chrome" aria-hidden="true">
+            <span class="ride-browser-dots"><i></i><i></i><i></i></span>
+            <span class="ride-browser-address">atherenergy.com/test-ride</span>
+          </div>
+
+          <div class="ride-device-screen" id="ride-screen-web" role="tabpanel" tabindex="0" aria-labelledby="ride-tab-web" aria-describedby="ride-comparison-help">
+            <div class="ride-web-view">
+              <div class="ride-web-header" aria-hidden="true"><img src="../assets/images/Ather Test Ride/Web Redesign.webp" alt="" loading="eager" decoding="async"></div>
+              <div class="ride-web-body">
+                <div class="ride-web-photo" aria-hidden="true"><img src="../assets/images/Ather Test Ride/Web Redesign.webp" alt="" loading="eager" decoding="async"></div>
+                <div class="ride-web-right"><img src="../assets/images/Ather Test Ride/Web Redesign.webp" alt="Redesigned web Test Ride booking page" loading="eager" decoding="async"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ride-comparison-ui">
+            <div class="ride-internal-progress" aria-hidden="true"><div class="ride-internal-progress-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider" aria-hidden="true"></div>
+<div class="section" id="s7">
+  <div class="section-stack mb-12">
+    <div class="section-label mb-2 text-xs font-mono tracking-widest uppercase text-cyan">07 // MISSION OUTCOME</div>
+    <h2 class="section-heading text-4xl md:text-5xl font-extrabold tracking-tight uppercase text-white">RESULTS</h2>
+    <p class="section-subtitle text-sm md:text-base text-white/70 leading-relaxed mt-2">Real-world impact across conversion and completed test rides.</p>
+  </div>
+
+  <div class="results-grid">
+    <div class="result-card"><div class="result-index">METRIC_01 //</div><div class="result-num"><span>8</span>%</div><div class="result-label">COMPLETED TEST RIDE CONVERSION — UP FROM 3% PREVIOUSLY</div></div>
+    <div class="result-card"><div class="result-index">METRIC_02 //</div><div class="result-num"><span>500</span></div><div class="result-label">HOME TEST RIDES CONDUCTED DURING THE PILOT WITH ZERO SHOWROOM VISITS</div></div>
+    <div class="result-card"><div class="result-index">METRIC_03 //</div><div class="result-num"><span>8</span>/10</div><div class="result-label">TEST PARTICIPANTS WHO FINISHED THE BOOKING WITHOUT ASSISTANCE</div></div>
+  </div>
+</div>
+<div class="divider" aria-hidden="true"></div>
+<div class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-label">CASE STUDY // COMPLETE</div>
+  <h2 class="cta-heading">Continue<br><span class="outline">Exploring</span></h2>
+  <div class="case-nav">
+    <a href="mission-02-ather-shop.html?v=20260823d" class="cta-btn"><span>← PREVIOUS: ATHER SHOP</span></a>
+    <a href="mission-01-phone-login.html?v=20260823d" class="cta-btn"><span>NEXT: PHONE LOGIN →</span></a>
+  </div>
+</div>
+</div>
+
+<div class="divider" aria-hidden="true"></div>
+
+<footer class="document-footer">
+  <div class="footer-main">
+    <div class="footer-zone-left">
+      <div class="footer-identity">SIDHARTH PREMANAND</div>
+      <div class="footer-meta footer-meta--identity">
+        PRODUCT DESIGNER · <span class="footer-city-dot"></span> WEIMAR, DE · EST. 1998
+      </div>
+      <div class="footer-clock" id="footer-time">--:--:--</div>
+    </div>
+
+    <div class="footer-ticket">
+      <div class="footer-barcode" aria-hidden="true"></div>
+      <div class="footer-ticket-label">AVAILABLE FOR COLLABORATION</div>
+      <a href="mailto:sidharthpremux@gmail.com">sidharthpremux@gmail.com</a>
+    </div>
+
+    <div class="footer-stamps">
+      <a class="footer-stamp" href="../assets/docs/Resume.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="footer-stamp-name">RESUME</span>
+        <span class="footer-stamp-sub">DOWNLOAD PDF</span>
+      </a>
+      <a class="footer-stamp" href="../index.html#missions">
+        <span class="footer-stamp-name">WORK</span>
+        <span class="footer-stamp-sub">VIEW CASE STUDIES</span>
+      </a>
+      <a class="footer-stamp" href="mailto:sidharthpremux@gmail.com">
+        <span class="footer-stamp-name">EMAIL</span>
+        <span class="footer-stamp-sub">SEND DIRECT NOTE</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-copy">© <span data-current-year>2026</span> SIDHARTH PREMANAND</div>
+    <div class="footer-bottom-copy">DESIGNED &amp; BUILT BY SIDHARTH</div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=20260824a"></script>
+<script>
+
+
+const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+if(dot&&ring){
+  document.body.classList.add('has-custom-cursor');
+  let rx=0,ry=0,mx=0,my=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px'});
+  (function l(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(l)})();
+  document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.problem-card,.result-card,.finding-card')){ring.style.width='44px';ring.style.height='44px';ring.style.borderColor='rgba(0,229,255,0.7)'}else{ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(0,229,255,0.35)'}});
+}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+(function initRideViewer(){
+  const root=document.querySelector('[data-ride-comparison]');
+  if(!root)return;
+
+  const shells=[...root.querySelectorAll('.ride-device-shell')];
+  const screens=shells.map(shell=>shell.querySelector('.ride-device-screen')).filter(Boolean);
+  const fills=shells.map(shell=>shell.querySelector('.ride-internal-progress-fill')).filter(Boolean);
+  const count=root.querySelector('.ride-comparison-count');
+  const tabs=[...root.querySelectorAll('[data-ride-viewport]')];
+  const VIEW_COUNT=2;
+  let active=0;
+
+  const updateScrollProgress=()=>{
+    const screen=screens[active],fill=fills[active];
+    if(!screen||!fill)return;
+    const maximum=screen.scrollHeight-screen.clientHeight;
+    const progress=maximum>0?screen.scrollTop/maximum:0;
+    fill.style.transform=`scaleY(${Math.min(1,Math.max(0,progress))})`;
+  };
+
+  const selectView=index=>{
+    active=index;
+    shells.forEach((shell,i)=>{
+      const isActive=i===index;
+      shell.classList.toggle('is-off',!isActive);
+      if(isActive){shell.removeAttribute('inert');screens[i].scrollTop=0;}
+      else{shell.setAttribute('inert','');}
+    });
+    count.textContent=String(index+1).padStart(2,'0')+' / '+String(VIEW_COUNT).padStart(2,'0');
+    tabs.forEach((tab,tabIndex)=>{
+      const selected=tabIndex===index;
+      tab.setAttribute('aria-selected',selected?'true':'false');
+      tab.tabIndex=selected?0:-1;
+    });
+    requestAnimationFrame(updateScrollProgress);
+  };
+
+  screens.forEach(screen=>screen.addEventListener('scroll',updateScrollProgress,{passive:true}));
+  tabs.forEach(tab=>tab.addEventListener('click',()=>selectView(Number(tab.dataset.rideViewport))));
+  tabs.forEach((tab,index)=>tab.addEventListener('keydown',event=>{
+    if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight')return;
+    event.preventDefault();
+    const direction=event.key==='ArrowRight'?1:-1;
+    const next=(index+direction+tabs.length)%tabs.length;
+    tabs[next].focus();
+    selectView(next);
+  }));
+  selectView(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+:root {
+  /* Spacing scale: 8, 16, 24, 48, 80, 96, 128px */
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-48: 48px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-128: 128px;
+
+  /* Section gap — matches Test Ride Booking reference */
+  --section-gap: var(--space-128);   /* ≥ 768px */
+  --nav-h: 78px;                     /* rendered nav height at ≥ 1024px */
+
+  /* Type scale */
+  --type-hero: clamp(60px, 9vw, 120px);
+  --type-heading: clamp(36px, 4.5vw, 64px);
+  --type-decision-title: clamp(22px, 2.5vw, 28px);
+  --type-body: 16px;
+  --type-question: 14px;
+  --type-caption: 12px;
+  --type-mono: 12px;
+
+  /* Accessible contrast colors (WCAG AA compliant on dark backgrounds) */
+  --text-primary: #F0F0F0;
+  --text-body: rgba(240, 240, 240, 0.86);
+  --text-muted: #B8B8B8;
+  --text-dim: #9E9E9E;
+  --cyan-label: #5CEBFF;
+  --cyan-accent: #00E5FF;
+}
+
+/* 761–1023px: nav height = 60px */
+@media (max-width: 1023px) {
+  :root {
+    --nav-h: 60px;
+  }
+}
+
+/* 761–767px: py-24 = 96px */
+@media (max-width: 767px) {
+  :root {
+    --section-gap: var(--space-96);
+  }
+}
+
+/* ≤ 760px: matches body[data-project-page] .section override (80px) */
+@media (max-width: 760px) {
+  :root {
+    --section-gap: var(--space-80);
+    --nav-h: 64px;
+  }
+}
+
+/* Remove or suppress the decorative context watermark across mission pages */
+body[data-project-page] .project-intro::before {
+  display: none !important;
+  content: none !important;
+}
+
+nav,
+.footer-line {
+  padding-left: var(--chrome-pad-x);
+  padding-right: var(--chrome-pad-x);
+}
+
+.hero,
+.cta-section {
+  padding-left: var(--section-pad-x);
+  padding-right: var(--section-pad-x);
+}
+
+/* Craft-focused design system standards */
+.section {
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+  max-width: 72rem !important; /* max-w-6xl */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.5rem !important; /* px-6 */
+  padding-right: 1.5rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.cta-section {
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+  box-sizing: border-box;
+}
+
+/* Dividers between sections: 1px gradient line */
+.divider {
+  display: block !important;
+  height: 1px;
+  margin: 0 var(--page-gutter, 56px);
+  background: linear-gradient(90deg, transparent, var(--cyan-border) 20%, var(--cyan-border) 80%, transparent);
+}
+
+.section-heading {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 2.25rem !important; /* text-4xl */
+  line-height: 2.5rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+  text-transform: uppercase !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .section-heading {
+    font-size: 3rem !important; /* md:text-5xl */
+    line-height: 1 !important;
+  }
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important; /* text-xs */
+  line-height: 1rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  color: var(--cyan) !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
+}
+
+.section-subtitle {
+  font-size: 0.875rem !important; /* text-sm */
+  line-height: 1.625 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-weight: 300 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  max-width: 42rem !important;
+}
+
+/* Shared body presentation (the Login Reflection block, shared with all
+   Context bodies): 680px column, 16px/24px paragraphs (14px/20px below 768),
+   16px paragraph gap. */
+.reflection-body {
+  max-width: 680px;
+}
+
+.reflection-body > p {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-weight: 300 !important;
+  margin: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .reflection-body > p {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+}
+
+.reflection-body > p + p {
+  margin-top: 16px !important;
+  margin-bottom: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .section-subtitle {
+    font-size: 1rem !important; /* md:text-base */
+  }
+}
+
+.body-text {
+  font-size: 0.875rem !important; /* text-sm */
+  line-height: 1.625 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-weight: 300 !important;
+}
+
+@media (min-width: 768px) {
+  .body-text {
+    font-size: 1rem !important; /* md:text-base */
+  }
+}
+
+.hero-meta,
+.data-table,
+.problems,
+.findings-grid,
+.results-grid,
+.ba-grid,
+.features-grid,
+.design-objectives {
+  gap: 1px;
+  background: var(--cyan-border);
+}
+
+.meta-cell,
+.data-row,
+.problem-card,
+.finding-card,
+.result-card,
+.ba-panel,
+.feature-card,
+.obj-card {
+  background: var(--bg-card);
+  transition: background 0.25s ease;
+}
+
+.problem-card:hover,
+.finding-card:hover,
+.result-card:hover,
+.feature-card:hover,
+.obj-card:hover {
+  background: var(--bg-raised);
+}
+
+.cta-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shared visual panel — moved from mission-01's inline Tailwind stack
+   (bg-white/5 border border-white/10 rounded-lg pt-6 sm:pt-8 px-6 sm:px-8 pb-3 sm:pb-4).
+   Used by mission-01 and mission-03 so the values exist in one place. */
+.visual-panel {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 24px 24px 12px;
+}
+
+@media (min-width: 640px) {
+  .visual-panel {
+    padding: 32px 32px 16px;
+  }
+}

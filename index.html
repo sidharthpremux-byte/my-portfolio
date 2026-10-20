@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sidharth Premanand — Digital Product Designer</title>
+<meta name="description" content="Digital Product Designer with 3+ years experience in UX, mobility, and healthcare. Currently pursuing MS in HCI at Bauhaus-Universität Weimar, Germany.">
+<meta name="author" content="Sidharth Premanand">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Sidharth Premanand — Digital Product Designer">
+<meta property="og:description" content="Digital Product Designer with 3+ years experience in UX, mobility, and healthcare. Currently pursuing MS in HCI at Bauhaus-Universität Weimar.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/Hero image.webp">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sidharth Premanand — Digital Product Designer">
+<meta name="twitter:description" content="Digital Product Designer with 3+ years experience in UX, mobility, and healthcare. Currently pursuing MS in HCI at Bauhaus-Universität Weimar.">
+<meta name="twitter:image" content="assets/Hero image.webp">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23070707'/%3E%3Ctext x='50' y='50' font-family='monospace' font-size='48' font-weight='bold' fill='%2300E5FF' text-anchor='middle' dominant-baseline='central'%3ESP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,900&family=JetBrains+Mono:wght@300;400;500&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261017a">
+<link rel="stylesheet" href="assets/css/index.css">
+<style>
+:root{--cyan:#00E5FF;--cyan-dim:rgba(0,229,255,0.08);--cyan-border:rgba(0,229,255,0.18);--magenta:#FF006E;--yellow:#C8FF00;--white:#F0F0F0;--grey:#666;--grey-mid:#444;--grey-dim:#242424;--bg:#070707;--bg-card:#0c0c0c;--bg-raised:#121212;--radius-lg:0;--radius-md:0;--cta-padding-y:16px;--cta-padding-x:32px;--cta-font-size:0.875rem;--cta-nav-padding-y:10px;--cta-nav-padding-x:24px;--cta-nav-font-size:0.875rem;--cta-letter-spacing:0.08em;--type-hero:3.75rem;--type-hero-md:6rem;--type-section:2.25rem;--type-section-md:3rem;--type-card:1.25rem;--type-body:0.875rem;--type-body-md:1rem;--type-meta:0.75rem;--type-btn:0.875rem}
+:is(.btn-primary,.btn-secondary,.section-more-link,.photo-view-more){box-sizing:border-box;height:auto;min-height:0;padding:var(--cta-padding-y) var(--cta-padding-x);display:inline-flex;align-items:center;justify-content:center;font-size:var(--type-btn);font-weight:500;letter-spacing:var(--cta-letter-spacing);line-height:1;text-decoration:none;border-radius:var(--radius-lg)}
+.nav-cta{box-sizing:border-box;height:auto;min-height:0;padding:var(--cta-nav-padding-y) var(--cta-nav-padding-x);display:inline-flex;align-items:center;justify-content:center;font-size:var(--type-btn);font-weight:500;letter-spacing:var(--cta-letter-spacing);line-height:1;text-decoration:none;border-radius:var(--radius-lg)}
+:is(.nav-cta,.btn-primary,.btn-secondary,.section-more-link,.photo-view-more) span{line-height:1}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}::selection{background:var(--cyan);color:#000}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.45}
+.scanlines{position:fixed;inset:0;pointer-events:none;z-index:999;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.025) 3px,rgba(0,0,0,0.025) 4px)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;padding:16px 56px;display:flex;justify-content:space-between;align-items:center;background:transparent;border-bottom:1px solid transparent;z-index:500;transition:background 0.4s,backdrop-filter 0.4s,border-color 0.4s}
+nav.scrolled{background:rgba(7,7,7,0.9);backdrop-filter:blur(18px);border-color:var(--cyan-border)}
+.nav-brand{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.1em;color:var(--white);text-decoration:none;text-transform:uppercase}
+.nav-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:32px}
+.nav-link{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--grey);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s;position:relative}
+.nav-link::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform 0.22s ease}
+.nav-link:hover{color:var(--white)}.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}.nav-link.active{color:var(--cyan)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-status{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);display:flex;align-items:center;gap:6px;letter-spacing:0.1em}
+.nav-status::before{content:'';width:5px;height:5px;background:var(--cyan);border-radius:50%;animation:blink 1.6s infinite}
+.nav-cta{font-family:'JetBrains Mono',monospace;color:var(--cyan);text-transform:uppercase;border:2px solid var(--cyan);border-radius:var(--radius-lg);background:transparent;position:relative;overflow:hidden;transition:color .3s,border-color .3s}
+.nav-cta span{position:relative;z-index:1}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* HERO */
+.hero{min-height:100vh;min-height:100svh;display:block;padding:0;position:relative;overflow:hidden}
+.sonar-grid{position:relative;isolation:isolate;overflow:hidden;cursor:crosshair;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:96px 80px;box-sizing:border-box}
+.sonar-grid-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;display:block}
+.hero-readability{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 34% 30% at 40% 45%,var(--bg) 0%,transparent 100%)}
+.hero-left{position:relative;z-index:10;width:100%;max-width:42rem;margin-right:auto;text-align:left;align-self:flex-start;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.hero-actions{display:flex;align-items:center;justify-content:flex-start;gap:16px;margin-top:24px;animation:fadeUp .8s .3s ease forwards;opacity:0}
+.hero-actions a{position:relative;z-index:10;width:fit-content}
+.hero-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:var(--type-hero);line-height:.92;letter-spacing:-0.025em;text-transform:none;animation:fadeUp .8s .08s ease forwards;opacity:0;position:relative;text-align:left}
+.hero-title-line{display:block}
+.hero-title-line:nth-child(2){white-space:nowrap}
+.hero-title [data-scramble]{display:inline-block}
+.hero-title .outline{-webkit-text-stroke:1.25px rgba(0,229,255,.78);color:transparent}
+.hero-highlight{white-space:nowrap}
+.hero-sub{font-size:var(--type-body);line-height:1.625;color:rgba(255,255,255,.7);font-weight:300;max-width:620px;margin-top:28px;animation:fadeUp .8s .2s ease forwards;opacity:0;text-align:left}
+@media(min-width:768px){
+  .hero-title{font-size:var(--type-hero-md)}
+  .hero-sub,.missions-desc,.photo-tagline,.about-body,.mission-tags,.text-body{font-size:var(--type-body-md)}
+  .section-heading,.about-headline{font-size:var(--type-section-md)}
+}
+.btn-secondary{border:1px solid rgba(240,240,240,.22);background:transparent;color:rgba(240,240,240,.72);font-family:'JetBrains Mono',monospace;text-transform:uppercase;border-radius:var(--radius-lg);position:relative;overflow:hidden;transition:color .3s,border-color .3s,transform .2s ease}
+.btn-secondary span{position:relative;z-index:1}
+.btn-secondary:hover{transform:translateY(-2px);border-color:rgba(240,240,240,.5)}
+.btn-primary{border:2px solid var(--cyan);background:transparent;color:var(--cyan);font-family:'JetBrains Mono',monospace;text-transform:uppercase;border-radius:var(--radius-lg);position:relative;overflow:hidden;transition:color .3s,border-color .3s,background .3s,transform .2s ease,box-shadow .3s ease}
+.btn-primary span{position:relative;z-index:1}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 24px rgba(0,229,255,0.35),0 4px 20px rgba(0,229,255,0.25)}
+.btn-primary-arrow{display:inline-block;margin-left:20px;color:#0A0A0A;transition:transform .25s ease}
+.btn-primary:hover .btn-primary-arrow{transform:translateX(4px);color:#0A0A0A}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glitch{0%,92%,100%{clip-path:none;transform:none}93%{clip-path:polygon(0 22%,100% 22%,100% 42%,0 42%);transform:translateX(-3px)}94%{clip-path:none;transform:none}96%{clip-path:polygon(0 62%,100% 62%,100% 80%,0 80%);transform:translateX(3px)}97%{clip-path:none;transform:none}}
+
+@media(max-width:1050px){.sonar-grid{padding-left:56px;padding-right:56px}}
+
+#missions,#about,#photos,#contact{scroll-margin-top:100px}
+
+/* DIVIDER */
+.divider{height:1px;margin:0 56px;background:linear-gradient(90deg,transparent,var(--cyan-border) 20%,var(--cyan-border) 80%,transparent)}
+
+/* SHARED */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease}.reveal.visible{opacity:1;transform:none}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:var(--type-meta);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan)}
+.section-heading{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:none;font-size:var(--type-section);line-height:0.95;letter-spacing:-0.025em}
+
+/* MISSIONS */
+.missions-section{padding:var(--space-section-y) 80px}
+.missions-header{margin-bottom:var(--space-body-content)}
+.missions-desc{font-size:var(--type-body);color:rgba(255,255,255,.7);max-width:420px;line-height:1.625;font-weight:300;text-align:left}
+.archive-link{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--grey);letter-spacing:0.1em;text-decoration:none;text-transform:uppercase;transition:color 0.2s;display:inline-flex;align-items:center;gap:6px;margin-top:14px}
+.archive-link:hover{color:var(--cyan)}
+
+/* MISSION GRID */
+.mission-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:stretch}
+.mission-card{position:relative;display:flex;flex-direction:column;overflow:hidden;border-radius:var(--radius-lg);text-decoration:none;background:var(--bg-card);color:inherit;transition:background .3s ease,transform .3s var(--ease-premium),box-shadow .3s ease}
+.mission-card:hover{background:var(--bg-raised);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,229,255,0.08)}
+.mission-thumb{position:relative;height:320px;overflow:hidden;border-radius:var(--radius-lg) var(--radius-lg) 0 0;border-bottom:1px solid var(--cyan-border);flex-shrink:0}
+.mission-thumb-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a1520,#001e30);background-size:cover,cover;background-position:center top,center top;background-repeat:no-repeat;transition:transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);transform-origin:center top}
+.th-m01{background-image:url(assets/images/m01-screens-wide.jpg)}
+.th-m02{background-image:url(assets/images/m02-screens-wide.jpg)}
+.th-m03{background-image:url(assets/images/m03-screens-wide.jpg)}
+.th-m04{background-image:url(assets/m04-screens-all.png);background-color:#efefef;background-size:cover;background-position:center}
+.mission-card:hover .mission-thumb-bg{transform:scale(1.06)}
+.mission-scan{position:absolute;left:0;right:0;height:45%;top:-100%;opacity:0;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(0,229,255,0.12),transparent);transition:top 0.6s ease,opacity 0.2s ease;z-index:2}
+.mission-card:hover .mission-scan{top:100%;opacity:1}
+.mission-lock-badge{position:absolute;top:12px;left:12px;z-index:6;display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,0.72);box-shadow:0 2px 12px rgba(0,0,0,0.45);backdrop-filter:blur(8px);border:0;padding:7px 12px;border-radius:var(--radius-md);font-family:'JetBrains Mono',monospace;font-size:var(--type-meta);font-weight:700;color:#fff;letter-spacing:0.1em;text-transform:uppercase;max-width:calc(100% - 64px)}
+.mission-wip-badge{position:absolute;top:12px;left:12px;z-index:6;font-family:'JetBrains Mono',monospace;font-size:var(--type-meta);font-weight:700;color:#fff;letter-spacing:0.1em;border:0;background:rgba(0,0,0,0.72);box-shadow:0 2px 12px rgba(0,0,0,0.45);padding:7px 12px;border-radius:var(--radius-md);text-transform:uppercase}
+.mission-card-body{display:flex;flex-direction:column;gap:10px;padding:20px 24px 18px;overflow:hidden}
+.mission-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:0}
+.mission-num{font-family:'JetBrains Mono',monospace;font-size:var(--type-meta);color:rgba(255,255,255,.5);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.25s}
+.mission-card:hover .mission-num{color:var(--cyan)}
+.mission-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:var(--type-card);line-height:1.2;text-transform:none;letter-spacing:0;color:var(--white);margin-bottom:0;transition:color 0.25s ease}
+.mission-card:hover .mission-title{color:var(--cyan)}
+.mission-tags{font-family:'Barlow',sans-serif;font-size:var(--type-body);color:rgba(255,255,255,.7);letter-spacing:0;font-weight:300;line-height:1.625;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;max-height:4.875em;text-transform:none}
+.mission-client{margin-top:0;padding-top:10px;border-top:1px solid var(--cyan-border);font-family:'JetBrains Mono',monospace;font-size:var(--type-meta);color:#00FFFF;letter-spacing:0.1em;text-transform:uppercase;line-height:1.5;transition:color 0.25s ease}
+.mission-card:hover .mission-client{color:#00FFFF}
+.mission-arrow{width:28px;height:28px;flex-shrink:0;border:1px solid var(--grey-dim);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grey);transition:border-color 0.25s,background 0.25s,color 0.25s,transform 0.25s}
+.mission-card:hover .mission-arrow{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim);transform:translate(2px,-2px)}
+.mission-card-progress{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease;pointer-events:none}
+.mission-card:hover .mission-card-progress{transform:scaleX(1)}
+.mission-card-wip{opacity:1}
+
+.mission-card-locked{cursor:default;opacity:0.8}
+.mission-card-locked:hover{background:var(--bg-card);transform:none;box-shadow:none}
+.mission-card-locked:hover .mission-thumb-bg{transform:none}
+.mission-card-locked:hover .mission-scan{display:none}
+.mission-card-locked:hover .mission-num{color:var(--grey)}
+.mission-card-locked:hover .mission-title{color:var(--white)}
+.mission-card-locked:hover .mission-client{color:#00FFFF}
+.mission-card-locked:hover .mission-arrow{border-color:var(--grey-dim);color:var(--grey);background:transparent;transform:none}
+.mission-card-locked:hover .mission-card-progress{transform:scaleX(0)}
+.mission-card-locked .mission-arrow{font-size:10px;opacity:0.6}
+.mission-card-locked .mission-lock-badge{color:#fff;border:0;background:rgba(0,0,0,0.72);box-shadow:0 2px 12px rgba(0,0,0,0.45)}
+
+/* ABOUT */
+.about-section{padding:var(--space-section-y) 80px;display:grid;grid-template-columns:380px 1fr;gap:80px;align-items:start}
+.about-visual{position:relative;padding-bottom:24px;padding-right:24px;width:fit-content}
+.about-portrait-frame{aspect-ratio:3/4;border:1px solid var(--cyan-border);border-radius:var(--radius-lg);overflow:hidden;position:relative;background:linear-gradient(135deg,#0d1a1f,#0a0a0a)}
+.about-portrait-frame img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.about-exp{position:absolute;bottom:0;right:0;width:72px;height:72px;background:var(--cyan);padding:8px;border-radius:var(--radius-lg);text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}
+.about-exp-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.75rem;color:#000;line-height:1;letter-spacing:-0.025em}
+.about-exp-label{font-family:'JetBrains Mono',monospace;font-size:var(--type-meta);color:rgba(0,0,0,0.65);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase;line-height:1.2}
+.about-headline{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:var(--type-section);text-transform:none;line-height:0.95;letter-spacing:-0.025em}
+.about-body{font-size:var(--type-body);line-height:1.625;color:rgba(255,255,255,.7);font-weight:300;max-width:500px}
+.skills-row{counter-reset:skill;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;border:0;background:transparent;margin-top:var(--space-body-content)}
+.skill-tag{counter-increment:skill;display:flex;align-items:center;justify-content:flex-start;gap:14px;min-height:54px;padding:12px 16px;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);background:rgba(255,255,255,.05);font-family:'Barlow',sans-serif;font-size:var(--type-body);color:rgba(255,255,255,.7);letter-spacing:0;font-weight:300;text-align:left;text-transform:none;transition:background .25s,color .25s,transform .2s ease,border-color .25s}
+.skill-tag::before{content:'0' counter(skill);color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:var(--type-meta);letter-spacing:0.1em;text-transform:uppercase;transition:transform .2s ease}
+.skill-tag:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:var(--white);transform:translateX(4px)}
+.skill-tag:hover::before{transform:scale(1.1)}
+
+/* PHOTOGRAPHY */
+.photo-section{padding:var(--space-section-y) 80px}
+.photo-header{margin-bottom:var(--space-body-content)}
+.photo-tagline{font-size:var(--type-body);color:rgba(255,255,255,.7);max-width:420px;line-height:1.625;font-weight:300;text-align:left}
+.photo-tagline em{color:rgba(255,255,255,.7);font-style:italic}
+.photo-view-more{border:1px solid var(--cyan);border-radius:var(--radius-lg);font-family:'JetBrains Mono',monospace;font-size:var(--type-btn);font-weight:500;color:var(--cyan);text-transform:none;width:fit-content}
+@media (max-width:1200px){
+  .missions-section{padding:var(--space-section-y) 56px}
+  .about-section{padding:var(--space-section-y) 56px;gap:56px}
+  .photo-section{padding:var(--space-section-y) 56px}
+}
+
+@media (max-width:900px){
+  .about-section{grid-template-columns:1fr;gap:40px;padding:var(--space-section-y) 56px}
+  .about-visual{width:100%;max-width:380px;margin:0 auto}
+  .mission-grid{grid-template-columns:1fr;gap:16px}
+  .mission-card{height:auto;min-height:0;max-height:none}
+  .mission-card:hover{transform:translateY(-2px)}
+  .photo-section{padding:var(--space-section-y) 56px}
+  .photo-header{margin-bottom:var(--space-body-content)}
+  .missions-desc{margin-top:0;text-align:left}
+}
+
+/* ===== MOBILE HOME (≤768px) — dedicated layout, not a scaled desktop ===== */
+@media(max-width:768px){
+  /* Nav — hide Let's talk CTA */
+  .nav-cta{display:none!important}
+
+  /* Hero */
+  .hero,.sonar-grid{min-height:85vh!important;min-height:85svh!important}
+  .sonar-grid{padding:104px 0 72px!important;justify-content:center;padding-top:96px!important}
+  .hero-left{width:100%!important;max-width:100%!important;padding:0 24px;box-sizing:border-box}
+  .hero-title{font-size:2.25rem!important;line-height:1.05!important;letter-spacing:-0.025em!important;font-weight:800!important}
+  .hero-title-line{white-space:normal}
+  .hero-title-line:nth-child(2){white-space:normal}
+  .hero-highlight{white-space:normal}
+  .hero-sub{margin-top:18px;max-width:100%!important;font-size:0.875rem!important;line-height:1.625!important;color:rgba(255,255,255,.7)!important}
+  .hero-actions{margin-top:20px!important;flex-direction:row;align-items:flex-start!important;justify-content:flex-start!important}
+  .hero-actions .btn-primary{
+    width:fit-content!important;
+    max-width:none!important;
+    padding:16px 32px!important;
+    font-size:0.875rem!important;
+    font-weight:500!important;
+    border-width:1px!important;
+    box-sizing:border-box;
+    outline:none!important;
+    box-shadow:none!important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .hero-actions .btn-primary:focus,
+  .hero-actions .btn-primary:focus-visible{
+    outline:none!important;
+    box-shadow:none!important;
+  }
+  .hero-actions .btn-primary::after{display:none!important}
+  .btn-secondary{width:fit-content}
+  .scroll-hint,
+  .hero-scroll-link{display:none!important}
+
+  /* Sections pad */
+  .missions-section,.about-section,.photo-section{padding:72px 24px!important}
+  .divider{margin:0 24px}
+  .section-label{font-size:0.75rem;margin-bottom:14px;letter-spacing:0.1em}
+  .section-heading,.about-headline{font-size:2.25rem!important;font-weight:800!important;letter-spacing:-0.025em!important;text-transform:none!important;line-height:1!important}
+  .missions-header,.photo-header{margin-bottom:28px}
+  .missions-desc,.photo-tagline,.about-body{font-size:0.875rem!important;line-height:1.625!important;color:rgba(255,255,255,.7)!important;margin-top:12px;text-align:left;max-width:100%}
+
+  /* Case studies */
+  .mission-grid{grid-template-columns:1fr;gap:28px}
+  .mission-card{height:auto;min-height:0;max-height:none}
+  .mission-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,229,255,0.06)}
+  .mission-thumb{height:auto!important;aspect-ratio:4/3;max-height:none;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+  .mission-thumb-num{display:none!important}
+  .mission-card-body{padding:18px 20px}
+  .mission-num{font-size:0.75rem!important;letter-spacing:0.1em}
+  .mission-title{font-size:1.25rem!important;font-weight:700!important;line-height:1.25}
+  .mission-tags{font-size:0.875rem!important;line-height:1.625!important;color:rgba(255,255,255,.7)!important}
+  .mission-client{font-size:0.75rem!important;letter-spacing:0.1em;padding-top:8px;color:#00FFFF}
+
+  /* About */
+  .about-section{grid-template-columns:1fr;gap:36px!important}
+  .about-visual{width:100%;max-width:100%;margin:0;padding:0;display:flex;flex-direction:column;align-items:flex-start}
+  .about-portrait-frame{width:100%;max-width:280px;max-height:300px;aspect-ratio:4/3;margin:0}
+  .about-portrait-frame img{object-position:top center}
+  .about-exp{position:static!important;margin-top:1rem!important;align-self:flex-start;width:68px;height:68px}
+  .about-exp-num{font-size:1.5rem}
+  .about-exp-label{font-size:0.75rem}
+  .about-body{margin-top:18px}
+  .skills-row{margin-top:24px;grid-template-columns:1fr;gap:8px}
+  .skill-tag{
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:12px;
+    padding:10px 12px!important;
+    font-size:0.875rem!important;
+    min-height:0!important;
+    line-height:1.4;
+  }
+  .skill-tag::before{font-size:0.75rem;flex-shrink:0}
+  .section-more-link{
+    display:inline-flex!important;
+    width:fit-content!important;
+    max-width:100%;
+    font-size:0.875rem!important;
+    font-weight:500!important;
+    padding:12px 18px;
+    margin-top:20px;
+    height:auto;
+    box-sizing:border-box;
+  }
+
+  /* Photography → horizontal snap carousel */
+  .photo-mosaic-grid{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    gap:14px!important;
+    height:auto!important;
+    margin-top:24px;
+    margin-left:-24px;
+    margin-right:-24px;
+    width:calc(100% + 48px);
+    padding:0 0 6px;
+    padding-left:24px!important;
+    padding-right:24px!important;
+    scrollbar-width:thin;
+  }
+  .photo-mosaic-center,
+  .photo-mosaic-subgrid{
+    display:contents!important;
+  }
+  .photo-tile,
+  .photo-tile--left,
+  .photo-tile--right,
+  .photo-tile--center-wide,
+  .photo-tile--sub{
+    flex:0 0 80%!important;
+    min-width:80%!important;
+    width:80%!important;
+    height:240px!important;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+
+  /* Footer stamps — refined outline buttons */
+  .footer-stamp{
+    padding:0.5rem 1rem!important;
+    border-radius:0!important;
+    background:transparent!important;
+    border:1px solid rgba(255,255,255,0.2)!important;
+  }
+  .footer-stamp-name{font-size:0.875rem!important;font-weight:500!important}
+}
+
+.section-more-link{margin-top:24px;border:2px solid var(--cyan);border-radius:var(--radius-lg);font-family:'JetBrains Mono',monospace;color:var(--cyan);text-transform:uppercase;font-size:var(--type-btn);font-weight:500;padding:var(--cta-padding-y) var(--cta-padding-x);width:fit-content;transition:background var(--duration-hover) var(--ease-premium),color var(--duration-hover) var(--ease-premium),transform var(--duration-hover) var(--ease-premium)}
+.section-more-link:hover{background:var(--cyan);color:#000;gap:14px}
+
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--cyan-border)}
+
+/* CUSTOM CURSOR */
+#cursor-dot{position:fixed;width:7px;height:7px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#cursor-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(0,229,255,0.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s}
+body.has-custom-cursor{cursor:none}
+body.has-custom-cursor *{cursor:none}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div class="scanlines"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-brand">Sidharth Premanand</a>
+  <div class="nav-center">
+    <a href="#missions" class="nav-link active">Work</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#photos" class="nav-link">Photos</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-status">Available for collaboration</div>
+    <a href="#contact" class="nav-cta" data-cta-hover><span>Let's talk</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="sonar-grid" data-sonar-grid>
+    <canvas class="sonar-grid-canvas" aria-hidden="true"></canvas>
+    <div class="hero-readability" aria-hidden="true"></div>
+    <div class="hero-left">
+      <h1 class="hero-title" id="hero-title" aria-label="I ask questions until the problem becomes clear. Then I design the solution.">
+        <span class="hero-title-line"><span data-scramble>I ask questions until</span></span>
+        <span class="hero-title-line"><span data-scramble>the problem becomes</span></span>
+        <span class="hero-title-line"><span class="hero-highlight"><span class="outline" data-scramble>clear</span></span><span data-scramble>.</span></span>
+      </h1>
+      <p class="hero-sub">Product designer with 3+ years turning complex problems into clear solutions for mobility and healthcare. Now pursuing MS in HCI at Bauhaus-Universität Weimar.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary" data-cta-hover><span>Let's talk</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MISSIONS -->
+<div class="missions-section reveal" id="missions">
+  <div class="missions-header">
+    <div class="section-stack">
+      <div class="section-label">Selected Work</div>
+      <h2 class="section-heading">Case Studies</h2>
+      <p class="missions-desc text-body">Four projects where asking the right questions led to better outcomes—from reducing shop navigation by 50% to fixing a broken authentication flow.</p>
+    </div>
+  </div>
+  <div class="mission-grid">
+    <a href="missions/mission-02-ather-shop.html?v=20260823d" class="mission-card">
+      <div class="mission-thumb">
+        <div class="mission-thumb-bg th-m02"></div>
+        <div class="mission-scan"></div>
+      </div>
+      <div class="mission-card-body">
+        <div class="mission-card-top">
+          <span class="mission-num">01 //</span>
+          <span class="mission-arrow">↗</span>
+        </div>
+        <div class="mission-title">Redesigning the Ather Shop experience</div>
+        <div class="mission-tags">Reduced navigation steps by 50% and improved product discovery for mobile shoppers.</div>
+        <div class="mission-client">Ather Energy</div>
+      </div>
+      <div class="mission-card-progress"></div>
+    </a>
+    <a href="missions/mission-03-test-ride.html?v=20260823d" class="mission-card">
+      <div class="mission-thumb">
+        <div class="mission-thumb-bg th-m03"></div>
+        <div class="mission-scan"></div>
+      </div>
+      <div class="mission-card-body">
+        <div class="mission-card-top">
+          <span class="mission-num">02 //</span>
+          <span class="mission-arrow">↗</span>
+        </div>
+        <div class="mission-title">Making test ride booking feel effortless</div>
+        <div class="mission-tags">Redesigned booking flow after observing 40% abandonment at location selection.</div>
+        <div class="mission-client">Ather Energy</div>
+      </div>
+      <div class="mission-card-progress"></div>
+    </a>
+    <a href="missions/mission-01-phone-login.html?v=20260823d" class="mission-card">
+      <div class="mission-thumb">
+        <div class="mission-thumb-bg th-m01"></div>
+        <div class="mission-scan"></div>
+      </div>
+      <div class="mission-card-body">
+        <div class="mission-card-top">
+          <span class="mission-num">03 //</span>
+          <span class="mission-arrow">↗</span>
+        </div>
+        <div class="mission-title">Rethinking phone number login</div>
+        <div class="mission-tags">Redesigned authentication flow to reduce user confusion and build trust during signup.</div>
+        <div class="mission-client">Ather Energy</div>
+      </div>
+      <div class="mission-card-progress"></div>
+    </a>
+    <div class="mission-card mission-card-locked">
+      <div class="mission-thumb">
+        <div class="mission-thumb-bg th-m04"></div>
+        <div class="mission-scan"></div>
+        <div class="mission-lock-badge">WORK IN PROGRESS</div>
+      </div>
+      <div class="mission-card-body">
+        <div class="mission-card-top">
+          <span class="mission-num">04 //</span>
+          <span class="mission-arrow">🔒</span>
+        </div>
+        <div class="mission-title">Building an AI-first product from scratch</div>
+        <div class="mission-tags">Designing a conversational AI interface that feels practical, not gimmicky.</div>
+        <div class="mission-client">Neosapien</div>
+      </div>
+      <div class="mission-card-progress"></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div class="about-section reveal" id="about">
+  <div class="about-visual">
+    <div class="about-portrait-frame">
+      <img src="assets/images/portrait-about.webp" alt="Sidharth Premanand" loading="lazy">
+    </div>
+    <div class="about-exp"><div class="about-exp-num">3+</div><div class="about-exp-label">Years Exp</div></div>
+  </div>
+  <div class="about-content">
+    <div class="section-stack">
+      <div class="section-label">About</div>
+      <h2 class="about-headline">I didn't start with pixels.<br>I started with questions.</h2>
+      <p class="about-body text-body">Over the last three years, I've designed products for mobility and healthcare—industries where confusion isn't just frustrating, it's a real barrier.<br><br>What keeps me going isn't polishing interfaces. It's understanding why people get stuck, then clearing the path forward.<br><br>Now I'm pursuing my Master's in Human–Computer Interaction at Bauhaus-Universität Weimar, studying how to design systems that adapt to people, not the other way around.</p>
+    </div>
+    <div class="skills-row">
+      <div class="skill-tag">Asking questions until the problem is clear</div>
+      <div class="skill-tag">Removing steps instead of adding features</div>
+      <div class="skill-tag">Turning research into decisions, not presentations</div>
+      <div class="skill-tag">Designing systems, not just screens</div>
+      <div class="skill-tag">Working with engineers without losing context</div>
+      <div class="skill-tag">Prototyping fast to fail faster</div>
+    </div>
+    <a href="about.html" class="section-more-link" data-cta-hover><span>More about my approach <span class="cta-hover-arrow" aria-hidden="true">→</span></span></a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PHOTOGRAPHY -->
+<div class="photo-section" id="photos" data-photo-inview>
+  <div class="photo-header">
+    <div class="section-stack">
+      <div class="section-label">Photography</div>
+      <h2 class="section-heading">Through the Lens</h2>
+      <p class="photo-tagline text-body">Photography taught me to notice what's actually there, not what I expect to see. Same with design.</p>
+    </div>
+  </div>
+
+  <!-- Layout B: Balanced Gallery Mosaic -->
+  <div class="photo-mosaic-grid">
+    <!-- Left: Portrait Hero -->
+    <div class="photo-tile photo-tile--left photo-card" aria-label="Portrait photograph">
+      <img src="assets/images/Photos/Photo-01-structure.png" alt="Architectural vertical framing" width="800" height="1200" loading="lazy" decoding="async">
+    </div>
+
+    <!-- Center: Landscape Hero + 2 Sub-Details -->
+    <div class="photo-mosaic-center">
+      <div class="photo-tile photo-tile--center-wide photo-card" aria-label="Wide landscape photograph">
+        <img src="assets/images/Photos/Photo-02-light.png" alt="Atmospheric landscape perspective" width="1600" height="900" loading="lazy" decoding="async">
+      </div>
+      <div class="photo-mosaic-subgrid">
+        <div class="photo-tile photo-tile--sub photo-card" aria-label="Detail photograph">
+          <img src="assets/images/Photos/Photo-03-detail.png" alt="Material texture and geometric details" width="800" height="800" loading="lazy" decoding="async">
+        </div>
+        <div class="photo-tile photo-tile--sub photo-card" aria-label="Urban photograph">
+          <img src="assets/images/Photos/Photo-04-movement.png" alt="Urban moment and movement" width="800" height="800" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Portrait Complement -->
+    <div class="photo-tile photo-tile--right photo-card" aria-label="Portrait photograph">
+      <img src="assets/images/Photos/Photo-05-perspective.png" alt="Vertical perspective framing" width="800" height="1200" loading="lazy" decoding="async">
+    </div>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer class="document-footer" id="contact">
+  <div class="footer-main">
+    <div class="footer-zone-left">
+      <div class="footer-identity">SIDHARTH PREMANAND</div>
+      <div class="footer-meta footer-meta--identity">
+        PRODUCT DESIGNER · <span class="footer-city-dot"></span> Weimar, DE · Est. 1998
+      </div>
+      <div class="footer-clock" id="footer-time">--:--:--</div>
+    </div>
+
+    <div class="footer-ticket">
+      <div class="footer-barcode" aria-hidden="true"></div>
+      <div class="footer-ticket-label">Open for work</div>
+      <p class="footer-ticket-copy">Looking for internships and full-time roles across Germany. Let's talk if you need someone who asks questions first.</p>
+    </div>
+
+    <div class="footer-stamps">
+      <a class="footer-stamp" href="assets/docs/Resume.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="footer-stamp-name">Resume</span>
+        <span class="footer-stamp-sub">Download PDF</span>
+      </a>
+      <a class="footer-stamp" href="https://www.linkedin.com/in/sidharthpremanand" target="_blank" rel="noopener noreferrer">
+        <span class="footer-stamp-name">LinkedIn</span>
+        <span class="footer-stamp-sub">Connect with me</span>
+      </a>
+      <a class="footer-stamp" href="mailto:sidharthpremux@gmail.com">
+        <span class="footer-stamp-name">Email</span>
+        <span class="footer-stamp-sub">Send direct note</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-copy">© <span data-current-year>2026</span> Sidharth Premanand</div>
+    <div class="footer-bottom-copy">Designed &amp; Built by Sidharth</div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js?v=20260824a"></script>
+<script src="assets/js/sonar-grid.js"></script>
+<script>
+/* NAV SCROLL FROST + ACTIVE SECTION */
+const nav=document.getElementById('nav');
+const scrollSections=['missions','about','photos','contact'];
+const scrollNavLinks=document.querySelectorAll('.nav-center .nav-link');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>60);
+  let current='';
+  scrollSections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    if(el.getBoundingClientRect().top<=120)current=id;
+  });
+  scrollNavLinks.forEach(link=>{
+    const href=link.getAttribute('href');
+    link.classList.toggle('active',
+      href==='#'+current||
+      (!current&&href==='#missions')
+    );
+  });
+});
+window.addEventListener('load',()=>window.dispatchEvent(new Event('scroll')));
+
+/* TEXT SCRAMBLE */
+const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#%&*';
+function scrambleNode(node,delay){
+  const orig=node.textContent;if(!orig.trim())return;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){node.textContent=orig;return}
+  const width=node.getBoundingClientRect().width;
+  node.style.width=`${Math.ceil(width)}px`;
+  let iter=0;
+  setTimeout(()=>{
+    const iv=setInterval(()=>{
+      node.textContent=orig.split('').map((c,i)=>c===' '?' ':i<iter?c:CHARS[Math.floor(Math.random()*CHARS.length)]).join('');
+      iter+=1.35;
+      if(iter>=orig.length){node.textContent=orig;node.style.width='';clearInterval(iv)}
+    },28);
+  },delay);
+}
+window.addEventListener('load',()=>{
+  const title=document.getElementById('hero-title');if(!title)return;
+  title.querySelectorAll('[data-scramble]').forEach((node,index)=>scrambleNode(node,100+(index*105)));
+});
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),60)});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* CUSTOM CURSOR */
+const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+if(dot&&ring){
+  document.body.classList.add('has-custom-cursor');
+  let rx=0,ry=0,mx=0,my=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px'});
+  (function l(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(l)})();
+  document.addEventListener('mouseover',e=>{
+    if(e.target.closest('a,button,.mission-card:not(.mission-card-locked),.photo-tile,.btn-primary,.btn-secondary,.section-more-link,.skill-tag,.nav-link')){
+      ring.style.width='44px';ring.style.height='44px';ring.style.borderColor='rgba(0,229,255,0.65)';
+    }else{ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(0,229,255,0.35)'}
+  });
+}
+</script>
+</body>
+</html>

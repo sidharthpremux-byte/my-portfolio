@@ -1,0 +1,3301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MISSION_02 // UX Revamp — Ather Shop — Sidharth Premanand</title>
+  <meta name="description"
+    content="Redesigning Ather Shop for improved product discovery and shopping flow. Reduced bounce rate by 18% and increased conversions. Case study by Sidharth Premanand.">
+  <meta name="author" content="Sidharth Premanand">
+  <meta property="og:title" content="Redesigning the Ather Shop Experience">
+  <meta property="og:description"
+    content="Improved product discovery and shopping flow for accessories and merchandise. 18% reduction in bounce rate.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Redesigning the Ather Shop Experience">
+  <meta name="twitter:description"
+    content="Improved product discovery and shopping flow for accessories and merchandise. 18% reduction in bounce rate.">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23070707'/%3E%3Ctext x='50' y='50' font-family='monospace' font-size='48' font-weight='bold' fill='%2300E5FF' text-anchor='middle' dominant-baseline='central'%3ESP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=JetBrains+Mono:wght@300;400;500&family=Barlow:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=20261018c">
+  <link rel="stylesheet" href="../assets/css/missions.css">
+  <style>
+    :root {
+      --space-8: 8px;
+      --space-16: 16px;
+      --space-24: 24px;
+      --space-48: 48px;
+      --space-64: 64px;
+      --space-96: 96px;
+      --space-128: 128px;
+
+      --type-hero: clamp(60px, 9vw, 120px);
+      --type-heading: clamp(36px, 4.5vw, 64px);
+      --type-decision-title: clamp(22px, 2.5vw, 28px);
+      --type-body: 16px;
+      --type-question: 14px;
+      --type-caption: 12px;
+      --type-mono: 12px;
+
+      --cyan: #00E5FF;
+      --cyan-dim: rgba(0, 229, 255, 0.10);
+      --cyan-border: rgba(0, 229, 255, 0.2);
+      --cyan-label: #5CEBFF;
+      --white: #F0F0F0;
+      --text-body: rgba(240, 240, 240, 0.86);
+      --grey: #B5B5B5;
+      --grey-dim: #2a2a2a;
+      --bg: #070707;
+      --bg-card: #0d0d0d;
+      --bg-raised: #131313;
+      --page-gutter: clamp(20px, 4.2vw, 80px);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    ::selection {
+      background: var(--cyan);
+      color: #000
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      overflow-x: clip
+    }
+
+    #cursor-dot {
+      position: fixed;
+      width: 7px;
+      height: 7px;
+      background: var(--cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%)
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, border-color 0.3s
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 0, 0, 0.03) 3px, rgba(0, 0, 0, 0.03) 4px)
+    }
+
+    body[data-project-page] nav,
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 16px var(--page-gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      z-index: 500;
+      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s
+    }
+
+    nav.scrolled {
+      background: rgba(7, 7, 7, 0.9);
+      backdrop-filter: blur(18px);
+      border-color: var(--cyan-border)
+    }
+
+    .nav-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 32px
+    }
+
+    .nav-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--grey);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--cyan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease
+    }
+
+    .nav-link:hover {
+      color: var(--white)
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      transform: scaleX(1)
+    }
+
+    .nav-link.active {
+      color: var(--cyan)
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px
+    }
+
+    .nav-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.1em
+    }
+
+    .nav-status::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: blink 1.6s infinite
+    }
+
+    .nav-cta {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid var(--cyan);
+      border-radius: var(--radius-lg);
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      transition: color .3s, border-color .3s
+    }
+
+    .nav-cta span {
+      position: relative;
+      z-index: 1
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.2
+      }
+    }
+
+    .hero {
+      min-height: 100svh;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-right: var(--page-gutter) !important;
+      padding-left: var(--page-gutter) !important;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 55% 50% at 70% 35%, rgba(200, 255, 0, 0.04) 0%, transparent 65%), radial-gradient(ellipse 40% 60% at 25% 65%, rgba(0, 229, 255, 0.04) 0%, transparent 60%)
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(0, 229, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px);
+      background-size: 52px 52px
+    }
+
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--cyan-label);
+      letter-spacing: 0.22em;
+      margin-bottom: var(--space-16);
+      animation: fadeUp 0.8s ease forwards;
+      opacity: 0
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: var(--type-hero);
+      line-height: 0.88;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      animation: fadeUp 0.8s 0.1s ease forwards;
+      opacity: 0;
+      position: relative
+    }
+
+    .hero-title .outline {
+      -webkit-text-stroke: 2.5px var(--cyan);
+      color: rgba(0, 229, 255, 0.12)
+    }
+
+    .hero-title::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      color: var(--cyan);
+      opacity: 0.1;
+      animation: glitch 10s ease-in-out infinite
+    }
+
+    .hero-meta {
+      margin-top: var(--space-48);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      border: 1px solid var(--cyan-border);
+      background: var(--cyan-border);
+      animation: fadeUp 0.8s 0.25s ease forwards;
+      opacity: 0
+    }
+
+    @media(max-width: 1100px) {
+      .hero-meta {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      /* five cells; the status cell spans both columns in the two-up strip */
+      .hero-meta .meta-cell:nth-child(5) {
+        grid-column: 1 / -1
+      }
+    }
+
+    @media(max-width: 640px) {
+      .hero-meta {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .hero-meta .meta-cell:nth-child(5) {
+        grid-column: 1 / -1
+      }
+    }
+
+    @media(max-width: 420px) {
+      .hero-meta {
+        grid-template-columns: 1fr
+      }
+
+      .hero-meta .meta-cell:nth-child(5) {
+        grid-column: auto
+      }
+    }
+
+    .meta-cell {
+      background: var(--bg);
+      padding: var(--space-16) var(--space-24)
+    }
+
+    .meta-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--cyan-label);
+      letter-spacing: 0.12em;
+      margin-bottom: var(--space-8)
+    }
+
+    .meta-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.35;
+      color: var(--white)
+    }
+
+    .meta-value.accent {
+      color: var(--cyan)
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes glitch {
+
+      0%,
+      93%,
+      100% {
+        clip-path: none;
+        transform: none
+      }
+
+      94% {
+        clip-path: polygon(0 25%, 100% 25%, 100% 45%, 0 45%);
+        transform: translateX(-3px)
+      }
+
+      95% {
+        clip-path: none;
+        transform: none
+      }
+
+      97% {
+        clip-path: polygon(0 62%, 100% 62%, 100% 79%, 0 79%);
+        transform: translateX(3px)
+      }
+
+      98% {
+        clip-path: none;
+        transform: none
+      }
+    }
+
+    body[data-project-page] .section,
+    .section {
+      max-width: none !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-inline: var(--page-gutter) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s, transform 0.65s;
+      scroll-margin-top: 100px
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    /* Suppress large faded PROJECT CONTEXT watermark */
+    body[data-project-page] .project-intro::before {
+      display: none !important;
+      content: none !important;
+    }
+
+    .section-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: var(--type-heading);
+      line-height: 0.94;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--cyan-label);
+      letter-spacing: 0.22em;
+      margin-bottom: var(--space-16);
+      text-transform: uppercase
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-48);
+      margin-top: 0;
+      align-items: start
+    }
+
+    .body-text {
+      font-size: var(--type-body);
+      line-height: 1.75;
+      color: var(--text-body);
+      font-weight: 300
+    }
+
+    .data-table {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 1px solid var(--cyan-border);
+      background: var(--cyan-border)
+    }
+
+    .data-row {
+      background: var(--bg-card);
+      padding: var(--space-16) var(--space-24);
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .data-key {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--grey);
+      letter-spacing: 0.12em
+    }
+
+    .data-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--cyan);
+      font-weight: 500
+    }
+
+    /* Key Findings */
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 0;
+      background: var(--cyan-border);
+      border: 1px solid var(--cyan-border)
+    }
+
+    .finding-card {
+      background: var(--bg-card);
+      padding: var(--space-48) var(--space-24);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+      position: relative;
+      transition: background 0.3s
+    }
+
+    .finding-card:hover {
+      background: var(--bg-raised)
+    }
+
+    .finding-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--cyan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s
+    }
+
+    .finding-card:hover::after {
+      transform: scaleX(1)
+    }
+
+    .finding-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--cyan-label);
+      letter-spacing: 0.15em;
+      text-transform: uppercase
+    }
+
+    .finding-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: var(--white)
+    }
+
+    .finding-body {
+      font-size: var(--type-body);
+      line-height: 1.7;
+      color: var(--text-body);
+      font-weight: 300
+    }
+
+    .finding-stat-wrap {
+      margin-top: auto;
+      padding-top: var(--space-24);
+      border-top: 1px solid rgba(0, 229, 255, 0.12)
+    }
+
+    .finding-stat {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(36px, 4vw, 48px);
+      line-height: 1;
+      color: var(--cyan);
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-8)
+    }
+
+    .finding-stat-desc {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-caption);
+      color: var(--grey);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.5
+    }
+
+    /* Process Track */
+    .process-intro {
+      font-size: var(--type-body);
+      line-height: 1.75;
+      color: var(--text-body);
+      max-width: 68ch;
+      margin-bottom: var(--space-48)
+    }
+
+
+
+    .step-phase {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--cyan-label);
+      letter-spacing: 0.15em;
+      padding-top: 4px;
+      text-transform: uppercase
+    }
+
+    .step-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: var(--type-decision-title);
+      text-transform: uppercase;
+      margin-bottom: var(--space-8);
+      color: var(--white)
+    }
+
+    .step-body {
+      font-size: var(--type-body);
+      line-height: 1.75;
+      color: var(--text-body);
+      font-weight: 300;
+      max-width: 68ch
+    }
+
+    .step-collab {
+      margin-top: var(--space-16);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-caption);
+      color: var(--cyan-label);
+      letter-spacing: 0.08em
+    }
+
+    /* Before / After */
+    .ba-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin-top: 0;
+      background: var(--cyan-border);
+      border: 1px solid var(--cyan-border)
+    }
+
+    .ba-panel {
+      background: var(--bg-card);
+      padding: var(--space-24)
+    }
+
+    .ba-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-caption);
+      letter-spacing: 0.15em;
+      padding: 4px 10px;
+      border: 1px solid;
+      margin-bottom: var(--space-16);
+      text-transform: uppercase
+    }
+
+    .ba-tag.before {
+      color: var(--grey);
+      border-color: var(--grey-dim)
+    }
+
+    .ba-tag.after {
+      color: var(--cyan);
+      border-color: var(--cyan)
+    }
+
+    .ba-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      text-transform: uppercase;
+      margin-bottom: var(--space-16);
+      color: var(--white)
+    }
+
+    .ba-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+      width: 100%
+    }
+
+    .ba-list li {
+      font-size: var(--type-body);
+      line-height: 1.6;
+      color: var(--text-body);
+      padding-left: 24px;
+      position: relative;
+      max-width: 100%
+    }
+
+    .ba-list.before li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #FF4D4D;
+    }
+
+    .ba-list.after li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+    }
+
+    /* Results */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto auto 1fr auto;
+      column-gap: 1px;
+      row-gap: 0;
+      margin-top: 0;
+      background: var(--cyan-border);
+      border: 1px solid var(--cyan-border)
+    }
+
+    .result-card {
+      background: var(--bg-card);
+      padding: var(--space-48) var(--space-24);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 5;
+      row-gap: var(--space-16);
+      transition: background 0.3s
+    }
+
+    .result-card:hover {
+      background: var(--bg-raised)
+    }
+
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.4s
+    }
+
+    .result-card:hover::before {
+      opacity: 1
+    }
+
+    .result-index {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--cyan-label);
+      letter-spacing: 0.15em;
+      text-transform: uppercase
+    }
+
+    .result-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1;
+      color: var(--cyan);
+      letter-spacing: -0.02em
+    }
+
+    .result-num span {
+      color: var(--cyan)
+    }
+
+    .result-secondary {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--cyan-label);
+      margin-top: -8px;
+      min-height: 1.2em
+    }
+
+    .result-secondary:empty {
+      visibility: hidden
+    }
+
+    .result-label {
+      font-size: var(--type-body);
+      color: var(--text-body);
+      line-height: 1.65
+    }
+
+    .result-target {
+      padding-top: var(--space-16);
+      border-top: 1px solid rgba(0, 229, 255, 0.12);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-caption);
+      color: var(--grey);
+      letter-spacing: 0.08em;
+      min-height: calc(1em + var(--space-16) + 1px)
+    }
+
+    .result-target:empty {
+      visibility: hidden
+    }
+
+    .results-source {
+      margin-top: 1px;
+      background: var(--bg-card);
+      border: 1px solid var(--cyan-border);
+      padding: var(--space-16) var(--space-24);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-caption);
+      color: var(--grey);
+      letter-spacing: 0.08em
+    }
+
+    /* The Decisions */
+    .decisions-track {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-top: 0;
+      background: var(--cyan-border);
+      border: 1px solid var(--cyan-border)
+    }
+
+    .decision-card {
+      background: var(--bg-card);
+      padding: var(--space-48);
+      position: relative;
+      transition: background 0.3s ease
+    }
+
+    .decision-card:hover {
+      background: var(--bg-raised)
+    }
+
+    .decision-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: transparent;
+      transition: background 0.3s ease
+    }
+
+    .decision-card:hover::before {
+      background: var(--cyan)
+    }
+
+    .decision-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-mono);
+      color: var(--cyan-label);
+      letter-spacing: 0.18em;
+      margin-bottom: var(--space-16);
+      text-transform: uppercase
+    }
+
+    .decision-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: var(--type-decision-title);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: var(--space-8)
+    }
+
+    .decision-question {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--type-question);
+      color: var(--cyan);
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+      margin-bottom: var(--space-24);
+      font-style: italic
+    }
+
+    .decision-body {
+      font-size: var(--type-body);
+      line-height: 1.8;
+      color: var(--text-body);
+      font-weight: 300;
+      max-width: 68ch
+    }
+
+    .decision-card--split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-48);
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .decision-card--split {
+        grid-template-columns: 1fr;
+        gap: var(--space-24);
+      }
+    }
+
+    .decision-content {
+      min-width: 0;
+    }
+
+    .decision-visual {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      min-width: 0;
+    }
+
+    .decision-video-frame {
+      position: relative;
+      border: 1px solid var(--cyan-border);
+      background: var(--bg-card);
+      overflow: hidden;
+      max-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .decision-video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+      aspect-ratio: 1856 / 972;
+    }
+
+    .decision-caption {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--grey);
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+    }
+
+    .decision-video-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 200px;
+      border: 1px dashed var(--cyan-border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--grey);
+      padding: var(--space-24);
+      text-align: center;
+    }
+
+    /* Decision 01 — brief flip diagram (pairs with the Decision 03 stage).
+       Pure HTML/CSS: two rows with a divider; nodes reuse the .cf-* styles.
+       Layout modes react to the STAGE's own width (container query):
+       ≥680px content: horizontal pair; 556–679px: two stacked columns;
+       <556px: one stacked column. */
+    .checkout-flow-stage.bf-stage {
+      width: 100%;
+      min-height: 350px; /* matches the Decision 03 stage's rendered height */
+      padding-block: 0; /* vertical spacing lives in .bf-body; left/right stays 24px 12px (shared) */
+      max-height: none; /* overrides the shared 480px clip; height is driven by min-height 350px */
+      container-type: inline-size;
+    }
+
+    .bf-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* rows + divider hug their content and stay centred */
+      width: 100%;
+      padding-block: var(--space-8);
+    }
+
+    .bf-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* labels share the first node's left edge */
+      margin: 0 auto;
+    }
+
+    .bf-label {
+      margin: 0 0 6px;
+    }
+
+    .bf-label--grey {
+      background: #222222;
+      color: #888888;
+    }
+
+    .bf-label--cyan {
+      background: rgba(0, 229, 255, 0.15);
+      color: #00E5FF;
+    }
+
+    .bf-flow {
+      display: flex;
+      align-items: stretch; /* both nodes in a row match in height */
+      justify-content: center;
+      gap: 0;
+    }
+
+    /* position:static must beat the later .cf-node { position: absolute } */
+    .cf-node.bf-node {
+      position: static;
+      flex: 0 0 260px;
+      flex-shrink: 0;
+      width: 260px;
+      max-width: 260px;
+      box-sizing: border-box;
+      min-height: 94px; /* shared min-height; keeps the two-column stack ≤ 350px */
+      padding-block: 6px;
+    }
+
+    /* Arrow: CSS line + head; grey dashed, cyan solid. Head/line/dash match
+       the Decision 03 map's SVG (markers scale with stroke-width:
+       grey head 12.6x11.2 from a 2px line, cyan 15.75x14 from a 2.5px line). */
+    .bf-arrow {
+      position: relative;
+      flex: 0 0 150px; /* fills the ≥150px gutter between the nodes */
+      height: 18px;
+    }
+
+    .bf-arrow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 6px;
+      right: 6px;
+      height: 2px;
+      margin-top: -1px;
+    }
+
+    .bf-arrow--grey::before {
+      background-image: repeating-linear-gradient(90deg, #666666 0 6px, transparent 6px 10px);
+    }
+
+    .bf-arrow--cyan::before {
+      height: 2.5px;
+      margin-top: -1.25px;
+      background: #00E5FF;
+    }
+
+    .bf-arrow::after {
+      content: '';
+      position: absolute;
+      right: 0; /* tip lands on the second node's edge, like Decision 03's markers */
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    .bf-arrow--grey::after {
+      border-width: 5.6px 0 5.6px 12.6px; /* Decision 03 grey head: 12.6 long x 11.2 tall */
+      border-color: transparent transparent transparent #666666;
+    }
+
+    .bf-arrow--cyan::after {
+      border-width: 7px 0 7px 15.75px; /* Decision 03 cyan head: 15.75 long x 14 tall */
+      border-color: transparent transparent transparent #00E5FF;
+    }
+
+    .bf-arrow .cf-chip {
+      left: 50%; /* chip centred ON the line; line stays visible on both sides */
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Divider between the rows, chip centred on the line */
+    .bf-divider {
+      display: flex;
+      align-items: center;
+      gap: var(--space-16);
+      width: 100%;
+      margin: var(--space-24) 0; /* keeps ≥24px clear above and below the chip */
+    }
+
+    .bf-divider::before,
+    .bf-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan-border) 20%, var(--cyan-border) 80%, transparent);
+    }
+
+    /* position:static must beat the later .cf-chip { position: absolute } */
+    .cf-chip.bf-divider-chip {
+      position: static;
+      background: transparent;
+      border: 1px solid #00E5FF;
+      color: #00E5FF;
+      font-weight: 700;
+    }
+
+    /* ── Stage content 556–679px: two columns, each row's nodes stacked ── */
+    @container (min-width: 556px) and (max-width: 679px) {
+      .bf-body {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-content: center;
+        justify-content: center;
+        column-gap: 32px; /* 260 + 32 + 260 = 552px of content */
+        padding-block: 0; /* total ≈ 347px ≤ the Decision 03 stage's 350px */
+      }
+
+      .bf-row {
+        width: 260px;
+        margin: 0;
+      }
+
+      .bf-label {
+        margin: 0 0 2px;
+      }
+
+      .cf-node.bf-node {
+        flex: 0 0 auto; /* in a column, keep flex-basis off the height */
+      }
+
+      .bf-flow {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .bf-arrow {
+        flex: 0 0 auto;
+        height: 64px; /* chip needs 22.39 + 20×2 clearance → 64px zone */
+      }
+
+      .bf-arrow::before {
+        top: 6px;
+        bottom: 6px;
+        left: 50%;
+        right: auto;
+        width: 2px;
+        height: auto;
+        margin: 0 0 0 -1px;
+      }
+
+      .bf-arrow--grey::before {
+        background-image: repeating-linear-gradient(180deg, #666666 0 6px, transparent 6px 10px);
+      }
+
+      .bf-arrow--cyan::before {
+        width: 2.5px;
+        height: auto;
+        margin: 0 0 0 -1.25px;
+        background: #00E5FF;
+      }
+
+      .bf-arrow--grey::after,
+      .bf-arrow--cyan::after {
+        right: auto;
+        left: 50%;
+        bottom: 0;
+        top: auto;
+        transform: translateX(-50%);
+      }
+
+      .bf-arrow--grey::after {
+        border-width: 12.6px 5.6px 0 5.6px; /* down: 11.2 wide x 12.6 long */
+        border-color: #666666 transparent transparent transparent;
+      }
+
+      .bf-arrow--cyan::after {
+        border-width: 15.75px 7px 0 7px; /* down: 14 wide x 15.75 long */
+        border-color: #00E5FF transparent transparent transparent;
+      }
+
+      .bf-divider {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+    }
+
+    /* ── Stage content < 556px: one stacked column (rows keep their order) ── */
+    @container (max-width: 555px) {
+      .bf-body {
+        align-items: center;
+      }
+
+      .cf-node.bf-node {
+        flex: 0 0 auto; /* in a column, keep flex-basis off the height */
+      }
+      .bf-row {
+        width: 260px;
+        margin: 0;
+      }
+
+      .bf-flow {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .bf-arrow {
+        flex: 0 0 auto;
+        height: 64px;
+      }
+
+      .bf-arrow::before {
+        top: 6px;
+        bottom: 6px;
+        left: 50%;
+        right: auto;
+        width: 2px;
+        height: auto;
+        margin: 0 0 0 -1px;
+      }
+
+      .bf-arrow--grey::before {
+        background-image: repeating-linear-gradient(180deg, #666666 0 6px, transparent 6px 10px);
+      }
+
+      .bf-arrow--cyan::before {
+        width: 2.5px;
+        height: auto;
+        margin: 0 0 0 -1.25px;
+        background: #00E5FF;
+      }
+
+      .bf-arrow--grey::after,
+      .bf-arrow--cyan::after {
+        right: auto;
+        left: 50%;
+        bottom: 0;
+        top: auto;
+        transform: translateX(-50%);
+      }
+
+      .bf-arrow--grey::after {
+        border-width: 12.6px 5.6px 0 5.6px;
+        border-color: #666666 transparent transparent transparent;
+      }
+
+      .bf-arrow--cyan::after {
+        border-width: 15.75px 7px 0 7px;
+        border-color: #00E5FF transparent transparent transparent;
+      }
+    }
+
+    /* Entrance: hidden while prepared, revealed when shown (150ms between groups) */
+    .checkout-flow-stage.bf-stage.is-prepared [data-bf-step] {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      transition-delay: calc(var(--bf-step, 0) * 150ms);
+    }
+
+    .checkout-flow-stage.bf-stage.is-prepared.is-shown [data-bf-step] {
+      opacity: 1;
+    }
+
+    .bf-stage [data-bf-step="0"] {
+      --bf-step: 0;
+    }
+
+    .bf-stage [data-bf-step="1"] {
+      --bf-step: 1;
+    }
+
+    .bf-stage [data-bf-step="2"] {
+      --bf-step: 2;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bf-stage [data-bf-step] {
+        transition: none !important;
+        transition-delay: 0ms !important;
+      }
+    }
+
+    /* Design Process section — Wave Band & Grid Layout */
+    .section#s5 {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .process-wave {
+      position: relative;
+      width: 100%;
+    }
+
+    /* Desktop (≥ 1114px) */
+    @media (min-width: 1114px) {
+      .process-wave {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto 92px auto;
+        column-gap: 0;
+        row-gap: var(--space-8);
+      }
+
+      .process-wave .process-rail {
+        display: none !important;
+      }
+
+      .process-wave-band {
+        grid-row: 2;
+        grid-column: 1 / -1;
+        position: relative;
+        height: 92px;
+        width: 100%;
+        overflow: visible;
+      }
+
+      .process-wave-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+      }
+
+      .process-wave-path {
+        fill: none;
+        stroke: var(--cyan);
+        stroke-width: 1;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0.4;
+        transition: opacity 0.4s ease;
+      }
+
+      .process-stem {
+        position: absolute;
+        width: 1px;
+        background: rgba(0, 229, 255, 0.28);
+        left: var(--x);
+        transform: translateX(-50%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+
+      .process-stem--odd {
+        top: 0;
+        height: var(--y);
+      }
+
+      .process-stem--even {
+        top: var(--y);
+        bottom: 0;
+      }
+
+      .process-marker {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--cyan);
+        box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.16);
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+
+      .process-wave .process-track {
+        display: contents;
+      }
+
+      .process-wave .process-step {
+        display: block !important;
+        position: relative;
+        padding-inline-end: 24px !important;
+        padding-inline-start: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+        opacity: 0;
+        transform: translateY(0);
+        transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .process-wave .process-step::before {
+        display: none !important;
+      }
+
+      /* Odd steps: row 1, align-self: end */
+      .process-wave .process-step[data-step-index="0"] { grid-row: 1; grid-column: 1; align-self: end; }
+      .process-wave .process-step[data-step-index="2"] { grid-row: 1; grid-column: 3; align-self: end; }
+      .process-wave .process-step[data-step-index="4"] { grid-row: 1; grid-column: 5; align-self: end; }
+
+      /* Even steps: row 3, align-self: start */
+      .process-wave .process-step[data-step-index="1"] { grid-row: 3; grid-column: 2; align-self: start; }
+      .process-wave .process-step[data-step-index="3"] { grid-row: 3; grid-column: 4; align-self: start; }
+    }
+
+    /* Below 1114px, vertical layout */
+    @media (max-width: 1113px) {
+      .process-wave-band {
+        display: none !important;
+      }
+
+      .process-wave .process-track {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-48);
+        list-style: none;
+        margin: 0;
+        padding: 0 !important;
+        position: relative;
+        width: 100%;
+      }
+
+      .process-wave .process-rail {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        height: auto;
+        right: auto;
+        background: rgba(0, 229, 255, 0.4);
+        transform: translateX(-50%) scaleY(0);
+        transform-origin: center top;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .process-wave.is-revealed .process-rail {
+        transform: translateX(-50%) scaleY(1);
+      }
+
+      .process-wave .process-step {
+        position: relative;
+        padding-left: var(--space-48) !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-right: 0 !important;
+        display: block !important;
+        width: 100%;
+        box-sizing: border-box;
+        opacity: 0;
+        transform: translateY(0);
+        transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .process-wave .process-step::before {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--cyan);
+        box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.16);
+        left: 0;
+        top: 0;
+        transform: translateX(-50%);
+        z-index: 2;
+        box-sizing: border-box;
+      }
+    }
+
+    /* Staggered reveal */
+    .process-wave.is-revealed .process-step,
+    .process-wave.is-revealed .process-marker,
+    .process-wave.is-revealed .process-stem {
+      opacity: 1;
+    }
+
+    .process-wave.is-revealed .process-step {
+      transform: translateY(0);
+    }
+
+    .process-wave.is-revealed [data-step-index="0"] { transition-delay: 200ms; }
+    .process-wave.is-revealed [data-step-index="1"] { transition-delay: 300ms; }
+    .process-wave.is-revealed [data-step-index="2"] { transition-delay: 400ms; }
+    .process-wave.is-revealed [data-step-index="3"] { transition-delay: 500ms; }
+    .process-wave.is-revealed [data-step-index="4"] { transition-delay: 600ms; }
+
+    .process-wave-card {
+      position: relative;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .process-rail,
+      .process-wave-path,
+      .process-step,
+      .process-marker,
+      .process-stem {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      @media (min-width: 1114px) {
+        .process-marker { transform: translate(-50%, -50%) !important; }
+        .process-stem { transform: translateX(-50%) !important; }
+      }
+      @media (max-width: 1113px) {
+        .process-rail { transform: translateX(-50%) scaleY(1) !important; }
+        .process-step::before { transform: translateX(-50%) !important; }
+      }
+    }
+
+    /* Former top:156px/190px rules for the old fixed button were removed:
+       they shifted the now in-flow relative link down over the hero title. */
+
+    .shop-comparison {
+      margin-top: 0;
+      border: 1px solid var(--cyan-border);
+      background: var(--bg-card);
+      overflow: hidden;
+      --compare: 50%
+    }
+
+    .shop-comparison-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      padding: 26px 30px
+    }
+
+    .shop-comparison-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--cyan);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .shop-comparison-copy {
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(240, 240, 240, 0.66);
+      max-width: 620px
+    }
+
+    .shop-comparison-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--grey);
+      letter-spacing: 0.14em;
+      white-space: nowrap
+    }
+
+    .shop-comparison-panel {
+      padding: 30px;
+      background: radial-gradient(circle at 50% 48%, rgba(0, 229, 255, 0.07), transparent 42%), #090909
+    }
+
+    .shop-device-stage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 620px
+    }
+
+    .shop-device-shell {
+      position: relative;
+      width: min(100%, 390px);
+      aspect-ratio: 776/1592;
+      background: #000;
+      border-radius: 12%/5.8%;
+      filter: drop-shadow(0 28px 48px rgba(0, 0, 0, 0.5))
+    }
+
+    .shop-device-screen {
+      position: absolute;
+      z-index: 1;
+      left: 4.51%;
+      right: 4.64%;
+      top: 1.95%;
+      bottom: 1.95%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #fff;
+      border-radius: 10.8%/5.2%;
+      scrollbar-width: none;
+      overscroll-behavior: auto;
+      touch-action: pan-y;
+      color: #111
+    }
+
+    .shop-device-screen::-webkit-scrollbar {
+      display: none
+    }
+
+    .shop-device-screen:focus-visible {
+      outline: 3px solid var(--cyan);
+      outline-offset: 5px
+    }
+
+    .shop-comparison-canvas {
+      position: relative;
+      width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      background: #fff;
+      transition: opacity 0.22s ease, transform 0.22s ease
+    }
+
+    .shop-comparison-canvas>img,
+    .shop-comparison-after img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: auto;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none
+    }
+
+    .shop-comparison-after {
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      clip-path: inset(0 0 0 var(--compare));
+      will-change: clip-path
+    }
+
+    .shop-comparison-ui {
+      position: absolute;
+      z-index: 2;
+      left: 4.51%;
+      right: 4.64%;
+      top: 1.95%;
+      bottom: 1.95%;
+      border-radius: 10.8%/5.2%;
+      overflow: hidden;
+      pointer-events: none
+    }
+
+    .shop-state-label {
+      position: absolute;
+      top: 6.2%;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(7, 7, 7, 0.78);
+      backdrop-filter: blur(8px);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      color: #fff;
+      text-transform: uppercase
+    }
+
+    .shop-state-label.before {
+      left: 4%
+    }
+
+    .shop-state-label.after {
+      right: 4%;
+      color: #000;
+      background: rgba(0, 229, 255, 0.9);
+      border-color: var(--cyan)
+    }
+
+    .shop-comparison-slider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--compare);
+      width: 44px;
+      transform: translateX(-50%);
+      border: 0;
+      background: transparent;
+      padding: 0;
+      pointer-events: auto;
+      touch-action: pan-y;
+      color: inherit
+    }
+
+    .shop-comparison-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      transform: translateX(-50%);
+      background: rgba(0, 229, 255, 0.92);
+      box-shadow: 0 0 9px rgba(0, 229, 255, 0.5)
+    }
+
+    .shop-comparison-handle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 42px;
+      height: 38px;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--cyan);
+      border-radius: 5px;
+      background: rgba(7, 7, 7, 0.9);
+      backdrop-filter: blur(8px);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--cyan);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35)
+    }
+
+    .shop-comparison-slider:focus-visible .shop-comparison-handle {
+      outline: 2px solid #fff;
+      outline-offset: 3px
+    }
+
+    .shop-device-frame {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+      user-select: none
+    }
+
+    .shop-internal-progress {
+      position: absolute;
+      z-index: 4;
+      right: 2.1%;
+      top: 15%;
+      bottom: 15%;
+      width: 3px;
+      background: rgba(255, 255, 255, 0.3);
+      pointer-events: none
+    }
+
+    .shop-internal-progress-fill {
+      width: 100%;
+      height: 100%;
+      background: var(--cyan);
+      transform: scaleY(0);
+      transform-origin: top;
+      box-shadow: 0 0 7px rgba(0, 229, 255, 0.65);
+      will-change: transform
+    }
+
+    .shop-scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 5%;
+      transform: translateX(-50%);
+      padding: 8px 11px;
+      border: 1px solid rgba(0, 229, 255, 0.55);
+      background: rgba(7, 7, 7, 0.84);
+      backdrop-filter: blur(8px);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      line-height: 1;
+      color: #fff;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: opacity 0.2s ease, transform 0.2s ease
+    }
+
+    .shop-comparison.has-scrolled .shop-scroll-cue {
+      opacity: 0;
+      transform: translate(-50%, 8px)
+    }
+
+    .shop-comparison-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 34px;
+      margin: 0 auto 18px
+    }
+
+    .shop-comparison-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #aaa;
+      letter-spacing: 0.1em;
+      text-transform: uppercase
+    }
+
+    .shop-comparison-hint b {
+      color: var(--cyan);
+      font-weight: inherit
+    }
+
+    .shop-hint-mobile {
+      display: none
+    }
+
+    .shop-mobile-state-toggle {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      width: 100%;
+      max-width: 280px
+    }
+
+    .shop-mobile-state-button {
+      min-height: 44px;
+      border: 1px solid var(--grey-dim);
+      background: #0b0b0b;
+      color: #aaa;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase
+    }
+
+    .shop-mobile-state-button[aria-pressed="true"] {
+      border-color: var(--cyan);
+      background: var(--cyan);
+      color: #000
+    }
+
+    .shop-mobile-state-button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px
+    }
+
+    .shop-comparison-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      max-width: 760px;
+      margin: 0 auto 16px
+    }
+
+    .shop-comparison-tab {
+      min-height: 52px;
+      border: 1px solid var(--grey-dim);
+      background: #0b0b0b;
+      color: #aaa;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      transition: color 0.22s, border-color 0.22s, background 0.22s
+    }
+
+    .shop-comparison-tab:hover {
+      color: var(--white);
+      border-color: rgba(0, 229, 255, 0.45)
+    }
+
+    .shop-comparison-tab[aria-selected="true"] {
+      color: #000;
+      border-color: var(--cyan);
+      background: var(--cyan)
+    }
+
+    .shop-comparison-tab:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px
+    }
+
+    .shop-comparison.is-switching .shop-comparison-canvas {
+      opacity: 0.18;
+      transform: scale(0.995)
+    }
+
+    @media(max-width:760px) {
+      .shop-comparison-intro {
+        align-items: flex-start;
+        padding: 22px;
+        flex-direction: column;
+        gap: 12px
+      }
+
+      .shop-comparison-panel {
+        padding: 24px 12px 22px
+      }
+
+      .shop-device-stage {
+        min-height: 0
+      }
+
+      .shop-device-shell {
+        width: min(100%, 360px)
+      }
+
+      .shop-comparison-tabs {
+        gap: 5px;
+        margin-bottom: 14px
+      }
+
+      .shop-comparison-tab {
+        font-size: 10px;
+        padding: 8px 5px;
+        letter-spacing: 0.02em
+      }
+
+      .shop-comparison-toolbar {
+        flex-direction: column;
+        margin-bottom: 16px
+      }
+
+      .shop-mobile-state-toggle {
+        display: grid
+      }
+
+      .shop-comparison-slider,
+      .shop-state-label,
+      .shop-hint-desktop {
+        display: none
+      }
+
+      .shop-hint-mobile {
+        display: inline
+      }
+
+      .shop-comparison-hint {
+        font-size: 9px;
+        letter-spacing: 0.03em
+      }
+
+      .shop-scroll-cue {
+        font-size: 8px
+      }
+    }
+
+    @media(max-width:900px) {
+      .findings-grid {
+        grid-template-columns: 1fr
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 1px;
+      }
+
+      .result-card {
+        display: grid;
+        grid-template-rows: auto auto auto 1fr auto;
+        grid-row: auto;
+        row-gap: var(--space-16);
+      }
+    }
+
+    @media(max-width:768px) {
+      .nav-cta{display:none!important}
+    }
+
+    @media(max-width:1023px) {
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: var(--space-24)
+      }
+    }
+
+    @media(max-width:768px) {
+      .ba-grid {
+        grid-template-columns: 1fr
+      }
+
+      .ba-panel {
+        padding: var(--space-16)
+      }
+
+      .decision-card {
+        padding: var(--space-24)
+      }
+
+
+
+      .nav-center {
+        display: none
+      }
+
+      .section-heading {
+        font-size: clamp(32px, 8vw, 44px)
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      .shop-comparison-canvas,
+      .shop-scroll-cue,
+      .shop-comparison-tab {
+        transition: none
+      }
+    }
+
+    body[data-project-page] .cta-section,
+    .cta-section {
+      padding: 150px 80px;
+      padding-left: var(--page-gutter) !important;
+      padding-right: var(--page-gutter) !important;
+      text-align: center;
+      position: relative;
+      box-sizing: border-box !important;
+    }
+
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none
+    }
+
+    .cta-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--cyan);
+      letter-spacing: 0.22em;
+      margin-bottom: 18px;
+      position: relative
+    }
+
+    .cta-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(48px, 7vw, 96px);
+      text-transform: uppercase;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+      position: relative
+    }
+
+    .cta-heading .outline {
+      -webkit-text-stroke: 1.5px rgba(240, 240, 240, 0.25);
+      color: transparent
+    }
+
+    .case-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 32px;
+      min-height: var(--button-h);
+      background: transparent;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.3s
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--cyan);
+      transform: translateX(-100%);
+      transition: transform 0.35s
+    }
+
+    .cta-btn:hover::before {
+      transform: translateX(0)
+    }
+
+    .cta-btn:hover {
+      color: #000
+    }
+
+    .cta-btn span {
+      position: relative;
+      z-index: 1
+    }
+
+    ::-webkit-scrollbar {
+      width: 2px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--cyan-border)
+    }
+
+    body[data-project-page] .document-footer,
+    .document-footer {
+      margin-left: var(--page-gutter) !important;
+      margin-right: var(--page-gutter) !important;
+      width: auto !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+    }
+
+    /* ── Decision 03 — Checkout flow map ── */
+    .checkout-flow-stage {
+      position: relative;
+      border: 1px solid var(--cyan-border);
+      background: var(--bg-card);
+      padding: 24px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 340px;
+      max-height: 480px;
+      overflow: hidden;
+    }
+
+    .checkout-flow-map--desktop {
+      position: relative;
+      width: 370px;
+      max-width: 100%;
+      height: 300px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .checkout-flow-map--mobile {
+      position: relative;
+      width: 100%;
+      max-width: 290px;
+      height: 435px;
+      display: none;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 599px) {
+      .checkout-flow-map--desktop {
+        display: none;
+      }
+
+      .checkout-flow-map--mobile {
+        display: block;
+      }
+
+      .checkout-flow-stage {
+        max-height: none;
+        min-height: 0;
+        padding: 20px 12px;
+      }
+    }
+
+    /* Node card styling recreated from the login map reference */
+    .cf-node {
+      position: absolute;
+      background: #0d1115;
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      z-index: 2;
+    }
+
+    .cf-node--cyan {
+      border: 2px solid #00E5FF;
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
+    }
+
+    .cf-node--muted {
+      background: #0b0e11;
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      box-shadow: none;
+    }
+
+    .cf-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .cf-node--cyan .cf-tag {
+      background: rgba(0, 229, 255, 0.15);
+      color: #00E5FF;
+    }
+
+    .cf-node--muted .cf-tag {
+      background: #222222;
+      color: #888888;
+    }
+
+    .cf-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+
+    .cf-node--cyan .cf-title {
+      color: #FFFFFF;
+    }
+
+    .cf-node--muted .cf-title {
+      color: #D0D0D0;
+    }
+
+    .cf-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .cf-node--cyan .cf-sub {
+      color: #A0A0A0;
+    }
+
+    .cf-node--muted .cf-sub {
+      color: #777777;
+    }
+
+    /* Connectors SVG layer */
+    .cf-connectors {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Chips on connectors */
+    .cf-chip {
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 3px 8px;
+      line-height: 1.2;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .cf-chip--cyan {
+      background: #00E5FF;
+      color: #000000;
+      font-weight: 700;
+    }
+
+    .cf-chip--grey {
+      background: #1f2429;
+      border: 1px solid #444444;
+      color: #888888;
+      font-weight: 500;
+    }
+
+    /* Animation states */
+    [data-cf-node],
+    [data-cf-chip] {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cf-arrow-cyan {
+      fill: none;
+    }
+
+    .cf-arrow-grey {
+      fill: none;
+    }
+
+    /* prefers-reduced-motion: show everything immediately */
+    @media (prefers-reduced-motion: reduce) {
+      [data-cf-node],
+      [data-cf-chip] {
+        opacity: 1 !important;
+        transition: none !important;
+      }
+    }
+
+    
+
+    /* Divider - section separator */
+    .divider {
+      display: block !important; /* missions.css ships .divider{display:none!important} */
+      height: 1px;
+      margin: 0 var(--page-gutter);
+      background: linear-gradient(90deg, transparent, var(--cyan-border) 20%, var(--cyan-border) 80%, transparent);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      border: 2px solid var(--cyan);
+      background: transparent;
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      transition: color .3s, border-color .3s, background .3s, transform .2s ease, box-shadow .3s ease;
+      padding: 14px 32px;
+      text-decoration: none;
+    }
+    .btn-primary span {
+      position: relative;
+      z-index: 1;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px rgba(0,229,255,0.35), 0 4px 20px rgba(0,229,255,0.25);
+    }
+
+    .talk-cta {
+      text-align: center;
+      padding: var(--space-48) var(--page-gutter);
+    }
+
+    /* Fix btn-primary hover fill clipping */
+    .btn-primary::after {
+      border-radius: inherit;
+    }
+  </style>
+</head>
+
+<body data-project-page data-project="ather-shop">
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div class="scanlines"></div>
+  <nav id="nav">
+    <a href="../index.html" class="nav-brand">Sidharth Premanand</a>
+    <div class="nav-center">
+      <a href="../index.html#missions" class="nav-link">Work</a>
+      <a href="../about.html" class="nav-link">About</a>
+      <a href="../photos.html" class="nav-link">Photos</a>
+      <a href="../index.html#contact" class="nav-link">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-status">Available for collaboration</div>
+      <a href="../index.html#contact" class="nav-cta" data-cta-hover><span>Let's talk</span></a>
+    </div>
+  </nav>
+
+  <div class="page-flow">
+  <a href="../index.html?v=20260823d#missions" class="back-link">Back home</a>
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-label">Ather Energy · Ecommerce UX</div>
+    <h1 class="hero-title" data-text="REDESIGNING THE ATHER SHOP">
+      REDESIGNING<br>
+      THE ATHER<br>
+      <span class="outline">SHOP</span>
+    </h1>
+    <div class="hero-meta">
+      <div class="meta-cell">
+        <div class="meta-label">CLIENT //</div>
+        <div class="meta-value">Ather Energy</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">ROLE //</div>
+        <div class="meta-value">Digital Product Designer</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">SCOPE //</div>
+        <div class="meta-value">[SCOPE TEXT]</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">PLATFORM //</div>
+        <div class="meta-value">Mobile Web (85.9%)</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">STATUS //</div>
+        <div class="meta-value accent">MISSION COMPLETE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="section project-intro" id="s1">
+    <div class="section-stack">
+      <div class="section-label">01 // The Backstory</div>
+      <h2 class="section-heading">Context</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="reflection-body">
+        <p class="text-white/70">Ather Shop worked fine on desktop, but almost everyone visited on their phone. The product team's analytics showed most of the traffic was on phones, so the brief was mobile first. And the mobile experience was rough: confusing navigation, no search, and product pages that weren't built for touch.</p>
+        <p class="text-white/70">Our goal was simple: fix the mobile experience so people could find what they wanted, add items to their cart, and check out without getting frustrated.</p>
+      </div>
+      <div class="data-table">
+        <div class="data-row"><span class="data-key">TARGET CONVERSION</span><span class="data-val">0.53%</span></div>
+        <div class="data-row"><span class="data-key">SESSION-TO-CART (BEFORE)</span><span class="data-val">2.40%</span></div>
+        <div class="data-row"><span class="data-key">TARGET SESSION-TO-CART</span><span class="data-val">4.00%</span></div>
+        <div class="data-row"><span class="data-key">SEARCH UTILISATION</span><span class="data-val">NEW FEATURE</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="section" id="s2">
+    <div class="section-stack">
+      <div class="section-label">02 // The Discovery</div>
+      <h2 class="section-heading">Key Findings</h2>
+    </div>
+
+    <div class="findings-grid">
+      <div class="finding-card">
+        <div class="finding-label">01 // AUDIENCE</div>
+        <h3 class="finding-title">Mobile Shopper Majority</h3>
+        <p class="finding-body">Most shoppers visited on mobile, but the original store was built for desktop screens. The touch experience was overlooked, leaving phone shoppers with awkward navigation and hard-to-tap targets.</p>
+        <div class="finding-stat-wrap">
+          <div class="finding-stat">85.9%</div>
+          <div class="finding-stat-desc">Of shoppers visited on mobile</div>
+        </div>
+      </div>
+      <div class="finding-card">
+        <div class="finding-label">02 // CONVERSION</div>
+        <h3 class="finding-title">Mobile Conversion Rate</h3>
+        <p class="finding-body">Mobile conversion was less than half of desktop before the redesign. Customers browsed categories, but confusing layouts and missing search made them abandon before checkout.</p>
+        <div class="finding-stat-wrap">
+          <div class="finding-stat">0.8%</div>
+          <div class="finding-stat-desc">Mobile conversion rate before redesign</div>
+        </div>
+      </div>
+      <div class="finding-card">
+        <div class="finding-label">03 // BASKET SIZE</div>
+        <h3 class="finding-title">Single-Item Purchases</h3>
+        <p class="finding-body">Only a tiny fraction of buyers checked out with more than one item in their cart. People weren't avoiding extra items because they didn't want them, adding another item was just too clunky.</p>
+        <div class="finding-stat-wrap">
+          <div class="finding-stat">2.5%</div>
+          <div class="finding-stat-desc">Of buyers bought multiple items</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="section" id="s4">
+    <div class="section-stack">
+      <div class="section-label">03 // The Thinking</div>
+      <h2 class="section-heading">The Decisions</h2>
+    </div>
+
+    <div class="decisions-track">
+      <div class="decision-card decision-card--split">
+        <div class="decision-content">
+          <div class="decision-num">DECISION 01</div>
+          <h3 class="decision-title">A web project that became a mobile project</h3>
+          <div class="decision-question">Are we solving a design problem or a strategy problem?</div>
+          <div class="decision-body">
+            The Ather Shop was built for desktop users. Mobile was a responsive afterthought: the same content, scaled down. The product team's analytics showed most sessions came from phones, so the brief changed. Mobile became the primary surface and I designed from the phone up. Every later choice started from that.
+          </div>
+        </div>
+        <div class="decision-visual">
+          <div class="checkout-flow-stage bf-stage" data-brief-flip
+            role="img"
+            aria-label="Original brief: desktop first, mobile scaled down from it. Revised brief: mobile first, desktop expanded from it.">
+
+            <!-- Inner wrap: the container queries style this, not the stage itself
+                 (@container rules cannot restyle the query container element). -->
+            <div class="bf-body">
+
+            <!-- Row 1: ORIGINAL BRIEF -->
+            <div class="bf-row" data-bf-step="0" aria-hidden="true">
+              <div class="bf-label bf-label--grey cf-tag" aria-hidden="true">ORIGINAL BRIEF</div>
+              <div class="bf-flow" aria-hidden="true">
+                <div class="cf-node cf-node--muted bf-node">
+                  <span class="cf-tag">01</span>
+                  <div class="cf-title">DESKTOP</div>
+                  <div class="cf-sub">Primary surface</div>
+                </div>
+                <div class="bf-arrow bf-arrow--grey">
+                  <span class="cf-chip cf-chip--grey">SCALED DOWN</span>
+                </div>
+                <div class="cf-node cf-node--muted bf-node">
+                  <span class="cf-tag">02</span>
+                  <div class="cf-title">MOBILE</div>
+                  <div class="cf-sub">Responsive afterthought</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Divider with centred chip -->
+            <div class="bf-divider" data-bf-step="1" aria-hidden="true">
+              <span class="cf-chip bf-divider-chip">BRIEF CHANGED</span>
+            </div>
+
+            <!-- Row 2: REVISED BRIEF -->
+            <div class="bf-row" data-bf-step="2" aria-hidden="true">
+              <div class="bf-label bf-label--cyan cf-tag" aria-hidden="true">REVISED BRIEF</div>
+              <div class="bf-flow" aria-hidden="true">
+                <div class="cf-node cf-node--cyan bf-node">
+                  <span class="cf-tag">01</span>
+                  <div class="cf-title">MOBILE</div>
+                  <div class="cf-sub">Primary surface, designed first</div>
+                </div>
+                <div class="bf-arrow bf-arrow--cyan">
+                  <span class="cf-chip cf-chip--cyan">EXPANDED UP</span>
+                </div>
+                <div class="cf-node cf-node--muted bf-node">
+                  <span class="cf-tag">02</span>
+                  <div class="cf-title">DESKTOP</div>
+                  <div class="cf-sub">Built from the phone layout</div>
+                </div>
+              </div>
+            </div>
+
+            </div><!-- /.bf-body -->
+
+          </div>
+          <div class="decision-caption" data-bf-caption>The brief flipped: mobile first, desktop second</div>
+        </div>
+      </div>
+
+      <div class="decision-card decision-card--split">
+        <div class="decision-content">
+          <div class="decision-num">DECISION 02</div>
+          <h3 class="decision-title">Search as a scale decision</h3>
+          <div class="decision-question">When does a product need search?</div>
+          <div class="decision-body">
+            Search wasn't on the roadmap because the original product range was small. As Ather expanded across scooter verticals, the catalogue grew to a point where browsing alone couldn't serve users who arrived with intent. The theme's built-in search wouldn't do. It only matched the exact product name, and most people don't know it. I designed a search that also works on product type, suggests products and shows results while you type, and looks like the rest of the shop. Shoppers who used search converted 2.25x more than those who didn't.
+          </div>
+        </div>
+        <div class="decision-visual">
+          <div class="decision-video-frame">
+            <video class="decision-video" autoplay loop muted playsinline poster="../assets/decision-02-search-poster.webp" aria-label="Search with suggestions and live results">
+              <source src="../assets/decision-02-search.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="decision-caption">Search with suggestions and live results</div>
+        </div>
+      </div>
+
+      <div class="decision-card decision-card--split">
+        <div class="decision-content">
+          <div class="decision-num">DECISION 03</div>
+          <h3 class="decision-title">Buy Now for people who came for one thing</h3>
+          <div class="decision-question">Why make people go through the cart for one product?</div>
+          <div class="decision-body">
+            Most people came to the shop for one product. Only 2.5% of buyers checked out with more than one item in their cart. Add to cart and then the cart was extra steps for a single purchase, so I added a Buy Now button and designed the page so people could see what they were buying before they tapped it.
+          </div>
+        </div>
+        <div class="decision-visual">
+          <div class="checkout-flow-stage" data-checkout-flow
+            aria-label="From the product page, Buy Now goes straight to checkout. Add to cart goes to the cart, then to checkout.">
+
+            <!-- ═══ DESKTOP MAP (≥600px) ═══ -->
+            <div class="checkout-flow-map checkout-flow-map--desktop">
+              <!-- Inline SVG connectors behind nodes -->
+              <svg class="cf-connectors" viewBox="0 0 370 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <defs>
+                  <marker id="cf-head-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1 L 9 5 L 0 9 z" fill="#00E5FF"/>
+                  </marker>
+                  <marker id="cf-head-grey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1 L 9 5 L 0 9 z" fill="#666666"/>
+                  </marker>
+                </defs>
+
+                <!-- Buy Now: straight cyan arrow along center line from Product to Checkout -->
+                <line class="cf-arrow-cyan" data-cf-line="buy"
+                  x1="140" y1="53" x2="224" y2="53" stroke="#00E5FF" stroke-width="2.5"
+                  marker-end="url(#cf-head-cyan)"/>
+
+                <!-- Add to Cart: dashed grey curve Product down to Cart -->
+                <path class="cf-arrow-grey" data-cf-line="cart1"
+                  d="M 68 94 C 68 165, 88 236, 110 236" stroke="#666666" stroke-width="2" stroke-dasharray="6 4"
+                  marker-end="url(#cf-head-grey)"/>
+
+                <!-- Cart up to Checkout: dashed grey arrow -->
+                <path class="cf-arrow-grey" data-cf-line="cart2"
+                  d="M 255 236 C 278 236, 302 165, 302 99" stroke="#666666" stroke-width="2" stroke-dasharray="6 4"
+                  marker-end="url(#cf-head-grey)"/>
+              </svg>
+
+              <!-- Node 1: Product Page (cyan) -->
+              <div class="cf-node cf-node--cyan" data-cf-node="product" style="left: 0; top: 12px; width: 140px;">
+                <span class="cf-tag">01 START</span>
+                <div class="cf-title">PRODUCT PAGE</div>
+                <div class="cf-sub">Add to cart + Buy Now</div>
+              </div>
+
+              <!-- Route 1 Chip: BUY NOW (filled cyan) -->
+              <div class="cf-chip cf-chip--cyan" data-cf-chip="buy" aria-hidden="true" style="left: 185px; top: 53px; transform: translate(-50%, -50%);">
+                BUY NOW
+              </div>
+
+              <!-- Node 3: Checkout (cyan) -->
+              <div class="cf-node cf-node--cyan" data-cf-node="checkout" style="right: 0; top: 12px; width: 140px;">
+                <span class="cf-tag">03 FINISH</span>
+                <div class="cf-title">CHECKOUT</div>
+                <div class="cf-sub">Where both paths end</div>
+              </div>
+
+              <!-- Route 2 Chip: ADD TO CART (outlined grey) -->
+              <div class="cf-chip cf-chip--grey" data-cf-chip="cart" aria-hidden="true" style="left: 68px; top: 145px; transform: translate(-50%, -50%);">
+                ADD TO CART
+              </div>
+
+              <!-- Node 2: Cart (muted grey) -->
+              <div class="cf-node cf-node--muted" data-cf-node="cart" style="left: 115px; top: 195px; width: 140px;">
+                <span class="cf-tag">02 EXTRA STEP</span>
+                <div class="cf-title">CART</div>
+                <div class="cf-sub">Skipped with Buy Now</div>
+              </div>
+            </div>
+
+            <!-- ═══ MOBILE MAP (<600px) ═══ -->
+            <div class="checkout-flow-map checkout-flow-map--mobile">
+              <!-- Inline SVG connectors behind nodes -->
+              <svg class="cf-connectors" viewBox="0 0 290 435" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <defs>
+                  <marker id="cf-m-head-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1 L 9 5 L 0 9 z" fill="#00E5FF"/>
+                  </marker>
+                  <marker id="cf-m-head-grey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1 L 9 5 L 0 9 z" fill="#666666"/>
+                  </marker>
+                </defs>
+
+                <!-- Left lane: straight cyan arrow down to Checkout -->
+                <line class="cf-arrow-cyan" data-cf-line="m-buy"
+                  x1="40" y1="82" x2="40" y2="345" stroke="#00E5FF" stroke-width="2.5"
+                  marker-end="url(#cf-m-head-cyan)"/>
+
+                <!-- Right lane: dashed grey arrow down to Cart -->
+                <line class="cf-arrow-grey" data-cf-line="m-cart1"
+                  x1="200" y1="82" x2="200" y2="162" stroke="#666666" stroke-width="2" stroke-dasharray="6 4"
+                  marker-end="url(#cf-m-head-grey)"/>
+
+                <!-- Right lane: dashed grey arrow from Cart down to Checkout -->
+                <line class="cf-arrow-grey" data-cf-line="m-cart2"
+                  x1="200" y1="250" x2="200" y2="345" stroke="#666666" stroke-width="2" stroke-dasharray="6 4"
+                  marker-end="url(#cf-m-head-grey)"/>
+              </svg>
+
+              <!-- Node 1: Product Page (spanning top) -->
+              <div class="cf-node cf-node--cyan" data-cf-node="m-product" style="left: 0; right: 0; top: 0; width: 100%;">
+                <span class="cf-tag">01 START</span>
+                <div class="cf-title">PRODUCT PAGE</div>
+                <div class="cf-sub">Add to cart + Buy Now</div>
+              </div>
+
+              <!-- Left lane: BUY NOW chip -->
+              <div class="cf-chip cf-chip--cyan" data-cf-chip="m-buy" aria-hidden="true" style="left: 40px; top: 205px; transform: translate(-50%, -50%);">
+                BUY NOW
+              </div>
+
+              <!-- Right lane: ADD TO CART chip -->
+              <div class="cf-chip cf-chip--grey" data-cf-chip="m-cart" aria-hidden="true" style="left: 200px; top: 118px; transform: translate(-50%, -50%);">
+                ADD TO CART
+              </div>
+
+              <!-- Right lane: Cart node -->
+              <div class="cf-node cf-node--muted" data-cf-node="m-cart" style="left: 115px; right: 0; top: 168px; width: 175px;">
+                <span class="cf-tag">02 EXTRA STEP</span>
+                <div class="cf-title">CART</div>
+                <div class="cf-sub">Skipped with Buy Now</div>
+              </div>
+
+              <!-- Node 3: Checkout (spanning bottom) -->
+              <div class="cf-node cf-node--cyan" data-cf-node="m-checkout" style="left: 0; right: 0; top: 353px; width: 100%;">
+                <span class="cf-tag">03 FINISH</span>
+                <div class="cf-title">CHECKOUT</div>
+                <div class="cf-sub">Where both paths end</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="decision-caption">Paths to checkout from the product page</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="section" id="s5">
+    <div class="section-stack">
+      <div class="section-label">04 // The Build</div>
+      <h2 class="section-heading">Design Process</h2>
+    </div>
+
+    <div class="process-wave" data-process-wave>
+      <div class="process-rail" aria-hidden="true"></div>
+      <div class="process-wave-band" aria-hidden="true">
+        <svg class="process-wave-svg" viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false" aria-hidden="true">
+          <path class="process-wave-path" d="M0 50 C 66.67 0, 133.33 0, 200 0 S 300 100, 400 100 S 500 8.75, 600 8.75 S 700 95, 800 95 S 900 1.25, 1000 3.75" vector-effect="non-scaling-stroke"></path>
+        </svg>
+        <div class="process-stem process-stem--odd" data-step-index="0" style="--x: 0%; --y: 50.00%;"></div>
+        <div class="process-stem process-stem--even" data-step-index="1" style="--x: 20%; --y: 0.00%;"></div>
+        <div class="process-stem process-stem--odd" data-step-index="2" style="--x: 40%; --y: 100.00%;"></div>
+        <div class="process-stem process-stem--even" data-step-index="3" style="--x: 60%; --y: 8.75%;"></div>
+        <div class="process-stem process-stem--odd" data-step-index="4" style="--x: 80%; --y: 95.00%;"></div>
+        <div class="process-marker" data-step-index="0" style="--x: 0%; --y: 50.00%;"></div>
+        <div class="process-marker" data-step-index="1" style="--x: 20%; --y: 0.00%;"></div>
+        <div class="process-marker" data-step-index="2" style="--x: 40%; --y: 100.00%;"></div>
+        <div class="process-marker" data-step-index="3" style="--x: 60%; --y: 8.75%;"></div>
+        <div class="process-marker" data-step-index="4" style="--x: 80%; --y: 95.00%;"></div>
+      </div>
+      <ol class="process-track">
+        <li class="process-step" data-step-index="0">
+          <div class="process-wave-card">
+            <div class="step-phase">STEP 01</div>
+            <h3 class="step-title">Research and problem discovery</h3>
+            <p class="step-body">We analysed session recordings and funnel data to map where mobile users were abandoning. We interviewed Ather Shop users to understand how they look for products. Most arrived with a category in mind, not a specific product name.</p>
+          </div>
+        </li>
+        <li class="process-step" data-step-index="1">
+          <div class="process-wave-card">
+            <div class="step-phase">STEP 02</div>
+            <h3 class="step-title">Navigation and search</h3>
+            <p class="step-body">I restructured the navigation for touch first use: clear category entry points, persistent breadcrumbs and a global search bar in the top bar. On listing pages I redesigned the filters as scrollable chips that work with one thumb.</p>
+          </div>
+        </li>
+        <li class="process-step" data-step-index="2">
+          <div class="process-wave-card">
+            <div class="step-phase">STEP 03</div>
+            <h3 class="step-title">Content and assets</h3>
+            <p class="step-body">Many images and content blocks weren't made for mobile. I worked with the agency that owned the assets and with the content team, and fixed some of the assets myself where I had access.</p>
+          </div>
+        </li>
+        <li class="process-step" data-step-index="3">
+          <div class="process-wave-card">
+            <div class="step-phase">STEP 04</div>
+            <h3 class="step-title">Product page</h3>
+            <p class="step-body">The product page got the biggest change: a sticky Buy Now bar, a swipeable image gallery, inline size guidance with a 'how to measure' expandable, and a clear discount display. Add to cart and Buy Now got different visual weight to reduce decision paralysis.</p>
+          </div>
+        </li>
+        <li class="process-step" data-step-index="4">
+          <div class="process-wave-card">
+            <div class="step-phase">STEP 05</div>
+            <h3 class="step-title">Phased release</h3>
+            <p class="step-body">We released in phases. Search and navigation shipped first to set a data baseline, and the product page redesign followed, so metric changes could be tied to specific design changes.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="section" id="s6">
+    <div class="section-stack">
+      <div class="section-label">05 // The Shift</div>
+      <h2 class="section-heading">Before & After</h2>
+    </div>
+
+    <div class="ba-grid">
+      <div class="ba-panel">
+        <div class="ba-tag before">Before</div>
+        <h3 class="ba-title">The old mobile shop</h3>
+        <ul class="ba-list before">
+          <li>No search bar: zero path for intent-driven product discovery</li>
+          <li>Category browse only: required navigating full product listings</li>
+          <li>Non-sticky CTA: "Buy Now" scrolled out of view on long PDPs</li>
+          <li>No size guide: users had to guess or leave to find guidance</li>
+          <li>Basic image gallery: no swipe support, arrows only</li>
+          <li>Filter chips required multiple taps: friction-heavy selections</li>
+        </ul>
+      </div>
+      <div class="ba-panel">
+        <div class="ba-tag after">After</div>
+        <h3 class="ba-title">The redesigned shop</h3>
+        <ul class="ba-list after">
+          <li>Global search with category-scoped results and empty state guidance</li>
+          <li>Category tiles with product photography: visual-first navigation</li>
+          <li>Sticky bottom bar: price + "Add to cart" + "Buy now" always visible</li>
+          <li>Inline size chart with step-by-step measurement guide</li>
+          <li>Full-width swipeable image gallery: touch-native interaction</li>
+          <li>Horizontal scrolling filter chips: one-hand operation optimised</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="section" id="screens">
+    <div class="section-stack">
+      <div class="section-label">06 // The Work</div>
+      <h2 class="section-heading">The Work</h2>
+    </div>
+
+    <div class="work-overview"
+      style="border:1px solid var(--cyan-border);overflow:hidden;background:var(--bg-card);margin-bottom:1px">
+      <img src="../assets/m02-screens-wide.png" alt="UX Revamp Ather Shop — Screens overview" loading="lazy"
+        decoding="async" style="width:100%;display:block;object-fit:cover">
+    </div>
+
+    <div class="shop-comparison" data-shop-comparison>
+      <div class="shop-comparison-intro">
+        <div>
+          <div class="shop-comparison-kicker">Interactive Review // Earlier ↔ Redesign</div>
+          <p class="shop-comparison-copy">Choose a page and explore the earlier and redesigned screen structures.
+            Catalogue content differs where the product range changed.</p>
+        </div>
+        <div class="shop-comparison-count" aria-live="polite">01 / 03</div>
+      </div>
+
+      <div class="shop-comparison-panel">
+        <div class="shop-comparison-tabs" role="tablist" aria-label="Choose an Ather Shop screen">
+          <button class="shop-comparison-tab" id="shop-tab-homepage" type="button" role="tab" aria-selected="true"
+            aria-controls="shop-device-screen" data-shop-slide="0">Homepage</button>
+          <button class="shop-comparison-tab" id="shop-tab-listing" type="button" role="tab" aria-selected="false"
+            aria-controls="shop-device-screen" data-shop-slide="1">Product listing</button>
+          <button class="shop-comparison-tab" id="shop-tab-details" type="button" role="tab" aria-selected="false"
+            aria-controls="shop-device-screen" data-shop-slide="2">Product details</button>
+        </div>
+
+        <div class="shop-comparison-toolbar">
+          <div class="shop-comparison-hint" id="shop-comparison-help">
+            <span class="shop-hint-desktop"><b aria-hidden="true">↕</b> Scroll the screen · Drag to compare</span>
+            <span class="shop-hint-mobile"><b aria-hidden="true">↕</b> Scroll the screen · Choose a state</span>
+          </div>
+          <div class="shop-mobile-state-toggle" role="group" aria-label="Choose comparison state">
+            <button class="shop-mobile-state-button" type="button" aria-pressed="false"
+              data-shop-state="before">Earlier</button>
+            <button class="shop-mobile-state-button" type="button" aria-pressed="true"
+              data-shop-state="after">Redesign</button>
+          </div>
+        </div>
+
+        <div class="shop-device-stage">
+          <div class="shop-device-shell">
+            <div class="shop-device-screen" id="shop-device-screen" role="tabpanel" tabindex="0"
+              aria-labelledby="shop-tab-homepage" aria-describedby="shop-comparison-help">
+              <div class="shop-comparison-canvas">
+                <img class="shop-before-image" src="../assets/images/Ather Shop/m02-home-before.webp"
+                  alt="Earlier Ather Shop homepage" loading="lazy" decoding="async">
+                <div class="shop-comparison-after">
+                  <img class="shop-after-image" src="../assets/images/Ather Shop/m02-home-after.webp"
+                    alt="Redesigned Ather Shop homepage" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
+
+            <div class="shop-comparison-ui">
+              <div class="shop-state-label before" aria-hidden="true">Earlier</div>
+              <div class="shop-state-label after" aria-hidden="true">Redesign</div>
+              <button class="shop-comparison-slider" type="button" role="slider"
+                aria-label="Reveal the earlier and redesigned screen states" aria-describedby="shop-comparison-help"
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% earlier, 50% redesign">
+                <span class="shop-comparison-line"></span>
+                <span class="shop-comparison-handle">↔</span>
+              </button>
+              <div class="shop-internal-progress" aria-hidden="true">
+                <div class="shop-internal-progress-fill"></div>
+              </div>
+              <div class="shop-scroll-cue" aria-hidden="true">Scroll screen ↓</div>
+            </div>
+
+            <img class="shop-device-frame" src="../assets/images/Ather Shop/iPhone 15 Pro - White Flatten.png" alt=""
+              aria-hidden="true" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="section" id="s7">
+    <div class="section-stack">
+      <div class="section-label">07 // The Outcome</div>
+      <h2 class="section-heading">Results</h2>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-index">Metric 01</div>
+        <div class="result-num"><span>0.28%</span> to <span>0.39%</span></div>
+        <div class="result-secondary"></div>
+        <div class="result-label">Store conversion rate rose from 0.28% to 0.39% after the redesign.</div>
+        <div class="result-target"></div>
+      </div>
+      <div class="result-card">
+        <div class="result-index">Metric 02</div>
+        <div class="result-num"><span>2.25</span>×</div>
+        <div class="result-secondary" aria-hidden="true"></div>
+        <div class="result-label">Shoppers who used search converted 2.25x more than those who didn't.</div>
+        <div class="result-target" aria-hidden="true"></div>
+      </div>
+      <div class="result-card">
+        <div class="result-index">Metric 03</div>
+        <div class="result-num"><span>2.40%</span> to <span>6.18%</span></div>
+        <div class="result-secondary"></div>
+        <div class="result-label">Product page to checkout conversion after the product page redesign.</div>
+        <div class="result-target"></div>
+      </div>
+    </div>
+    <div class="results-source">Metrics shared by the product manager from Ather's analytics.</div>
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="cta-section">
+    <div class="cta-bg"></div>
+    <div class="cta-label">Case Study // Complete</div>
+    <h2 class="cta-heading">Continue<br><span class="outline">Exploring</span></h2>
+    <a href="mission-03-test-ride.html?v=20260823d" class="cta-btn"><span>Next: Test Ride Flow →</span></a>
+  </div>
+</div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+<footer class="document-footer">
+    <div class="footer-main">
+      <div class="footer-zone-left">
+        <div class="footer-identity">Sidharth Premanand</div>
+        <div class="footer-meta footer-meta--identity">Product Designer · <span class="footer-city-dot"></span> Weimar,
+          DE · Est. 1998</div>
+        <div class="footer-clock" id="footer-time">--:--:--</div>
+      </div>
+      <div class="footer-ticket">
+        <div class="footer-barcode" aria-hidden="true"></div>
+        <div class="footer-ticket-label">Available for collaboration</div>
+        <a href="mailto:sidharthpremux@gmail.com">sidharthpremux@gmail.com</a>
+      </div>
+      <div class="footer-stamps">
+        <a class="footer-stamp" href="../assets/docs/Resume.pdf" target="_blank" rel="noopener noreferrer">
+          <span class="footer-stamp-name">Resume</span>
+          <span class="footer-stamp-sub">Download PDF</span>
+        </a>
+        <a class="footer-stamp" href="../index.html#missions">
+          <span class="footer-stamp-name">Work</span>
+          <span class="footer-stamp-sub">View case studies</span>
+        </a>
+        <a class="footer-stamp" href="mailto:sidharthpremux@gmail.com">
+          <span class="footer-stamp-name">Email</span>
+          <span class="footer-stamp-sub">Send direct note</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-copy">© <span data-current-year>2026</span> Sidharth Premanand</div>
+      <div class="footer-bottom-copy">Designed & built by Sidharth</div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js?v=20260824a"></script>
+  <script>
+    const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
+    if (dot && ring) {
+      document.body.classList.add('has-custom-cursor');
+      let rx = 0, ry = 0, mx = 0, my = 0;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px' });
+      (function l() { rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(l) })();
+      document.addEventListener('mouseover', e => { if (e.target.closest('a,button,.problem-card,.result-card')) { ring.style.width = '44px'; ring.style.height = '44px'; ring.style.borderColor = 'rgba(0,229,255,0.7)' } else { ring.style.width = '30px'; ring.style.height = '30px'; ring.style.borderColor = 'rgba(0,229,255,0.35)' } });
+    }
+    const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: 0.1 });
+    document.querySelectorAll('.section').forEach(s => obs.observe(s));
+
+    (() => {
+      const root = document.querySelector('[data-shop-comparison]');
+      if (!root) return;
+      const pairs = [
+        { name: 'Homepage', before: '../assets/images/Ather Shop/m02-home-before.webp', after: '../assets/images/Ather Shop/m02-home-after.webp' },
+        { name: 'Product listing', before: '../assets/images/Ather Shop/m02-listing-before.webp', after: '../assets/images/Ather Shop/m02-listing-after.webp' },
+        { name: 'Product details', before: '../assets/images/Ather Shop/m02-details-before.webp', after: '../assets/images/Ather Shop/m02-details-after.webp' }
+      ];
+      const screen = root.querySelector('.shop-device-screen');
+      const canvas = root.querySelector('.shop-comparison-canvas');
+      const beforeImage = root.querySelector('.shop-before-image');
+      const afterImage = root.querySelector('.shop-after-image');
+      const slider = root.querySelector('.shop-comparison-slider');
+      const count = root.querySelector('.shop-comparison-count');
+      const tabs = [...root.querySelectorAll('[data-shop-slide]')];
+      const stateButtons = [...root.querySelectorAll('[data-shop-state]')];
+      const scrollFill = root.querySelector('.shop-internal-progress-fill');
+      const mobileQuery = window.matchMedia('(max-width:760px)');
+      let activeIndex = 0;
+      let comparison = 50;
+      const setComparison = value => {
+        comparison = Math.min(100, Math.max(0, value));
+        root.style.setProperty('--compare', comparison + '%');
+        slider.setAttribute('aria-valuenow', Math.round(comparison));
+        slider.setAttribute('aria-valuetext', `${Math.round(comparison)}% earlier, ${Math.round(100 - comparison)}% redesign`);
+        stateButtons.forEach(button => {
+          const active = button.dataset.shopState === 'before' ? comparison === 100 : comparison === 0;
+          button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        if (beforeImage.naturalWidth && afterImage.naturalWidth) requestAnimationFrame(syncCanvasHeight);
+      };
+      const updateScrollProgress = () => {
+        const maximum = screen.scrollHeight - screen.clientHeight;
+        const progress = maximum > 0 ? screen.scrollTop / maximum : 0;
+        scrollFill.style.transform = `scaleY(${Math.min(1, Math.max(0, progress))})`;
+        root.classList.toggle('has-scrolled', screen.scrollTop > 24);
+      };
+      const syncCanvasHeight = () => {
+        const width = screen.clientWidth;
+        if (!beforeImage.naturalWidth || !afterImage.naturalWidth) return;
+        const beforeHeight = beforeImage.naturalHeight / beforeImage.naturalWidth * width;
+        const afterHeight = afterImage.naturalHeight / afterImage.naturalWidth * width;
+        const targetHeight = comparison >= 95 ? beforeHeight : comparison <= 5 ? afterHeight : Math.min(beforeHeight, afterHeight);
+        canvas.style.height = Math.ceil(targetHeight) + 'px';
+        const maximum = Math.max(0, screen.scrollHeight - screen.clientHeight);
+        if (screen.scrollTop > maximum) screen.scrollTop = maximum;
+        updateScrollProgress();
+      };
+      const imageReady = image => image.complete && image.naturalWidth ? Promise.resolve() : new Promise(resolve => image.addEventListener('load', resolve, { once: true }));
+      const selectPair = index => {
+        const pair = pairs[index];
+        activeIndex = index;
+        root.classList.add('is-switching');
+        screen.scrollTop = 0;
+        root.classList.remove('has-scrolled');
+        setComparison(mobileQuery.matches ? 0 : 50);
+        beforeImage.src = pair.before;
+        beforeImage.alt = `Earlier Ather Shop ${pair.name} screen`;
+        afterImage.src = pair.after;
+        afterImage.alt = `Redesigned Ather Shop ${pair.name} screen`;
+        count.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(pairs.length).padStart(2, '0');
+        tabs.forEach((tab, tabIndex) => {
+          const selected = tabIndex === index;
+          tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        screen.setAttribute('aria-labelledby', tabs[index].id);
+        Promise.all([imageReady(beforeImage), imageReady(afterImage)]).then(() => {
+          syncCanvasHeight();
+          requestAnimationFrame(() => root.classList.remove('is-switching'));
+        });
+      };
+      const updateFromPointer = clientX => {
+        const bounds = screen.getBoundingClientRect();
+        setComparison((clientX - bounds.left) / bounds.width * 100);
+      };
+      slider.addEventListener('pointerdown', event => { slider.setPointerCapture(event.pointerId); updateFromPointer(event.clientX) });
+      slider.addEventListener('pointermove', event => { if (slider.hasPointerCapture(event.pointerId)) updateFromPointer(event.clientX) });
+      slider.addEventListener('keydown', event => {
+        const step = event.shiftKey ? 10 : 2;
+        if (event.key === 'ArrowLeft') { event.preventDefault(); setComparison(comparison - step) }
+        if (event.key === 'ArrowRight') { event.preventDefault(); setComparison(comparison + step) }
+        if (event.key === 'Home') { event.preventDefault(); setComparison(0) }
+        if (event.key === 'End') { event.preventDefault(); setComparison(100) }
+      });
+      screen.addEventListener('scroll', updateScrollProgress, { passive: true });
+      stateButtons.forEach(button => button.addEventListener('click', () => setComparison(button.dataset.shopState === 'before' ? 100 : 0)));
+      tabs.forEach(tab => tab.addEventListener('click', () => selectPair(Number(tab.dataset.shopSlide))));
+      tabs.forEach((tab, index) => tab.addEventListener('keydown', event => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        const direction = event.key === 'ArrowRight' ? 1 : -1;
+        const next = (index + direction + tabs.length) % tabs.length;
+        tabs[next].focus();
+        selectPair(next);
+      }));
+      if ('ResizeObserver' in window) new ResizeObserver(syncCanvasHeight).observe(screen);
+      else window.addEventListener('resize', syncCanvasHeight);
+      const resetForViewport = () => setComparison(mobileQuery.matches ? 0 : 50);
+      if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', resetForViewport);
+      else mobileQuery.addListener(resetForViewport);
+      selectPair(0);
+      pairs.slice(1).forEach(pair => [pair.before, pair.after].forEach(source => { const image = new Image(); image.src = source }));
+    })();
+
+    (() => {
+      const searchVideo = document.querySelector('.decision-video');
+      if (!searchVideo) return;
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const applyMotionPreference = () => {
+        if (motionQuery.matches) {
+          searchVideo.pause();
+          searchVideo.removeAttribute('autoplay');
+          searchVideo.currentTime = 0;
+          searchVideo.load();
+        } else {
+          searchVideo.setAttribute('autoplay', '');
+          searchVideo.play().catch(() => {});
+        }
+      };
+      applyMotionPreference();
+      if (motionQuery.addEventListener) {
+        motionQuery.addEventListener('change', applyMotionPreference);
+      } else if (motionQuery.addListener) {
+        motionQuery.addListener(applyMotionPreference);
+      }
+      searchVideo.addEventListener('error', () => {
+        const frame = searchVideo.closest('.decision-video-frame');
+        if (frame) {
+          frame.innerHTML = '<div class="decision-video-placeholder">assets/decision-02-search</div>';
+        }
+      }, true);
+    })();
+
+    (() => {
+      // Decision 01 — brief flip stage. Same entrance pattern as the
+      // Decision 03 checkout map: hidden until the stage is prepared,
+      // then revealed group by group with a 150ms step.
+      const stage = document.querySelector('[data-brief-flip]');
+      if (!stage) return;
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const showAll = () => {
+        stage.querySelectorAll('[data-bf-step]').forEach(el => {
+          el.style.opacity = '1';
+        });
+      };
+
+      const prepare = () => stage.classList.add('is-prepared');
+
+      const show = () => {
+        if (!stage.classList.contains('is-shown')) stage.classList.add('is-shown');
+      };
+
+      if (motionQuery.matches) {
+        showAll();
+      } else {
+        prepare();
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+              requestAnimationFrame(show);
+              observer.disconnect();
+            }
+          });
+        }, { threshold: [0.6] });
+        observer.observe(stage);
+
+        if (motionQuery.addEventListener) {
+          motionQuery.addEventListener('change', () => {
+            if (motionQuery.matches) { show(); }
+          });
+        }
+      }
+    })();
+
+    (() => {
+      const root = document.querySelector('[data-process-wave]');
+      if (!root) return;
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      if (motionQuery.matches) {
+        root.classList.add('is-revealed');
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            root.classList.add('is-revealed');
+            observer.disconnect();
+          }
+        });
+      }, { rootMargin: '0px 0px -15% 0px', threshold: 0 });
+      observer.observe(root);
+
+      if (motionQuery.addEventListener) {
+        motionQuery.addEventListener('change', () => {
+          if (motionQuery.matches) root.classList.add('is-revealed');
+        });
+      }
+    })();
+
+    /* ── Decision 03 — Checkout flow animation ── */
+    (() => {
+      const stage = document.querySelector('[data-checkout-flow]');
+      if (!stage) return;
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const allLines = [...stage.querySelectorAll('[data-cf-line]')];
+      const cyanLines = allLines.filter(el => el.classList.contains('cf-arrow-cyan'));
+      const greyLines = allLines.filter(el => el.classList.contains('cf-arrow-grey'));
+
+      // Cyan arrows: hide via stroke-dashoffset draw animation
+      const initCyanLines = () => {
+        cyanLines.forEach(el => {
+          const len = el.getTotalLength ? el.getTotalLength() : 200;
+          el.style.strokeDasharray = String(len);
+          el.style.strokeDashoffset = String(len);
+          el.style.transition = 'stroke-dashoffset 0.45s ease';
+        });
+      };
+
+      // Grey arrows: hide via opacity (preserves their dashed appearance)
+      const initGreyLines = () => {
+        greyLines.forEach(el => {
+          el.style.opacity = '0';
+          el.style.transition = 'opacity 0.35s ease';
+        });
+      };
+
+      // Reveal everything instantly (reduced-motion or fallback)
+      const revealAll = () => {
+        stage.querySelectorAll('[data-cf-node],[data-cf-chip]').forEach(el => {
+          el.style.opacity = '1';
+        });
+        cyanLines.forEach(l => {
+          l.style.transition = 'none';
+          l.style.strokeDashoffset = '0';
+        });
+        greyLines.forEach(l => {
+          l.style.transition = 'none';
+          l.style.opacity = '1';
+        });
+      };
+
+      initCyanLines();
+      initGreyLines();
+
+      if (motionQuery.matches) { revealAll(); return; }
+
+      const show    = el => { if (el) el.style.opacity = '1'; };
+      const drawCyan = el => { if (el) el.style.strokeDashoffset = '0'; };
+
+      let animated = false;
+      const animate = () => {
+        if (animated) return;
+        animated = true;
+
+        const isMobile = window.innerWidth < 600;
+        const container = stage.querySelector(
+          isMobile ? '.checkout-flow-map--mobile' : '.checkout-flow-map--desktop'
+        );
+        if (!container) { revealAll(); return; }
+
+        const n = v => container.querySelector(`[data-cf-node="${v}"]`);
+        const c = v => container.querySelector(`[data-cf-chip="${v}"]`);
+        const l = v => container.querySelector(`[data-cf-line="${v}"]`);
+
+        const productNode  = isMobile ? n('m-product')  : n('product');
+        const checkoutNode = isMobile ? n('m-checkout') : n('checkout');
+        const cartNode     = isMobile ? n('m-cart')     : n('cart');
+        const buyChip      = isMobile ? c('m-buy')      : c('buy');
+        const cartChip     = isMobile ? c('m-cart')     : c('cart');
+        const buyLine      = isMobile ? l('m-buy')      : l('buy');
+        const cart1Line    = isMobile ? l('m-cart1')    : l('cart1');
+        const cart2Line    = isMobile ? l('m-cart2')    : l('cart2');
+
+        const delay = 150;
+        let step = 0;
+        const at = fn => setTimeout(fn, step++ * delay);
+
+        at(() => show(productNode));                                                   // 1: Fade in Node 1
+        at(() => { drawCyan(buyLine); show(buyChip); });                               // 2: Draw Buy Now arrow and chip
+        at(() => show(checkoutNode));                                                  // 3: Fade in Node 3
+        at(() => { show(cartChip); show(cart1Line); show(cartNode); show(cart2Line); }); // 4: Fade in muted route and Cart node
+      };
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+            animate();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: [0.6] });
+
+      observer.observe(stage);
+
+      if (motionQuery.addEventListener) {
+        motionQuery.addEventListener('change', () => {
+          if (motionQuery.matches) revealAll();
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
