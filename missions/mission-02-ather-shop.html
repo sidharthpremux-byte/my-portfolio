@@ -6,24 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MISSION_02 // UX Revamp — Ather Shop — Sidharth Premanand</title>
   <meta name="description"
-    content="Redesigning Ather Shop for improved product discovery and shopping flow. Reduced bounce rate by 18% and increased conversions. Case study by Sidharth Premanand.">
+    content="Redesigning Ather Shop for improved product discovery and shopping flow with increased conversions. Case study by Sidharth Premanand.">
   <meta name="author" content="Sidharth Premanand">
   <meta property="og:title" content="Redesigning the Ather Shop Experience">
   <meta property="og:description"
-    content="Improved product discovery and shopping flow for accessories and merchandise. 18% reduction in bounce rate.">
+    content="Improved product discovery and shopping flow for accessories and merchandise.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Redesigning the Ather Shop Experience">
   <meta name="twitter:description"
-    content="Improved product discovery and shopping flow for accessories and merchandise. 18% reduction in bounce rate.">
+    content="Improved product discovery and shopping flow for accessories and merchandise.">
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23070707'/%3E%3Ctext x='50' y='50' font-family='monospace' font-size='48' font-weight='bold' fill='%2300E5FF' text-anchor='middle' dominant-baseline='central'%3ESP%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=JetBrains+Mono:wght@300;400;500&family=Barlow:wght@300;400;500&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/styles.css?v=20261018c">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=20261024a">
   <link rel="stylesheet" href="../assets/css/missions.css">
+<link rel="stylesheet" href="../assets/css/zoom.css?v=20261027a">
   <style>
     :root {
       --space-8: 8px;
@@ -33,6 +34,8 @@
       --space-64: 64px;
       --space-96: 96px;
       --space-128: 128px;
+      --section-gap: var(--space-96);
+      --nav-h: 67px; /* Homepage nav: 16px pad + 34px nav-cta (10+14+10) + 16px pad + 1px border */
 
       --type-hero: clamp(60px, 9vw, 120px);
       --type-heading: clamp(36px, 4.5vw, 64px);
@@ -229,7 +232,6 @@
       font-family: 'JetBrains Mono', monospace;
       color: var(--cyan);
       text-transform: uppercase;
-      text-decoration: none;
       border: 2px solid var(--cyan);
       border-radius: var(--radius-lg);
       background: transparent;
@@ -260,7 +262,9 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      padding-top: calc(var(--nav-h) + var(--space-24)) !important;
       padding-right: var(--page-gutter) !important;
+      padding-bottom: var(--space-96) !important;
       padding-left: var(--page-gutter) !important;
       position: relative;
       overflow: hidden
@@ -302,8 +306,8 @@
     }
 
     .hero-title .outline {
-      -webkit-text-stroke: 2.5px var(--cyan);
-      color: rgba(0, 229, 255, 0.12)
+      -webkit-text-stroke: 2px var(--cyan);
+      color: transparent
     }
 
     .hero-title::after {
@@ -431,6 +435,7 @@
       margin-bottom: 0 !important;
       margin-left: 0 !important;
       margin-right: 0 !important;
+      padding-block: var(--section-gap) !important;
       padding-inline: var(--page-gutter) !important;
       width: 100% !important;
       box-sizing: border-box !important;
@@ -614,7 +619,49 @@
       margin-bottom: var(--space-48)
     }
 
+    .process-track {
+      list-style: none;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: var(--space-24);
+      position: relative
+    }
 
+    .process-track::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      bottom: 14px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--cyan), var(--cyan-border) 70%, transparent)
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: var(--space-48);
+      padding: 32px 0;
+      position: relative
+    }
+
+    .process-step::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 38px;
+      width: 7px;
+      height: 7px;
+      border: 1px solid var(--cyan);
+      border-radius: 50%;
+      background: var(--bg);
+      transition: background 0.3s, box-shadow 0.3s
+    }
+
+    .process-step:hover::before {
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan)
+    }
 
     .step-phase {
       font-family: 'JetBrains Mono', monospace;
@@ -1292,47 +1339,42 @@
       }
     }
 
-    /* Design Process section — Wave Band & Grid Layout */
-    .section#s5 {
-      overflow: hidden;
-      position: relative;
-    }
-
+    /* Process wave (desktop ≥1024px) — three-row layout, no overlap by construction */
     .process-wave {
+      --block-w: clamp(240px, calc((100% - 48px) / 3), 320px);
+      /* 92px band keeps block <600px at 1440; extrema at viewBox edges → ~46px amplitude */
+      --wave-h: 92px;
+      --leader: 24px;
       position: relative;
-      width: 100%;
     }
 
-    /* Desktop (≥ 1114px) */
-    @media (min-width: 1114px) {
+    .process-wave-svg {
+      display: none;
+    }
+
+    .process-wave-dot,
+    .process-wave-leader {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
       .process-wave {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: auto 92px auto;
-        column-gap: 0;
-        row-gap: var(--space-8);
-      }
-
-      .process-wave .process-rail {
-        display: none !important;
-      }
-
-      .process-wave-band {
-        grid-row: 2;
-        grid-column: 1 / -1;
-        position: relative;
-        height: 92px;
-        width: 100%;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto var(--leader) var(--wave-h) var(--leader) auto;
         overflow: visible;
+        position: relative;
       }
 
       .process-wave-svg {
-        position: absolute;
-        inset: 0;
+        display: block;
+        grid-row: 3;
+        grid-column: 1;
         width: 100%;
-        height: 100%;
+        height: var(--wave-h);
         overflow: visible;
-        pointer-events: none;
+        z-index: 0;
+        align-self: stretch;
       }
 
       .process-wave-path {
@@ -1342,187 +1384,183 @@
         stroke-linecap: round;
         stroke-linejoin: round;
         opacity: 0.4;
-        transition: opacity 0.4s ease;
       }
 
-      .process-stem {
-        position: absolute;
-        width: 1px;
-        background: rgba(0, 229, 255, 0.28);
-        left: var(--x);
-        transform: translateX(-50%);
-        pointer-events: none;
+      .process-wave.is-animating .process-wave-path {
+        stroke-dasharray: var(--path-length);
+        stroke-dashoffset: var(--path-length);
+      }
+
+      .process-wave.is-drawn .process-wave-path {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 1.6s ease-in-out;
+      }
+
+      .process-wave .process-track {
+        display: contents;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .process-wave .process-track::before {
+        display: none;
+      }
+
+      .process-wave .process-step {
+        display: block;
+        position: static;
+        width: var(--block-w);
+        max-width: var(--block-w);
+        margin: 0;
+        margin-left: var(--wave-x, 0px);
+        padding: 0;
+        gap: 0;
+        border: none;
         opacity: 0;
-        transition: opacity 0.35s ease;
+        transform: translateY(20px);
+        transition: opacity 0.45s ease, transform 0.45s ease;
+        z-index: 1;
       }
 
-      .process-stem--odd {
-        top: 0;
-        height: var(--y);
+      .process-wave .process-step[data-anchor="peak"] {
+        grid-row: 1;
+        grid-column: 1;
+        align-self: end;
       }
 
-      .process-stem--even {
-        top: var(--y);
-        bottom: 0;
+      .process-wave .process-step[data-anchor="trough"] {
+        grid-row: 5;
+        grid-column: 1;
+        align-self: start;
       }
 
-      .process-marker {
+      .process-wave.is-animating:not(.is-drawn) .process-step,
+      .process-wave.is-animating .process-step:not(.is-revealed) {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .process-wave .process-step.is-revealed,
+      .process-wave.reduce-motion .process-step,
+      .process-wave.is-drawn.reduce-motion .process-step {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .process-wave .process-step::before {
+        display: none;
+      }
+
+      .process-wave-card {
+        position: relative;
+        width: 100%;
+        background: transparent;
+        border: none;
+        padding: 0;
+        text-align: left;
+      }
+
+      .process-wave .step-phase {
+        position: static;
+        padding-top: 0;
+        margin-bottom: var(--space-8);
+        white-space: nowrap;
+      }
+
+      .process-wave-card .step-title {
+        margin-bottom: var(--space-8);
+      }
+
+      .process-wave-card .step-body {
+        max-width: none;
+      }
+
+      /* Marker layer — same box as the SVG rendered box (grid-row 3, inset 0) */
+      .process-wave-markers {
+        grid-row: 3;
+        grid-column: 1;
         position: absolute;
-        left: var(--x);
-        top: var(--y);
-        width: 12px;
-        height: 12px;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        overflow: visible;
+      }
+
+      .process-wave-dot {
+        display: block;
+        position: absolute;
+        left: var(--marker-left, 0%);
+        top: var(--marker-top, 0%);
+        width: 11px;
+        height: 11px;
         border-radius: 50%;
         background: var(--cyan);
         box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.16);
         transform: translate(-50%, -50%);
         z-index: 2;
-        opacity: 0;
-        transition: opacity 0.35s ease;
-      }
-
-      .process-wave .process-track {
-        display: contents;
-      }
-
-      .process-wave .process-step {
-        display: block !important;
-        position: relative;
-        padding-inline-end: 24px !important;
-        padding-inline-start: 0 !important;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        margin: 0 !important;
-        box-sizing: border-box;
-        opacity: 0;
-        transform: translateY(0);
-        transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-
-      .process-wave .process-step::before {
-        display: none !important;
-      }
-
-      /* Odd steps: row 1, align-self: end */
-      .process-wave .process-step[data-step-index="0"] { grid-row: 1; grid-column: 1; align-self: end; }
-      .process-wave .process-step[data-step-index="2"] { grid-row: 1; grid-column: 3; align-self: end; }
-      .process-wave .process-step[data-step-index="4"] { grid-row: 1; grid-column: 5; align-self: end; }
-
-      /* Even steps: row 3, align-self: start */
-      .process-wave .process-step[data-step-index="1"] { grid-row: 3; grid-column: 2; align-self: start; }
-      .process-wave .process-step[data-step-index="3"] { grid-row: 3; grid-column: 4; align-self: start; }
-    }
-
-    /* Below 1114px, vertical layout */
-    @media (max-width: 1113px) {
-      .process-wave-band {
-        display: none !important;
-      }
-
-      .process-wave .process-track {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-48);
-        list-style: none;
         margin: 0;
-        padding: 0 !important;
-        position: relative;
-        width: 100%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
       }
 
-      .process-wave .process-rail {
+      .process-wave-leader {
+        display: block;
         position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
+        left: var(--marker-left, 0%);
+        top: var(--leader-top, 0%);
         width: 1px;
-        height: auto;
-        right: auto;
-        background: rgba(0, 229, 255, 0.4);
-        transform: translateX(-50%) scaleY(0);
-        transform-origin: center top;
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        height: var(--leader-height, 0px);
+        background: rgba(0, 229, 255, 0.28);
+        transform: translateX(-50%);
         z-index: 1;
         pointer-events: none;
-      }
-
-      .process-wave.is-revealed .process-rail {
-        transform: translateX(-50%) scaleY(1);
-      }
-
-      .process-wave .process-step {
-        position: relative;
-        padding-left: var(--space-48) !important;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        padding-right: 0 !important;
-        display: block !important;
-        width: 100%;
-        box-sizing: border-box;
+        margin: 0;
         opacity: 0;
-        transform: translateY(0);
-        transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.3s ease;
       }
 
-      .process-wave .process-step::before {
-        content: '';
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--cyan);
-        box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.16);
-        left: 0;
-        top: 0;
-        transform: translateX(-50%);
-        z-index: 2;
-        box-sizing: border-box;
+      .process-wave.is-drawn .process-wave-dot,
+      .process-wave.is-drawn .process-wave-leader {
+        opacity: 1;
       }
     }
 
-    /* Staggered reveal */
-    .process-wave.is-revealed .process-step,
-    .process-wave.is-revealed .process-marker,
-    .process-wave.is-revealed .process-stem {
-      opacity: 1;
-    }
+    /* At split-layout widths, trim vertical padding so the stage never
+       grows taller than the Decision 03 stage (350px at 1024 and up). */
+    @media (max-width: 1024px) {
+      .process-wave-svg,
+      .process-wave-markers,
+      .process-wave-dot,
+      .process-wave-leader {
+        display: none !important;
+      }
 
-    .process-wave.is-revealed .process-step {
-      transform: translateY(0);
-    }
+      .process-wave-card {
+        display: contents;
+        background: transparent;
+        border: none;
+        padding: 0;
+      }
 
-    .process-wave.is-revealed [data-step-index="0"] { transition-delay: 200ms; }
-    .process-wave.is-revealed [data-step-index="1"] { transition-delay: 300ms; }
-    .process-wave.is-revealed [data-step-index="2"] { transition-delay: 400ms; }
-    .process-wave.is-revealed [data-step-index="3"] { transition-delay: 500ms; }
-    .process-wave.is-revealed [data-step-index="4"] { transition-delay: 600ms; }
+      .process-step .step-phase {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+      }
 
-    .process-wave-card {
-      position: relative;
-      width: 100%;
-      background: transparent;
-      border: none;
-      padding: 0;
-      text-align: left;
+      .process-step .step-title,
+      .process-step .step-body {
+        grid-column: 2;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .process-rail,
-      .process-wave-path,
-      .process-step,
-      .process-marker,
-      .process-stem {
+      .process-wave.is-drawn .process-wave-path {
         transition: none !important;
-        opacity: 1 !important;
-        transform: none !important;
       }
-      @media (min-width: 1114px) {
-        .process-marker { transform: translate(-50%, -50%) !important; }
-        .process-stem { transform: translateX(-50%) !important; }
-      }
-      @media (max-width: 1113px) {
-        .process-rail { transform: translateX(-50%) scaleY(1) !important; }
-        .process-step::before { transform: translateX(-50%) !important; }
+
+      .process-wave .process-step {
+        transition: none !important;
       }
     }
 
@@ -1972,8 +2010,23 @@
       }
     }
 
+    @media(max-width:1023px) {
+      :root {
+        --section-gap: var(--space-64);
+      }
+    }
+
     @media(max-width:768px) {
+      :root {
+        --section-gap: var(--space-48);
+      }
       .nav-cta{display:none!important}
+    }
+
+    @media(max-width:760px) {
+      :root {
+        --nav-h: 87px; /* mobile Homepage nav: 12px pad + 40px menu-toggle + 12px pad + 1px border + 22px brand line-height */
+      }
     }
 
     @media(max-width:1023px) {
@@ -1996,7 +2049,38 @@
         padding: var(--space-24)
       }
 
+      .process-step {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        padding: var(--space-24) 0
+      }
 
+      .process-step::before {
+        top: 12px;
+        left: -24px
+      }
+
+      .process-step .step-phase {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .process-step .step-title,
+      .process-step .step-body {
+        grid-column: 1;
+      }
+
+      .hero {
+        padding: 130px var(--page-gutter) var(--space-48) !important;
+      }
+
+      body[data-project-page] nav,
+      nav {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        padding-left: var(--page-gutter) !important;
+        padding-right: var(--page-gutter) !important;
+      }
 
       .nav-center {
         display: none
@@ -2055,7 +2139,7 @@
     }
 
     .cta-heading .outline {
-      -webkit-text-stroke: 1.5px rgba(240, 240, 240, 0.25);
+      -webkit-text-stroke: 2px var(--cyan);
       color: transparent
     }
 
@@ -2356,7 +2440,41 @@
       border-radius: inherit;
     }
   </style>
-</head>
+
+  <style>
+    /* ===== Standard footer (parity with homepage): square corners on every footer element ===== */
+    .document-footer,
+    .footer-barcode,
+    .footer-ticket,
+    .footer-stamp,
+    .footer-ticket-label,
+    .footer-stamp-name,
+    .footer-stamp-sub,
+    .footer-bottom,
+    .footer-bottom-copy { border-radius: 0; }
+
+    /* Footer stamps — refined outline buttons (homepage copy, ≤768) */
+    @media(max-width:768px){
+      .footer-stamp{
+        padding:0.5rem 1rem!important;
+        border-radius:0!important;
+        background:transparent!important;
+        border:1px solid rgba(255,255,255,0.2)!important;
+      }
+      .footer-stamp-name{font-size:0.875rem!important;font-weight:500!important}
+    }
+  </style>
+<style>
+/* ===== Round 2026-10-24: Context spacing spec (shared) ===== */
+#s1 .context-intro,
+#s1 .body-text,
+#s1 .reflection-body { max-width: 680px; }
+#s1 .two-col { display: block; }
+#s1 .two-col .body-text + .body-text,
+#s1 .reflection-body p + p { margin-top: var(--space-16) !important; }
+#s1 .data-table { margin-top: var(--space-24) !important; }
+@media (max-width: 768px) { #s1 { scroll-margin-top: calc(var(--nav-h) + var(--space-16)); } }
+</style></head>
 
 <body data-project-page data-project="ather-shop">
   <div id="cursor-dot"></div>
@@ -2398,15 +2516,15 @@
       </div>
       <div class="meta-cell">
         <div class="meta-label">SCOPE //</div>
-        <div class="meta-value">[SCOPE TEXT]</div>
+        <div class="meta-value">Mobile homepages, custom search, product page</div>
       </div>
       <div class="meta-cell">
         <div class="meta-label">PLATFORM //</div>
-        <div class="meta-value">Mobile Web (85.9%)</div>
+        <div class="meta-value">Mobile web</div>
       </div>
       <div class="meta-cell">
         <div class="meta-label">STATUS //</div>
-        <div class="meta-value accent">MISSION COMPLETE</div>
+        <div class="meta-value accent">Launched</div>
       </div>
     </div>
   </div>
@@ -2420,10 +2538,8 @@
     </div>
 
     <div class="two-col">
-      <div class="reflection-body">
-        <p class="text-white/70">Ather Shop worked fine on desktop, but almost everyone visited on their phone. The product team's analytics showed most of the traffic was on phones, so the brief was mobile first. And the mobile experience was rough: confusing navigation, no search, and product pages that weren't built for touch.</p>
-        <p class="text-white/70">Our goal was simple: fix the mobile experience so people could find what they wanted, add items to their cart, and check out without getting frustrated.</p>
-      </div>
+      <div class="body-text">Ather Shop worked fine on desktop, but almost everyone visited on their phone. The product team's analytics showed most of the traffic was on phones, so the brief was mobile first. And the mobile experience was rough: confusing navigation, no search, and product pages that weren't built for touch.</div>
+      <div class="body-text">Our goal was simple: fix the mobile experience so people could find what they wanted, add items to their cart, and check out without getting frustrated.</div>
       <div class="data-table">
         <div class="data-row"><span class="data-key">TARGET CONVERSION</span><span class="data-val">0.53%</span></div>
         <div class="data-row"><span class="data-key">SESSION-TO-CART (BEFORE)</span><span class="data-val">2.40%</span></div>
@@ -2721,52 +2837,51 @@
     </div>
 
     <div class="process-wave" data-process-wave>
-      <div class="process-rail" aria-hidden="true"></div>
-      <div class="process-wave-band" aria-hidden="true">
-        <svg class="process-wave-svg" viewBox="0 0 1000 100" preserveAspectRatio="none" focusable="false" aria-hidden="true">
-          <path class="process-wave-path" d="M0 50 C 66.67 0, 133.33 0, 200 0 S 300 100, 400 100 S 500 8.75, 600 8.75 S 700 95, 800 95 S 900 1.25, 1000 3.75" vector-effect="non-scaling-stroke"></path>
-        </svg>
-        <div class="process-stem process-stem--odd" data-step-index="0" style="--x: 0%; --y: 50.00%;"></div>
-        <div class="process-stem process-stem--even" data-step-index="1" style="--x: 20%; --y: 0.00%;"></div>
-        <div class="process-stem process-stem--odd" data-step-index="2" style="--x: 40%; --y: 100.00%;"></div>
-        <div class="process-stem process-stem--even" data-step-index="3" style="--x: 60%; --y: 8.75%;"></div>
-        <div class="process-stem process-stem--odd" data-step-index="4" style="--x: 80%; --y: 95.00%;"></div>
-        <div class="process-marker" data-step-index="0" style="--x: 0%; --y: 50.00%;"></div>
-        <div class="process-marker" data-step-index="1" style="--x: 20%; --y: 0.00%;"></div>
-        <div class="process-marker" data-step-index="2" style="--x: 40%; --y: 100.00%;"></div>
-        <div class="process-marker" data-step-index="3" style="--x: 60%; --y: 8.75%;"></div>
-        <div class="process-marker" data-step-index="4" style="--x: 80%; --y: 95.00%;"></div>
+      <svg class="process-wave-svg" viewBox="0 0 1200 160" preserveAspectRatio="none" focusable="false" aria-hidden="true">
+        <path class="process-wave-path" d="M0 80 C 80 0, 160 0, 240 0 S 360 160, 480 160 S 600 14, 720 14 S 840 152, 960 152 S 1080 2, 1200 6"></path>
+      </svg>
+      <div class="process-wave-markers" aria-hidden="true">
+        <span class="process-wave-dot" aria-hidden="true"></span>
+        <span class="process-wave-leader" aria-hidden="true"></span>
+        <span class="process-wave-dot" aria-hidden="true"></span>
+        <span class="process-wave-leader" aria-hidden="true"></span>
+        <span class="process-wave-dot" aria-hidden="true"></span>
+        <span class="process-wave-leader" aria-hidden="true"></span>
+        <span class="process-wave-dot" aria-hidden="true"></span>
+        <span class="process-wave-leader" aria-hidden="true"></span>
+        <span class="process-wave-dot" aria-hidden="true"></span>
+        <span class="process-wave-leader" aria-hidden="true"></span>
       </div>
       <ol class="process-track">
-        <li class="process-step" data-step-index="0">
+        <li class="process-step process-wave-item" data-anchor="peak" data-step-index="0">
           <div class="process-wave-card">
             <div class="step-phase">STEP 01</div>
             <h3 class="step-title">Research and problem discovery</h3>
             <p class="step-body">We analysed session recordings and funnel data to map where mobile users were abandoning. We interviewed Ather Shop users to understand how they look for products. Most arrived with a category in mind, not a specific product name.</p>
           </div>
         </li>
-        <li class="process-step" data-step-index="1">
+        <li class="process-step process-wave-item" data-anchor="trough" data-step-index="1">
           <div class="process-wave-card">
             <div class="step-phase">STEP 02</div>
             <h3 class="step-title">Navigation and search</h3>
             <p class="step-body">I restructured the navigation for touch first use: clear category entry points, persistent breadcrumbs and a global search bar in the top bar. On listing pages I redesigned the filters as scrollable chips that work with one thumb.</p>
           </div>
         </li>
-        <li class="process-step" data-step-index="2">
+        <li class="process-step process-wave-item" data-anchor="peak" data-step-index="2">
           <div class="process-wave-card">
             <div class="step-phase">STEP 03</div>
             <h3 class="step-title">Content and assets</h3>
             <p class="step-body">Many images and content blocks weren't made for mobile. I worked with the agency that owned the assets and with the content team, and fixed some of the assets myself where I had access.</p>
           </div>
         </li>
-        <li class="process-step" data-step-index="3">
+        <li class="process-step process-wave-item" data-anchor="trough" data-step-index="3">
           <div class="process-wave-card">
             <div class="step-phase">STEP 04</div>
             <h3 class="step-title">Product page</h3>
             <p class="step-body">The product page got the biggest change: a sticky Buy Now bar, a swipeable image gallery, inline size guidance with a 'how to measure' expandable, and a clear discount display. Add to cart and Buy Now got different visual weight to reduce decision paralysis.</p>
           </div>
         </li>
-        <li class="process-step" data-step-index="4">
+        <li class="process-step process-wave-item" data-anchor="peak" data-step-index="4">
           <div class="process-wave-card">
             <div class="step-phase">STEP 05</div>
             <h3 class="step-title">Phased release</h3>
@@ -2943,41 +3058,46 @@
 
   <div class="divider" aria-hidden="true"></div>
 
-<footer class="document-footer">
-    <div class="footer-main">
-      <div class="footer-zone-left">
-        <div class="footer-identity">Sidharth Premanand</div>
-        <div class="footer-meta footer-meta--identity">Product Designer · <span class="footer-city-dot"></span> Weimar,
-          DE · Est. 1998</div>
-        <div class="footer-clock" id="footer-time">--:--:--</div>
+<footer class="document-footer" id="contact">
+  <div class="footer-main">
+    <div class="footer-zone-left">
+      <div class="footer-identity">SIDHARTH PREMANAND</div>
+      <div class="footer-meta footer-meta--identity">
+        PRODUCT DESIGNER · <span class="footer-city-dot"></span> WEIMAR, DE · EST. 2000
       </div>
-      <div class="footer-ticket">
-        <div class="footer-barcode" aria-hidden="true"></div>
-        <div class="footer-ticket-label">Available for collaboration</div>
-        <a href="mailto:sidharthpremux@gmail.com">sidharthpremux@gmail.com</a>
-      </div>
-      <div class="footer-stamps">
-        <a class="footer-stamp" href="../assets/docs/Resume.pdf" target="_blank" rel="noopener noreferrer">
-          <span class="footer-stamp-name">Resume</span>
-          <span class="footer-stamp-sub">Download PDF</span>
-        </a>
-        <a class="footer-stamp" href="../index.html#missions">
-          <span class="footer-stamp-name">Work</span>
-          <span class="footer-stamp-sub">View case studies</span>
-        </a>
-        <a class="footer-stamp" href="mailto:sidharthpremux@gmail.com">
-          <span class="footer-stamp-name">Email</span>
-          <span class="footer-stamp-sub">Send direct note</span>
-        </a>
-      </div>
+      <div class="footer-clock" id="footer-time">--:--:--</div>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-copy">© <span data-current-year>2026</span> Sidharth Premanand</div>
-      <div class="footer-bottom-copy">Designed & built by Sidharth</div>
+
+    <div class="footer-ticket">
+      <div class="footer-barcode" aria-hidden="true"></div>
+      <div class="footer-ticket-label">Open for work</div>
+      <p class="footer-ticket-copy">Looking for internships and full-time roles across Germany. Let's talk if you need someone who asks questions first.</p>
     </div>
-  </footer>
+
+    <div class="footer-stamps">
+      <a class="footer-stamp" href="assets/docs/Resume.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="footer-stamp-name">RESUME</span>
+        <span class="footer-stamp-sub">Download PDF</span>
+      </a>
+      <a class="footer-stamp" href="https://www.linkedin.com/in/sidharthpremanand" target="_blank" rel="noopener noreferrer">
+        <span class="footer-stamp-name">LINKEDIN</span>
+        <span class="footer-stamp-sub">Connect with me</span>
+      </a>
+      <a class="footer-stamp" href="mailto:sidharthpremux@gmail.com">
+        <span class="footer-stamp-name">EMAIL</span>
+        <span class="footer-stamp-sub">Send direct note</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-copy">© <span data-current-year>2026</span> Sidharth Premanand</div>
+    <div class="footer-bottom-copy">🎮 Designed &amp; Built by Sidharth</div>
+  </div>
+</footer>
 
   <script src="../assets/js/main.js?v=20260824a"></script>
+<script src="../assets/js/zoom.js?v=20261027a"></script>
   <script>
     const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
     if (dot && ring) {
@@ -3166,34 +3286,204 @@
       }
     })();
 
-    (() => {
+(() => {
       const root = document.querySelector('[data-process-wave]');
       if (!root) return;
+      const path = root.querySelector('.process-wave-path');
+      const svg = root.querySelector('.process-wave-svg');
+      const markersLayer = root.querySelector('.process-wave-markers');
+      const items = [...root.querySelectorAll('.process-wave-item')];
+      const dots = [...markersLayer.querySelectorAll('.process-wave-dot')];
+      const leaders = [...markersLayer.querySelectorAll('.process-wave-leader')];
+      const desktopQuery = window.matchMedia('(min-width: 1024px)');
       const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!path || !svg || !markersLayer || !items.length || dots.length !== items.length) return;
+      let drawn = false;
 
-      if (motionQuery.matches) {
-        root.classList.add('is-revealed');
-        return;
-      }
+      const blockWidth = (width) => Math.min(320, Math.max(240, (width - 48) / 3));
+      const VIEWBOX_W = 1200;
+      const VIEWBOX_H = 160;
+      const STEM_GAP = 8; // px between marker and step text edge
+
+      // Get an element's left edge relative to the wrapper (ignoring transforms)
+      const getLeftRelativeToWrapper = (el, wrapper) => {
+        let left = 0;
+        let current = el;
+        while (current && current !== wrapper) {
+          left += current.offsetLeft;
+          current = current.offsetParent;
+        }
+        return left;
+      };
+
+      // Get an element's top edge relative to the markers layer (ignoring transforms)
+      const getTopRelativeToMarkersLayer = (el, markersLayer) => {
+        let top = 0;
+        let current = el;
+        while (current && current !== markersLayer) {
+          top += current.offsetTop;
+          current = current.offsetParent;
+        }
+        return top;
+      };
+
+      const placeItems = () => {
+        if (!desktopQuery.matches) return;
+        const width = root.clientWidth;
+        const bw = blockWidth(width);
+        root.style.setProperty('--block-w', bw + 'px');
+        const count = items.length;
+        items.forEach((item, index) => {
+          const x = count === 1 ? 0 : index * (width - bw) / (count - 1);
+          item.style.setProperty('--wave-x', x + 'px');
+          item.dataset.revealAt = String(index / Math.max(1, count - 1));
+        });
+
+        const length = path.getTotalLength();
+        root.style.setProperty('--path-length', String(length));
+
+        // Marker layer dimensions (same as SVG rendered box)
+        const markersRect = markersLayer.getBoundingClientRect();
+        const markersW = markersRect.width;
+        const markersH = markersRect.height;
+
+        // Binary search on path for a given viewBox X
+        const pointAtViewX = (targetX) => {
+          let lo = 0;
+          let hi = length;
+          for (let i = 0; i < 40; i++) {
+            const mid = (lo + hi) / 2;
+            if (path.getPointAtLength(mid).x < targetX) lo = mid;
+            else hi = mid;
+          }
+          return path.getPointAtLength((lo + hi) / 2);
+        };
+
+        items.forEach((item, idx) => {
+          const peak = item.dataset.anchor === 'peak';
+          const card = item.querySelector('.process-wave-card');
+
+          // Step text left edge relative to wrapper (ignoring transforms)
+          const stepLeft = getLeftRelativeToWrapper(item, root);
+          // Convert to viewBox X
+          const viewBoxX = (stepLeft / width) * VIEWBOX_W;
+          // Find path point at this viewBox X
+          const point = pointAtViewX(viewBoxX);
+          const viewBoxY = point.y;
+
+          // Marker position as percentages of the marker layer (SVG box)
+          const markerLeftPct = (viewBoxX / VIEWBOX_W) * 100;
+          const markerTopPct = (viewBoxY / VIEWBOX_H) * 100;
+
+          dots[idx].style.setProperty('--marker-left', markerLeftPct + '%');
+          dots[idx].style.setProperty('--marker-top', markerTopPct + '%');
+
+          // Stem: from marker to nearest edge of step text, minus 8px
+          // Get card rect relative to markers layer
+          const cardRect = card.getBoundingClientRect();
+          const markersLayerRect = markersLayer.getBoundingClientRect();
+          const cardTop = cardRect.top - markersLayerRect.top;
+          const cardBottom = cardRect.bottom - markersLayerRect.top;
+          // Marker center in pixels within markers layer
+          const markerYPx = (viewBoxY / VIEWBOX_H) * markersH;
+
+          if (peak) {
+            // Stem UP: from marker down to card bottom - 8px
+            const stemTop = cardBottom - STEM_GAP;
+            const stemBottom = markerYPx;
+            const leaderTop = Math.min(stemTop, stemBottom);
+            const leaderHeight = Math.abs(stemBottom - stemTop);
+            // Clamp: don't go above markers layer top (0)
+            const clampedTop = Math.max(0, leaderTop);
+            const clampedHeight = Math.max(0, leaderHeight - Math.max(0, -leaderTop));
+            leaders[idx].style.setProperty('--leader-top', clampedTop + 'px');
+            leaders[idx].style.setProperty('--leader-height', clampedHeight + 'px');
+          } else {
+            // Stem DOWN: from marker up to card top + 8px
+            const stemTop = markerYPx;
+            const stemBottom = cardTop + STEM_GAP;
+            const leaderTop = Math.min(stemTop, stemBottom);
+            const leaderHeight = Math.abs(stemBottom - stemTop);
+            // Clamp: don't go past section bottom divider (approximate as markers layer bottom + section gap)
+            // The section has padding-bottom = var(--section-gap) = 96px after the process-wave
+            // We'll clamp to markersH + 96px (section gap)
+            const maxBottom = markersH + 96;
+            const clampedBottom = Math.min(maxBottom, Math.max(stemTop, stemBottom));
+            const clampedHeight = Math.max(0, clampedBottom - leaderTop);
+            leaders[idx].style.setProperty('--leader-top', leaderTop + 'px');
+            leaders[idx].style.setProperty('--leader-height', clampedHeight + 'px');
+          }
+        });
+      };
+
+      const revealAll = () => {
+        root.classList.add('reduce-motion', 'is-drawn');
+        items.forEach((item) => item.classList.add('is-revealed'));
+        drawn = true;
+      };
+
+      const playDraw = () => {
+        if (drawn || !desktopQuery.matches) return;
+        placeItems();
+        if (motionQuery.matches) {
+          revealAll();
+          return;
+        }
+        root.classList.add('is-animating');
+        const length = path.getTotalLength();
+        path.style.strokeDasharray = String(length);
+        path.style.strokeDashoffset = String(length);
+        requestAnimationFrame(() => {
+          root.classList.add('is-drawn');
+          path.style.strokeDashoffset = '0';
+          placeItems();
+        });
+        drawn = true;
+        const duration = 1600;
+        const started = performance.now();
+        const tick = (now) => {
+          const progress = Math.min(1, (now - started) / duration);
+          items.forEach((item) => {
+            if (progress >= Number(item.dataset.revealAt || 0)) {
+              item.classList.add('is-revealed');
+            }
+          });
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            root.classList.add('is-revealed');
+            playDraw();
             observer.disconnect();
           }
         });
-      }, { rootMargin: '0px 0px -15% 0px', threshold: 0 });
+      }, { rootMargin: '0px 0px -25% 0px', threshold: 0 });
       observer.observe(root);
+
+      // Recompute marker positions on resize and after fonts load
+      const recompute = () => { if (desktopQuery.matches && drawn) placeItems(); };
+      window.addEventListener('resize', recompute);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(recompute);
+      }
+
+      // Fallback if IntersectionObserver is not supported
+      if (!window.IntersectionObserver) {
+        playDraw();
+      }
 
       if (motionQuery.addEventListener) {
         motionQuery.addEventListener('change', () => {
-          if (motionQuery.matches) root.classList.add('is-revealed');
+          if (motionQuery.matches) revealAll();
         });
       }
     })();
 
     /* ── Decision 03 — Checkout flow animation ── */
+
     (() => {
       const stage = document.querySelector('[data-checkout-flow]');
       if (!stage) return;
@@ -3295,6 +3585,7 @@
         });
       }
     })();
+
   </script>
 </body>
 
